@@ -258,6 +258,30 @@
     color: var(--colour-accent);
 }
 
+.hero__social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $spacing-2;
+    margin-top: $spacing-4;
+}
+
+.hero__social-link {
+    display: inline-flex;
+    align-items: center;
+    padding: $spacing-2 $spacing-4;
+    background-color: var(--colour-bg);
+    border-radius: $radius-full;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    transition: background-color $transition-fast, color $transition-fast;
+
+    &:hover {
+        background-color: var(--colour-accent);
+        color: var(--colour-bg);
+    }
+}
+
 // About
 .about__grid {
     display: grid;
