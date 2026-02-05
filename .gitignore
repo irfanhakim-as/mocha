@@ -4,8 +4,5 @@ node_modules/
 # build output
 dist/
 
-# environment files
-.env
-
 # OS
 .DS_Store
