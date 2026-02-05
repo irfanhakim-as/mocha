@@ -1,0 +1,22 @@
+{% set additionalPhotos = data.cat.photos | rejectattr("featured", "equalto", true) | list %}
+
+{% if additionalPhotos | length %}
+<section class="gallery section" id="gallery">
+    <div class="container">
+        <h2 class="section__title">Gallery</h2>
+
+        <div class="gallery__grid">
+            {% for photo in additionalPhotos %}
+            <button class="gallery__item" type="button" data-lightbox="/images/{{ photo.src }}" aria-label="View {{ photo.alt }}">
+                <img
+                    src="/images/{{ photo.src }}"
+                    alt="{{ photo.alt }}"
+                    class="gallery__image"
+                    loading="lazy"
+                >
+            </button>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}

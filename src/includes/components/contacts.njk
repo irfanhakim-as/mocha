@@ -1,0 +1,75 @@
+<section class="contact section" id="contact">
+    <div class="container">
+        <h2 class="section__title">Contacts</h2>
+
+        <div class="contact__grid">
+            <!-- Owner Info -->
+            <div class="card contact__owner">
+                <h3 class="card__title">Owner Information</h3>
+                <dl class="contact__details">
+                    <div class="contact__detail">
+                        <dt>Name</dt>
+                        <dd>{{ data.owner.name }}</dd>
+                    </div>
+                    <div class="contact__detail">
+                        <dt>Phone</dt>
+                        <dd>
+                            <a href="tel:{{ data.owner.phone | telLink }}">
+                                {{ data.owner.phone }}
+                            </a>
+                        </dd>
+                    </div>
+                    <div class="contact__detail">
+                        <dt>Email</dt>
+                        <dd>
+                            <a href="mailto:{{ data.owner.email }}">
+                                {{ data.owner.email }}
+                            </a>
+                        </dd>
+                    </div>
+                    {% if data.owner.address %}
+                    <div class="contact__detail">
+                        <dt>Address</dt>
+                        <dd>{{ data.owner.address }}</dd>
+                    </div>
+                    {% endif %}
+                </dl>
+
+                {% if data.owner.socials | length %}
+                <div class="contact__social">
+                    {% for link in data.owner.socials %}
+                    <a href="{{ link.url }}" class="contact__social-link" target="_blank" rel="noopener noreferrer">
+                        {{ link.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Emergency Contact -->
+            {% if data.owner.emergencyContact %}
+            <div class="card contact__emergency">
+                <h3 class="card__title">Emergency Contact</h3>
+                <dl class="contact__details">
+                    <div class="contact__detail">
+                        <dt>Name</dt>
+                        <dd>{{ data.owner.emergencyContact.name }}</dd>
+                    </div>
+                    <div class="contact__detail">
+                        <dt>Phone</dt>
+                        <dd>
+                            <a href="tel:{{ data.owner.emergencyContact.phone | telLink }}">
+                                {{ data.owner.emergencyContact.phone }}
+                            </a>
+                        </dd>
+                    </div>
+                    <div class="contact__detail">
+                        <dt>Relationship</dt>
+                        <dd>{{ data.owner.emergencyContact.relationship }}</dd>
+                    </div>
+                </dl>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

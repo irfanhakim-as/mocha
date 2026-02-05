@@ -1,0 +1,141 @@
+<section class="health section" id="health">
+    <div class="container">
+        <h2 class="section__title">Health Records</h2>
+
+        <div class="health__grid">
+            <!-- Vaccinations -->
+            {% if data.health.vaccinations | length %}
+            <div class="card health__vaccinations">
+                <h3 class="card__title">Vaccinations</h3>
+                <div class="health__table-wrapper">
+                    <table class="health__table">
+                        <thead>
+                            <tr>
+                                <th>Vaccine</th>
+                                <th>Date Given</th>
+                                <th>Next Due</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for vax in data.health.vaccinations %}
+                            {% set status = vax.nextDue | vaccinationStatus %}
+                            <tr>
+                                <td>{{ vax.name }}</td>
+                                <td>{{ vax.date | formatDate }}</td>
+                                <td>{{ vax.nextDue | formatDate }}</td>
+                                <td>
+                                    <span class="health__badge health__badge--{{ status.class }}">
+                                        {{ status.label }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Vet Visits -->
+            {% if data.health.vetVisits | length %}
+            <div class="card health__visits">
+                <h3 class="card__title">Vet Visits</h3>
+                <div class="health__visits-list">
+                    {% for visit in data.health.vetVisits %}
+                    <details class="health__visit">
+                        <summary class="health__visit-summary">
+                            <span class="health__visit-date">{{ visit.date | formatDate }}</span>
+                            <span class="health__visit-reason">{{ visit.reason }}</span>
+                        </summary>
+                        <div class="health__visit-details">
+                            <p><strong>Notes:</strong> {{ visit.notes }}</p>
+                            <p><strong>Veterinarian:</strong> {{ visit.veterinarian }}</p>
+                            <p><strong>Clinic:</strong> {{ visit.clinic }}</p>
+                        </div>
+                    </details>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Weight History -->
+            {% if data.health.weight | length %}
+            <div class="card health__weight">
+                <h3 class="card__title">Weight History</h3>
+                <div class="health__weight-list">
+                    {% for entry in data.health.weight %}
+                    <div class="health__weight-entry">
+                        <span class="health__weight-date">{{ entry.date | formatDate }}</span>
+                        <span class="health__weight-value">{{ entry.kg }} kg</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Allergies -->
+            {% if data.health.allergies | length %}
+            <div class="card health__allergies">
+                <h3 class="card__title">Allergies</h3>
+                <div class="health__list">
+                    {% for allergy in data.health.allergies %}
+                    <div class="health__item">
+                        <div class="health__item-header">
+                            <strong>{{ allergy.allergen }}</strong>
+                            <span class="health__badge health__badge--{{ allergy.severity }}">{{ allergy.severity }}</span>
+                        </div>
+                        <p class="health__item-detail">Reaction: {{ allergy.reaction }}</p>
+                        {% if allergy.notes %}
+                        <p class="health__item-notes">{{ allergy.notes }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Conditions -->
+            {% if data.health.conditions | length %}
+            <div class="card health__conditions">
+                <h3 class="card__title">Conditions</h3>
+                <div class="health__list">
+                    {% for condition in data.health.conditions %}
+                    <div class="health__item">
+                        <div class="health__item-header">
+                            <strong>{{ condition.name }}</strong>
+                            <span class="health__badge health__badge--{{ condition.status }}">{{ condition.status }}</span>
+                        </div>
+                        <p class="health__item-detail">Diagnosed: {{ condition.diagnosedDate | formatDate }}</p>
+                        {% if condition.notes %}
+                        <p class="health__item-notes">{{ condition.notes }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Medications -->
+            {% if data.health.medications | length %}
+            <div class="card health__medications">
+                <h3 class="card__title">Medications</h3>
+                <div class="health__list">
+                    {% for med in data.health.medications %}
+                    <div class="health__item">
+                        <div class="health__item-header">
+                            <strong>{{ med.name }}</strong>
+                        </div>
+                        <p class="health__item-detail">{{ med.dosage }} - {{ med.frequency }}</p>
+                        <p class="health__item-detail">Started: {{ med.startDate | formatDate }}</p>
+                        {% if med.reason %}
+                        <p class="health__item-notes">{{ med.reason }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

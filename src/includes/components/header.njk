@@ -1,0 +1,45 @@
+<header class="header">
+    <div class="container">
+        <a href="/" class="header__logo">
+            <!--<span class="header__logo-icon">🐱</span>-->
+            <img class="header__logo-icon" src="/images/logo.svg" alt="" width="32" height="32">
+            <span class="header__logo-text">{{ data.cat.name }}</span>
+        </a>
+        <nav class="header__nav" id="main-nav">
+            <ul class="header__nav-list">
+                <li><a href="#about" class="header__nav-link">About</a></li>
+                {% set additionalPhotos = data.cat.photos | rejectattr("featured", "equalto", true) | list %}
+                {% if additionalPhotos | length %}
+                <li><a href="#gallery" class="header__nav-link">Gallery</a></li>
+                {% endif %}
+                {% if data.health.vaccinations | length or data.health.vetVisits | length or data.health.weight | length %}
+                <li><a href="#health" class="header__nav-link">Health</a></li>
+                {% endif %}
+                {% if data.owner.name or data.owner.phone or data.owner.email %}
+                <li><a href="#contact" class="header__nav-link">Contact</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div class="header__actions">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                <svg class="theme-toggle__icon theme-toggle__icon--light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="theme-toggle__icon theme-toggle__icon--dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+            <button class="header__menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="menu-toggle">
+                <span class="header__menu-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>

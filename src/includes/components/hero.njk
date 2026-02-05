@@ -1,0 +1,36 @@
+<section class="hero" id="hero">
+    <div class="container">
+        <div class="hero__content">
+            {% set featuredPhoto = data.cat.photos | selectattr("featured", "equalto", true) | first %}
+            {% if featuredPhoto %}
+            <button class="hero__image-wrapper" type="button" data-lightbox="/images/{{ featuredPhoto.src }}" aria-label="View {{ featuredPhoto.alt }}">
+                <img
+                    src="/images/{{ featuredPhoto.src }}"
+                    alt="{{ featuredPhoto.alt }}"
+                    class="hero__image"
+                    loading="eager"
+                >
+            </button>
+            {% endif %}
+            <div class="hero__text">
+                <h1 class="hero__title">{{ data.cat.name }}</h1>
+                <p class="hero__subtitle">{{ data.cat.breed }} &bull; {{ data.cat.colour }}</p>
+                <p class="hero__age">
+                    <span class="hero__age-label">Age:</span>
+                    <span class="hero__age-value" data-dob="{{ data.cat.dob | toIso }}">
+                        {{ data.cat.dob | calculateAge }}
+                    </span>
+                </p>
+                {% if data.cat.socials | length %}
+                <div class="hero__social">
+                    {% for link in data.cat.socials %}
+                    <a href="{{ link.url }}" class="hero__social-link" target="_blank" rel="noopener noreferrer">
+                        {{ link.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

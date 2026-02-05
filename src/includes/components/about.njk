@@ -1,0 +1,86 @@
+<section class="about section" id="about">
+    <div class="container">
+        <h2 class="section__title">About</h2>
+
+        <div class="about__grid">
+            <!-- Basic Info Card -->
+            <div class="card about__info">
+                <h3 class="card__title">Basic Info</h3>
+                <dl class="about__details">
+                    <div class="about__detail">
+                        <dt>Date of Birth</dt>
+                        <dd>{{ data.cat.dob | formatDate }}</dd>
+                    </div>
+                    <div class="about__detail">
+                        <dt>Breed</dt>
+                        <dd>{{ data.cat.breed }}</dd>
+                    </div>
+                    <div class="about__detail">
+                        <dt>Colour</dt>
+                        <dd>{{ data.cat.colour }}</dd>
+                    </div>
+                    <div class="about__detail">
+                        <dt>Gender</dt>
+                        <dd>{{ data.cat.gender }}</dd>
+                    </div>
+                    {% if data.cat.microchipId %}
+                    <div class="about__detail">
+                        <dt>Microchip ID</dt>
+                        <dd><code>{{ data.cat.microchipId }}</code></dd>
+                    </div>
+                    {% endif %}
+                </dl>
+            </div>
+
+            <!-- Personality Card -->
+            <div class="card about__personality">
+                <h3 class="card__title">Personality</h3>
+                <p>{{ data.cat.about.personality }}</p>
+            </div>
+
+            <!-- Favourites Card -->
+            <div class="card about__favourites">
+                <h3 class="card__title">Favourites</h3>
+                <dl class="about__details">
+                    <div class="about__detail">
+                        <dt>Food</dt>
+                        <dd>{{ data.cat.about.favFood }}</dd>
+                    </div>
+                    <div class="about__detail">
+                        <dt>Toy</dt>
+                        <dd>{{ data.cat.about.favToy }}</dd>
+                    </div>
+                    <div class="about__detail">
+                        <dt>Sleep Spot</dt>
+                        <dd>{{ data.cat.about.sleepSpot }}</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <!-- Quirks Card -->
+            {% if data.cat.about.quirks | length %}
+            <div class="card about__quirks">
+                <h3 class="card__title">Quirks & Habits</h3>
+                <ul class="about__quirks-list">
+                    {% for quirk in data.cat.about.quirks %}
+                    <li>{{ quirk }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <!-- Daily Routine Card -->
+            <div class="card about__routine">
+                <h3 class="card__title">Daily Routine</h3>
+                <ul class="about__routine-list">
+                    {% for key, value in data.cat.routine %}
+                    <li class="about__routine-item">
+                        <span class="about__routine-time">{{ key | formatRoutineKey }}</span>
+                        <span class="about__routine-activity">{{ value }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
