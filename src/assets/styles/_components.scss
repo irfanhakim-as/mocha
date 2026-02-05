@@ -464,18 +464,25 @@
     border-radius: $radius-full;
     font-size: $font-size-xs;
     font-weight: $font-weight-medium;
+    text-transform: capitalize;
+    // fallback for unknown values
+    background-color: var(--colour-border);
+    color: var(--colour-text);
 
-    &--current {
+    // zero or low concern
+    &--current, &--managed, &--mild {
         background-color: rgba($colour-success, 0.1);
         color: color.adjust($colour-success, $lightness: -10%);
     }
 
-    &--due-soon {
+    // medium or moderate concern
+    &--due-soon, &--monitoring, &--moderate {
         background-color: rgba($colour-warning, 0.1);
         color: color.adjust($colour-warning, $lightness: -10%);
     }
 
-    &--overdue {
+    // urgent or serious concern
+    &--overdue, &--active, &--severe {
         background-color: rgba($colour-danger, 0.1);
         color: color.adjust($colour-danger, $lightness: -10%);
     }
