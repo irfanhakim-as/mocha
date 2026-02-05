@@ -8,7 +8,7 @@
     "build": "npm run clean && npm-run-all eleventy:build sass:build js:build",
     "build:docker": "npm run build",
     "eleventy:build": "eleventy",
-    "eleventy:watch": "eleventy --serve --port 8080",
+    "eleventy:watch": "eleventy --serve --port ${PORT:-8080}",
     "sass:build": "sass src/assets/styles/main.scss dist/css/main.css --style=compressed --load-path=src/assets/styles",
     "sass:watch": "sass src/assets/styles/main.scss dist/css/main.css --watch --load-path=src/assets/styles",
     "js:build": "esbuild src/assets/scripts/main.js --bundle --minify --outfile=dist/js/main.js",
