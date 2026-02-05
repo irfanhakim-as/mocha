@@ -481,6 +481,40 @@
     }
 }
 
+.health__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+}
+
+.health__item {
+    padding: $spacing-4;
+    background-color: var(--colour-bg-alt);
+    border-radius: $radius-md;
+}
+
+.health__item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-2;
+}
+
+.health__item-detail {
+    font-size: $font-size-sm;
+    color: var(--colour-text-muted);
+    margin-bottom: $spacing-1;
+}
+
+.health__item-notes {
+    font-size: $font-size-sm;
+    color: var(--colour-text);
+    font-style: italic;
+    margin-top: $spacing-2;
+    padding-top: $spacing-2;
+    border-top: 1px solid var(--colour-border-light);
+}
+
 .health__visits-list {
     display: flex;
     flex-direction: column;
