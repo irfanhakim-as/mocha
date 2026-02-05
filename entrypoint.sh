@@ -4,6 +4,12 @@ set -e
 
 # ================= DO NOT EDIT BEYOND THIS LINE =================
 
+# check required environment variables
+if [ -z "${APP_ROOT}" ]; then
+    echo "ERROR: APP_ROOT environment variable is not set." >&2
+    exit 1
+fi
+
 echo "Waking Mocha up..."
 
 # check if site build should be skipped
