@@ -9,7 +9,7 @@ echo "Waking Mocha up..."
 # check if site build should be skipped
 if [ "${SKIP_BUILD}" != "true" ]; then
     # run the build process
-    echo "Mocha is starting the build process..."
+    echo "Mocha is packing something for you..."
     npm run build:docker
 fi
 
@@ -24,14 +24,14 @@ if [ ${?} -eq 0 ]; then
     fi
 
     # perms and ownership setup
-    echo "Setting permissions and ownership..."
+    echo "Mocha is marking his territory..."
     # chmod -R 775 "/${APP_ROOT}" /var/www/html /var/log/apache2
     find "/${APP_ROOT}" -type d -exec chmod 755 {} \;
     find "/${APP_ROOT}" -type f -exec chmod 644 {} \;
     chown -R apache: "/${APP_ROOT}" /var/www/html /var/log/apache2
 
     # run apache server
-    echo "Waking Mocha up..."
+    echo "Mocha is going for a run..."
     httpd -D FOREGROUND
 else
     echo "ERROR: Build failed. Keeping the container running for debugging." >&2
