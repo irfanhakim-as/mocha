@@ -15,12 +15,14 @@
             <div class="hero__text">
                 <h1 class="hero__title">{{ data.cat.name }}</h1>
                 <p class="hero__subtitle">{{ data.cat.breed }} &bull; {{ data.cat.colour }}</p>
+                {% if data.cat.dob | calculateAge %}
                 <p class="hero__age">
                     <span class="hero__age-label">Age:</span>
                     <span class="hero__age-value" data-dob="{{ data.cat.dob | toIso }}">
                         {{ data.cat.dob | calculateAge }}
                     </span>
                 </p>
+                {% endif %}
                 {% if data.cat.socials | length %}
                 <div class="hero__social">
                     {% for link in data.cat.socials %}
