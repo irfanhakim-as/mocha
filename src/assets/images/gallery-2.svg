@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <!-- Background - soft green -->
+  <rect width="400" height="400" fill="#d4e8d4"/>
+  <!-- Cat head -->
+  <circle cx="200" cy="160" r="70" fill="#a08060"/>
+  <!-- Ears -->
+  <ellipse cx="150" cy="100" rx="25" ry="35" fill="#a08060"/>
+  <ellipse cx="250" cy="100" rx="25" ry="35" fill="#a08060"/>
+  <!-- Inner ears -->
+  <ellipse cx="150" cy="105" rx="12" ry="18" fill="#8b6040"/>
+  <ellipse cx="250" cy="105" rx="12" ry="18" fill="#8b6040"/>
+  <!-- Eyes - wide/playful -->
+  <circle cx="170" cy="150" r="14" fill="#2a2a2a"/>
+  <circle cx="230" cy="150" r="14" fill="#2a2a2a"/>
+  <circle cx="174" cy="146" r="5" fill="#ffffff"/>
+  <circle cx="234" cy="146" r="5" fill="#ffffff"/>
+  <circle cx="168" cy="152" r="2" fill="#ffffff"/>
+  <circle cx="228" cy="152" r="2" fill="#ffffff"/>
+  <!-- Nose -->
+  <ellipse cx="200" cy="175" rx="10" ry="7" fill="#ffa0a0"/>
+  <!-- Mouth - excited -->
+  <path d="M185 185 Q200 198 215 185" stroke="#2a2a2a" stroke-width="2" fill="none"/>
+  <!-- Text -->
+  <text x="200" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#4a7c4a">Playing</text>
+</svg>

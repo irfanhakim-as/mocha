@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#f0f0f0"/>
+  <!-- Cat head -->
+  <circle cx="200" cy="160" r="70" fill="#d4d4d4"/>
+  <!-- Ears -->
+  <ellipse cx="150" cy="100" rx="25" ry="35" fill="#d4d4d4"/>
+  <ellipse cx="250" cy="100" rx="25" ry="35" fill="#d4d4d4"/>
+  <!-- Inner ears -->
+  <ellipse cx="150" cy="105" rx="12" ry="18" fill="#c0c0c0"/>
+  <ellipse cx="250" cy="105" rx="12" ry="18" fill="#c0c0c0"/>
+  <!-- Eyes - neutral -->
+  <circle cx="170" cy="150" r="12" fill="#737373"/>
+  <circle cx="230" cy="150" r="12" fill="#737373"/>
+  <circle cx="173" cy="147" r="4" fill="#ffffff"/>
+  <circle cx="233" cy="147" r="4" fill="#ffffff"/>
+  <!-- Nose -->
+  <ellipse cx="200" cy="175" rx="10" ry="7" fill="#a3a3a3"/>
+  <!-- Mouth - small smile -->
+  <path d="M188 185 Q200 193 212 185" stroke="#737373" stroke-width="2" fill="none"/>
+  <!-- Text -->
+  <text x="200" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#737373">Add your cat's photo</text>
+</svg>
