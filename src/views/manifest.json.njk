@@ -1,0 +1,19 @@
+---
+permalink: /manifest.json
+---
+{
+    "name": "{{ data.site.name }}",
+    "short_name": "{{ data.site.shortname }}",
+    "description": "{{ data.site.description }}",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "{{ data.site.theme_colour }}",
+    "icons": [
+        {
+            "src": "/images/logo.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ]
+}
