@@ -50,11 +50,10 @@ function calculateAge(dateString) {
 
 // Get vaccination status based on next due date
 function vaccinationStatus(nextDueDate) {
-    if (!nextDueDate) return { class: 'current', label: 'Unknown' };
-
+    if (!nextDueDate) return { class: 'unknown', label: 'Unknown' };
     const now = new Date();
     const dueDate = parseDate(nextDueDate);
-    if (!dueDate || isNaN(dueDate.getTime())) return { class: 'current', label: 'Unknown' };
+    if (!dueDate || isNaN(dueDate.getTime())) return { class: 'unknown', label: 'Unknown' };
     const daysUntilDue = Math.floor((dueDate - now) / (24 * 60 * 60 * 1000));
 
     if (daysUntilDue < 0) {
