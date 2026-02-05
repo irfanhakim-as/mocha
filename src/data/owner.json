@@ -1,0 +1,25 @@
+{
+    "name": "Your Name",
+    "phone": "+60 12-345 6789",
+    "email": "owner@example.com",
+    "address": "123 Cat Street, Meowville, CA 90210",
+    "emergencyContact": {
+        "name": "Emergency Contact Name",
+        "phone": "+60 19-876 5432",
+        "relationship": "Family Friend"
+    },
+    "socials": [
+        {
+            "name": "Mastodon",
+            "url": "https://mastodon.social"
+        },
+        {
+            "name": "Sharkey",
+            "url": "https://sakurajima.social"
+        },
+        {
+            "name": "Bluesky",
+            "url": "https://bsky.app"
+        }
+    ]
+}
