@@ -1,0 +1,113 @@
+{
+    "vaccinations": [
+        {
+            "name": "FVRCP (Feline Distemper)",
+            "date": "15-06-2023",
+            "nextDue": "15-06-2027",
+            "veterinarian": "Dr. Sarah Smith",
+            "clinic": "Happy Paws Veterinary Clinic",
+            "notes": "3-year vaccine administered"
+        },
+        {
+            "name": "Rabies",
+            "date": "15-02-2024",
+            "nextDue": "28-02-2026",
+            "veterinarian": "Dr. Sarah Smith",
+            "clinic": "Happy Paws Veterinary Clinic",
+            "notes": "Annual booster due soon"
+        },
+        {
+            "name": "FeLV (Feline Leukemia)",
+            "date": "20-01-2021",
+            "nextDue": "20-01-2024",
+            "veterinarian": "Dr. Sarah Smith",
+            "clinic": "Happy Paws Veterinary Clinic",
+            "notes": "Indoor cat, may not require boosters"
+        }
+    ],
+    "vetVisits": [
+        {
+            "date": "10-01-2024",
+            "reason": "Annual wellness exam",
+            "notes": "Healthy weight at 4.5kg. Teeth in good condition. All vitals normal.",
+            "veterinarian": "Dr. Sarah Smith",
+            "clinic": "Happy Paws Veterinary Clinic"
+        },
+        {
+            "date": "15-06-2023",
+            "reason": "Vaccination appointment",
+            "notes": "Received FVRCP and Rabies boosters. No adverse reactions.",
+            "veterinarian": "Dr. Sarah Smith",
+            "clinic": "Happy Paws Veterinary Clinic"
+        },
+        {
+            "date": "20-02-2023",
+            "reason": "Minor eye irritation",
+            "notes": "Prescribed eye drops for 7 days. Cleared up completely.",
+            "veterinarian": "Dr. Michael Chen",
+            "clinic": "Happy Paws Veterinary Clinic"
+        }
+    ],
+    "weight": [
+        { "date": "10-01-2024", "kg": 4.5 },
+        { "date": "15-06-2023", "kg": 4.3 },
+        { "date": "15-01-2023", "kg": 4.4 },
+        { "date": "10-06-2022", "kg": 4.2 }
+    ],
+    "conditions": [
+        {
+            "name": "Mild arthritis",
+            "diagnosedDate": "10-01-2024",
+            "status": "managed",
+            "notes": "Age-related, monitored during annual checkups"
+        },
+        {
+            "name": "Dental tartar buildup",
+            "diagnosedDate": "10-01-2024",
+            "status": "monitoring",
+            "notes": "Recommend dental cleaning within 6 months"
+        },
+        {
+            "name": "Ear infection",
+            "diagnosedDate": "20-01-2026",
+            "status": "active",
+            "notes": "Currently being treated with ear drops"
+        }
+    ],
+    "medications": [
+        {
+            "name": "Glucosamine supplement",
+            "dosage": "1 chew daily",
+            "frequency": "Daily with food",
+            "startDate": "15-01-2024",
+            "reason": "Joint health support"
+        },
+        {
+            "name": "Omega-3 fish oil",
+            "dosage": "1/2 teaspoon",
+            "frequency": "Every other day",
+            "startDate": "01-02-2024",
+            "reason": "Coat and skin health"
+        }
+    ],
+    "allergies": [
+        {
+            "allergen": "Chicken",
+            "severity": "mild",
+            "reaction": "Skin irritation",
+            "notes": "Avoid chicken-based foods and treats"
+        },
+        {
+            "allergen": "Certain flea treatments",
+            "severity": "moderate",
+            "reaction": "Excessive scratching and hair loss",
+            "notes": "Use vet-approved alternatives only"
+        },
+        {
+            "allergen": "Bee stings",
+            "severity": "severe",
+            "reaction": "Swelling, difficulty breathing",
+            "notes": "Requires immediate vet attention if stung"
+        }
+    ]
+}
