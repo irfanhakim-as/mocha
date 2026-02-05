@@ -1,0 +1,57 @@
+{
+    "name": "Mocha",
+    "dob": "15-01-2020",
+    "breed": "Classic Siamese",
+    "colour": "Seal Points",
+    "gender": "Male",
+    "microchipId": "123456789012345",
+    "photos": [
+        {
+            "src": "hero.svg",
+            "alt": "Mocha the cat",
+            "featured": true
+        },
+        {
+            "src": "gallery-1.svg",
+            "alt": "Mocha sleeping peacefully",
+            "featured": false
+        },
+        {
+            "src": "gallery-2.svg",
+            "alt": "Mocha playing",
+            "featured": false
+        },
+        {
+            "src": "gallery-3.svg",
+            "alt": "Mocha taking a nap",
+            "featured": false
+        }
+    ],
+    "about": {
+        "personality": "Mocha is a gentle and curious soul who loves exploring every corner of the house. He's incredibly affectionate and always greets his humans at the door.",
+        "favFood": "Salmon wet food and occasional treats",
+        "favToy": "Feather wand and crinkle balls",
+        "sleepSpot": "The sunny spot by the window or on a warm laptop",
+        "quirks": [
+            "Chirps at birds through the window",
+            "Loves to knock things off tables",
+            "Has a specific meow for dinner time",
+            "Sits like a loaf when content"
+        ]
+    },
+    "routine": {
+        "wakeUp": "6:00 AM - Morning stretches and window watching",
+        "breakfast": "7:00 AM - Wet food and fresh water",
+        "playtime": "9:00 AM - Active play session",
+        "napTime": "11:00 AM - 3:00 PM - Extended nap in favourite spots",
+        "dinner": "6:00 PM - Second meal of the day",
+        "eveningPlay": "8:00 PM - Evening zoomies and play",
+        "bedtime": "10:00 PM - Settles down for the night"
+    },
+    "socials": [
+        {
+            "name": "Pixelfed",
+            "url": "https://pixelfed.social"
+        }
+    ]
+}
