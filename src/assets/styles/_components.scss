@@ -574,7 +574,8 @@
 
 .contact__social {
     display: flex;
-    gap: $spacing-3;
+    flex-wrap: wrap;
+    gap: $spacing-2;
     margin-top: $spacing-4;
     padding-top: $spacing-4;
     border-top: 1px solid var(--colour-border);
