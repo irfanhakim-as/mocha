@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="{{ data.site.language | default('en') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ data.site.description }}">
+    <meta name="theme-color" content="{{ data.site.theme_colour }}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ title | default(data.site.name) }}">
+    <meta property="og:description" content="{{ data.site.description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ data.site.url }}">
+    {% if data.cat.photos | length %}
+    {% set featuredPhoto = data.cat.photos | selectattr("featured", "equalto", true) | first %}
+    {% if featuredPhoto %}
+    <meta property="og:image" content="{{ data.site.url }}/images/{{ featuredPhoto.src }}">
+    {% endif %}
+    {% endif %}
+
+    <title>{{ title | default(data.site.name) }}</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family={{ data.site.font.family | replace(' ', '+') }}:wght@{{ data.site.font.weights }}&display=swap" rel="stylesheet">
+    <style>:root { --font-family: '{{ data.site.font.family }}', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }</style>
+</head>
+<body>
+    {% include "components/header.njk" %}
+
+    <main>
+        {{ content | safe }}
+    </main>
+
+    {% include "components/footer.njk" %}
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <button class="lightbox__close" aria-label="Close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <img class="lightbox__image" src="" alt="">
+    </div>
+
+    <script src="/js/main.js" defer></script>
+</body>
+</html>
