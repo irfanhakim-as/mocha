@@ -1,0 +1,12 @@
+{
+    "name": "Mocha's Profile",
+    "shortname": "Mocha",
+    "description": "Meet Mocha - A beloved cat companion",
+    "theme_colour": "#1a1a1a",
+    "language": "en",
+    "url": "https://mocha.example.com",
+    "font": {
+        "family": "Inter",
+        "weights": "400;500;600;700"
+    }
+}
