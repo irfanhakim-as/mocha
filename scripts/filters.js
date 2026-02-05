@@ -10,6 +10,8 @@ function parseDate(dateString) {
 // Convert DD-MM-YYYY date to ISO format (YYYY-MM-DD) for JavaScript
 function toIso(dateString) {
     if (!dateString) return '';
+    const date = parseDate(dateString);
+    if (!date || isNaN(date.getTime())) return '';
     const [day, month, year] = String(dateString).split('-');
     return `${year}-${month}-${day}`;
 }
