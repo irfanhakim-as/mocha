@@ -542,6 +542,14 @@
     @media (min-width: $breakpoint-md) {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    // Center single card when no emergency contact
+    > :only-child {
+        justify-self: center;
+        @media (min-width: $breakpoint-md) {
+            grid-column: 1 / -1;
+        }
+    }
 }
 
 .contact__details {
