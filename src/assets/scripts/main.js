@@ -115,13 +115,15 @@ function closeMobileMenu() {
 function updateAge() {
     const ageElements = document.querySelectorAll('[data-dob]');
     ageElements.forEach(el => {
+        if (!el.dataset.dob) return;
         const dob = new Date(el.dataset.dob);
-        const age = calculateAge(dob);
-        el.textContent = age;
+        if (isNaN(dob.getTime())) return;
+        el.textContent = calculateAge(dob);
     });
 }
 
 function calculateAge(dob) {
+    if (!dob || isNaN(dob.getTime())) return '';
     const now = new Date();
     const diff = now - dob;
     const years = Math.floor(diff / (365.25 * 24 * 60 * 60 * 1000));
