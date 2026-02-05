@@ -1,0 +1,103 @@
+@use 'variables' as *;
+
+// Theme - Light and Dark mode CSS custom properties
+// Colours are configured in _variables.scss ($theme-light-* and $theme-dark-*)
+
+:root {
+  // Light mode (default)
+  --colour-bg: #{$theme-light-bg};
+  --colour-bg-alt: #{$theme-light-bg-alt};
+  --colour-bg-card: #{$theme-light-bg-card};
+  --colour-text: #{$theme-light-text};
+  --colour-text-muted: #{$theme-light-text-muted};
+  --colour-text-heading: #{$theme-light-text-heading};
+  --colour-border: #{$theme-light-border};
+  --colour-border-light: #{$theme-light-border-light};
+  --colour-header-bg: #{$theme-light-header-bg};
+  --colour-footer-bg: #{$theme-light-footer-bg};
+  --colour-footer-text: #{$theme-light-footer-text};
+  --colour-accent: #{$theme-light-accent};
+  --colour-accent-light: #{$theme-light-accent-light};
+  --colour-accent-dark: #{$theme-light-accent-dark};
+  --colour-code-bg: #{$theme-light-code-bg};
+  --colour-lightbox-bg: #{$theme-light-lightbox-bg};
+  --colour-lightbox-close: #{$theme-light-lightbox-close};
+  --colour-lightbox-close-bg: #{$theme-light-lightbox-close-bg};
+  --colour-lightbox-close-hover: #{$theme-light-lightbox-close-hover};
+
+  // Shadows
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+// Dark mode
+[data-theme="dark"] {
+  --colour-bg: #{$theme-dark-bg};
+  --colour-bg-alt: #{$theme-dark-bg-alt};
+  --colour-bg-card: #{$theme-dark-bg-card};
+  --colour-text: #{$theme-dark-text};
+  --colour-text-muted: #{$theme-dark-text-muted};
+  --colour-text-heading: #{$theme-dark-text-heading};
+  --colour-border: #{$theme-dark-border};
+  --colour-border-light: #{$theme-dark-border-light};
+  --colour-header-bg: #{$theme-dark-header-bg};
+  --colour-footer-bg: #{$theme-dark-footer-bg};
+  --colour-footer-text: #{$theme-dark-footer-text};
+  --colour-accent: #{$theme-dark-accent};
+  --colour-accent-light: #{$theme-dark-accent-light};
+  --colour-accent-dark: #{$theme-dark-accent-dark};
+  --colour-code-bg: #{$theme-dark-code-bg};
+  --colour-lightbox-bg: #{$theme-dark-lightbox-bg};
+  --colour-lightbox-close: #{$theme-dark-lightbox-close};
+  --colour-lightbox-close-bg: #{$theme-dark-lightbox-close-bg};
+  --colour-lightbox-close-hover: #{$theme-dark-lightbox-close-hover};
+
+  // Shadows
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+}
+
+// Respect system preference when no explicit theme is set
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --colour-bg: #{$theme-dark-bg};
+    --colour-bg-alt: #{$theme-dark-bg-alt};
+    --colour-bg-card: #{$theme-dark-bg-card};
+    --colour-text: #{$theme-dark-text};
+    --colour-text-muted: #{$theme-dark-text-muted};
+    --colour-text-heading: #{$theme-dark-text-heading};
+    --colour-border: #{$theme-dark-border};
+    --colour-border-light: #{$theme-dark-border-light};
+    --colour-header-bg: #{$theme-dark-header-bg};
+    --colour-footer-bg: #{$theme-dark-footer-bg};
+    --colour-footer-text: #{$theme-dark-footer-text};
+    --colour-accent: #{$theme-dark-accent};
+    --colour-accent-light: #{$theme-dark-accent-light};
+    --colour-accent-dark: #{$theme-dark-accent-dark};
+    --colour-code-bg: #{$theme-dark-code-bg};
+    --colour-lightbox-bg: #{$theme-dark-lightbox-bg};
+    --colour-lightbox-close: #{$theme-dark-lightbox-close};
+    --colour-lightbox-close-bg: #{$theme-dark-lightbox-close-bg};
+    --colour-lightbox-close-hover: #{$theme-dark-lightbox-close-hover};
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+  }
+}
+
+// Smooth transition when switching themes
+html {
+  color-scheme: light dark;
+}
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}

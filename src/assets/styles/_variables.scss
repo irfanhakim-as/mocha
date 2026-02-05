@@ -1,0 +1,140 @@
+// Colour palette
+$colour-white: #ffffff;
+$colour-gray-50: #fafafa;
+$colour-gray-100: #f5f5f5;
+$colour-gray-200: #e5e5e5;
+$colour-gray-300: #d4d4d4;
+$colour-gray-400: #a3a3a3;
+$colour-gray-500: #737373;
+$colour-gray-600: #525252;
+$colour-gray-700: #404040;
+$colour-gray-800: #262626;
+$colour-gray-900: #171717;
+$colour-black: #0a0a0a;
+
+// Accent colour
+$colour-accent: #8b5a2b;
+$colour-accent-light: #a67c52;
+$colour-accent-dark: #6b4423;
+
+// Status colours
+$colour-success: #22c55e;
+$colour-warning: #f59e0b;
+$colour-danger: #ef4444;
+
+// ===============================================
+// THEME COLOURS - Edit these to customise themes
+// ===============================================
+
+// Light mode colours
+$theme-light-bg: #ffffff;
+$theme-light-bg-alt: #fafafa;
+$theme-light-bg-card: #ffffff;
+$theme-light-header-bg: rgba(255, 255, 255, 0.95);
+$theme-light-footer-bg: #171717;
+$theme-light-footer-text: #a3a3a3;
+$theme-light-text: #262626;
+$theme-light-text-muted: #737373;
+$theme-light-text-heading: #171717;
+$theme-light-border: #e5e5e5;
+$theme-light-border-light: #f5f5f5;
+$theme-light-code-bg: #f5f5f5;
+$theme-light-accent: $colour-accent;
+$theme-light-accent-light: $colour-accent-light;
+$theme-light-accent-dark: $colour-accent-dark;
+$theme-light-lightbox-bg: rgba(0, 0, 0, 0.9);
+$theme-light-lightbox-close: #ffffff;
+$theme-light-lightbox-close-bg: rgba(255, 255, 255, 0.1);
+$theme-light-lightbox-close-hover: rgba(255, 255, 255, 0.2);
+
+// Dark mode colours
+$theme-dark-bg: #0a0a0a;
+$theme-dark-bg-alt: #171717;
+$theme-dark-bg-card: #1a1a1a;
+$theme-dark-header-bg: rgba(10, 10, 10, 0.95);
+$theme-dark-footer-bg: #000000;
+$theme-dark-footer-text: #737373;
+$theme-dark-text: #e5e5e5;
+$theme-dark-text-muted: #a3a3a3;
+$theme-dark-text-heading: #fafafa;
+$theme-dark-border: #404040;
+$theme-dark-border-light: #262626;
+$theme-dark-code-bg: #262626;
+$theme-dark-accent: #a67c52;
+$theme-dark-accent-light: #c49a6c;
+$theme-dark-accent-dark: #8b5a2b;
+$theme-dark-lightbox-bg: rgba(0, 0, 0, 0.95);
+$theme-dark-lightbox-close: #ffffff;
+$theme-dark-lightbox-close-bg: rgba(255, 255, 255, 0.1);
+$theme-dark-lightbox-close-hover: rgba(255, 255, 255, 0.2);
+
+// ===============================================
+
+// Typography (font-family is set through site.json)
+$font-family-base: var(--font-family);
+// $font-family-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-size-base: 1rem;
+$font-size-sm: 0.875rem;
+$font-size-xs: 0.75rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 2rem;
+$font-size-4xl: 2.5rem;
+$font-size-5xl: 3rem;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.25;
+$line-height-base: 1.5;
+$line-height-relaxed: 1.75;
+
+// Spacing
+$spacing-1: 0.25rem;
+$spacing-2: 0.5rem;
+$spacing-3: 0.75rem;
+$spacing-4: 1rem;
+$spacing-5: 1.25rem;
+$spacing-6: 1.5rem;
+$spacing-8: 2rem;
+$spacing-10: 2.5rem;
+$spacing-12: 3rem;
+$spacing-16: 4rem;
+$spacing-20: 5rem;
+$spacing-24: 6rem;
+
+// Layout
+$container-max-width: 1200px;
+$container-padding: $spacing-6;
+
+// Border radius
+$radius-sm: 0.25rem;
+$radius-md: 0.5rem;
+$radius-lg: 0.75rem;
+$radius-xl: 1rem;
+$radius-2xl: 1.5rem;
+$radius-full: 9999px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+$shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+$shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+$shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+// Transitions
+$transition-fast: 150ms ease;
+$transition-base: 200ms ease;
+$transition-slow: 300ms ease;
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Z-index
+$z-header: 100;
+$z-modal: 200;

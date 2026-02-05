@@ -1,0 +1,101 @@
+@use 'variables' as *;
+
+// Reset and Base Styles
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; // prevent horizontal scroll on mobile
+}
+
+body {
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+    line-height: $line-height-base;
+    color: var(--colour-text);
+    background-color: var(--colour-bg);
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-tight;
+    color: var(--colour-text-heading);
+}
+
+h1 {
+    font-size: $font-size-4xl;
+
+    @media (min-width: $breakpoint-md) {
+        font-size: $font-size-5xl;
+    }
+}
+
+h2 {
+    font-size: $font-size-2xl;
+
+    @media (min-width: $breakpoint-md) {
+        font-size: $font-size-3xl;
+    }
+}
+
+h3 {
+    font-size: $font-size-xl;
+}
+
+p {
+    margin-bottom: $spacing-4;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+a {
+    color: var(--colour-accent);
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: var(--colour-accent-dark);
+    }
+}
+
+ul, ol {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+code {
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: $font-size-sm;
+    background-color: var(--colour-code-bg);
+    padding: $spacing-1 $spacing-2;
+    border-radius: $radius-sm;
+}
+
+// Focus styles
+:focus-visible {
+    outline: 2px solid var(--colour-accent);
+    outline-offset: 2px;
+}
+
+// Selection
+::selection {
+    background-color: var(--colour-accent);
+    color: var(--colour-bg);
+}
