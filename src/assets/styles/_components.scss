@@ -357,15 +357,15 @@
     color: var(--colour-accent);
     text-transform: capitalize;
     padding: $spacing-3 $spacing-2 $spacing-3 $spacing-3;
-    background-color: var(--colour-bg-alt);
-    border-radius: $radius-md 0 0 $radius-md;
+    // background-color: var(--colour-bg-alt);
+    // border-radius: $radius-md 0 0 $radius-md;
 }
 
 .about__routine-activity {
     color: var(--colour-text-muted);
     padding: $spacing-3 $spacing-3 $spacing-3 $spacing-2;
-    background-color: var(--colour-bg-alt);
-    border-radius: 0 $radius-md $radius-md 0;
+    // background-color: var(--colour-bg-alt);
+    // border-radius: 0 $radius-md $radius-md 0;
 }
 
 .about__favourites-list {
