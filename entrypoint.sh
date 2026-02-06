@@ -35,7 +35,7 @@ fi
 if [ ${?} -eq 0 ]; then
     # link built files to apache root
     if [ -d "/${APP_ROOT}/dist" ]; then
-        echo "Removing old /var/www/html and linking /${APP_ROOT}/dist..."
+        echo "Mocha is plotting his world wide (web) domination..."
         rm -rf /var/www/html && ln -s "/${APP_ROOT}/dist" /var/www/html
     else
         echo "ERROR: Build directory /${APP_ROOT}/dist does not exist." >&2
