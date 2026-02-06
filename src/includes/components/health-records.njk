@@ -49,9 +49,20 @@
                             <span class="health__visit-reason">{{ visit.reason | orNA }}</span>
                         </summary>
                         <div class="health__visit-details">
-                            <p><strong>Notes:</strong> {{ visit.notes | orNA }}</p>
-                            <p><strong>Veterinarian:</strong> {{ visit.veterinarian | orNA }}</p>
-                            <p><strong>Clinic:</strong> {{ visit.clinic | orNA }}</p>
+                            <dl class="health__visit-details-list">
+                                <div class="health__visit-detail">
+                                    <dt>Notes</dt>
+                                    <dd>{{ visit.notes | orNA }}</dd>
+                                </div>
+                                <div class="health__visit-detail">
+                                    <dt>Veterinarian</dt>
+                                    <dd>{{ visit.veterinarian | orNA }}</dd>
+                                </div>
+                                <div class="health__visit-detail">
+                                    <dt>Clinic</dt>
+                                    <dd>{{ visit.clinic | orNA }}</dd>
+                                </div>
+                            </dl>
                         </div>
                     </details>
                     {% endfor %}

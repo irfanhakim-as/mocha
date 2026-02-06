@@ -628,10 +628,24 @@
     padding: $spacing-4;
     background-color: var(--colour-bg-card);
     font-size: $font-size-sm;
-    color: var(--colour-text-muted);
+}
 
-    p {
-        margin-bottom: $spacing-2;
+.health__visit-details-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: $spacing-3 $spacing-4;
+}
+
+.health__visit-detail {
+    display: contents;
+
+    dt {
+        color: var(--colour-text-muted);
+        font-weight: $font-weight-medium;
+    }
+
+    dd {
+        color: var(--colour-text);
     }
 }
 
