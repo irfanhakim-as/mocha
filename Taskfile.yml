@@ -5,8 +5,19 @@ vars:
   IMAGE_REPOSITORY: irfan
   IMAGE_NAME: mocha
   IMAGE_ARCH: linux/amd64,linux/arm/v7,linux/arm64/v8
+  VERSION:
+    sh: node -p "try { require('./package.json').version } catch(e) { '' }"
+  RELEASE: ""
   TAG:
-    sh: node -p "try { process.env.TAG || require('./package.json').version } catch(e) { 'latest' }"
+    sh: |
+      VERSION="{{.VERSION}}"
+      RELEASE="{{.RELEASE}}"
+      BASE="${VERSION:-latest}"
+      if [ -n "${RELEASE}" ]; then
+        echo "${BASE}-r${RELEASE}"
+      else
+        echo "${BASE}"
+      fi
 
 tasks:
   default:
@@ -46,13 +57,13 @@ tasks:
       - echo "Version updated successfully"
 
   container:build:all:
-    desc: "Build and publish both standard and lean images (usage: task container:build:all TAG=x.x.x)"
+    desc: "Build and publish both standard and lean images (usage: task container:build:all [VERSION=x.x.x] [RELEASE=n])"
     cmds:
       - task: container:build:std
       - task: container:build:lean
 
   container:build:std:
-    desc: "Build and publish standard container image (usage: task container:build:std TAG=x.x.x)"
+    desc: "Build and publish standard container image (usage: task container:build:std [VERSION=x.x.x] [RELEASE=n])"
     cmds:
       - |
         cat > .build.env <<EOF
@@ -66,7 +77,7 @@ tasks:
       - rm -f .build.env
 
   container:build:lean:
-    desc: "Build and publish lean container image (usage: task container:build:lean TAG=x.x.x)"
+    desc: "Build and publish lean container image (usage: task container:build:lean [VERSION=x.x.x] [RELEASE=n])"
     cmds:
       - |
         cat > .build.env <<EOF
