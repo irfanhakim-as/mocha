@@ -45,7 +45,7 @@ Built files will be in the `dist/` directory.
 
 | Script | Description |
 |--------|-------------|
-| `npm start` | Start development server with hot reload |
+| `npm run start` | Start development server with hot reload |
 | `npm run build` | Build for production |
 | `npm run build:docker` | Build for Docker (no pre-clean) |
 | `npm run clean` | Remove the `dist/` directory |
