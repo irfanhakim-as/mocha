@@ -290,9 +290,11 @@
     @media (min-width: $breakpoint-md) {
         grid-template-columns: repeat(2, 1fr);
     }
+}
 
-    @media (min-width: $breakpoint-lg) {
-        grid-template-columns: repeat(3, 1fr);
+.about__routine {
+    @media (min-width: $breakpoint-md) {
+        grid-column: 1 / -1;
     }
 }
 
