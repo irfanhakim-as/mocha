@@ -16,6 +16,8 @@ RUN apk update && cat /tmp/packages.txt | xargs apk add --no-cache
 
 RUN rm /tmp/packages.txt
 
+COPY --chmod=0644 httpd.conf /etc/apache2/conf.d/67-mocha.conf
+
 COPY package*.json /${APP_ROOT}/
 
 RUN npm install --omit=dev
