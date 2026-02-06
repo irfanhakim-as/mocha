@@ -70,6 +70,7 @@
             {% endif %}
 
             <!-- Daily Routine Card -->
+            {% if data.cat.routine %}
             <div class="card about__routine">
                 <h3 class="card__title">Daily Routine</h3>
                 <ul class="about__routine-list">
@@ -81,6 +82,7 @@
                     {% endfor %}
                 </ul>
             </div>
+            {% endif %}
         </div>
     </div>
 </section>
