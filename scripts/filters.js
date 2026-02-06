@@ -126,6 +126,14 @@ function telLink(phone) {
     return String(phone).replace(/[^\d+]/g, '');
 }
 
+// Return N/A if value is null, undefined, or empty
+function orNA(value) {
+    if (value === null || value === undefined || value === '') {
+        return 'N/A';
+    }
+    return value;
+}
+
 module.exports = {
     formatDate,
     toIso,
@@ -133,5 +141,6 @@ module.exports = {
     vaccinationStatus,
     formatRoutineKey,
     currentYear,
-    telLink
+    telLink,
+    orNA
 };
