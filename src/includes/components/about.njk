@@ -48,14 +48,24 @@
                         { title: "Sleep Spot", value: data.cat.about.sleepSpot }
                     ] %}
                     {% for fav in favourites %}
+                    {% if (fav.value.join and fav.value.length) or (not fav.value.join and fav.value) %}
                     <details class="about__favourite">
                         <summary class="about__favourite-summary">
                             <span class="about__favourite-title">{{ fav.title }}</span>
                         </summary>
                         <div class="about__favourite-details">
+                            {% if fav.value.join %}
+                            <ul class="about__favourite-list">
+                                {% for item in fav.value %}
+                                <li>{{ item | orNA }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
                             <p>{{ fav.value | orNA }}</p>
+                            {% endif %}
                         </div>
                     </details>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>

@@ -411,6 +411,29 @@
     }
 }
 
+.about__favourite-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        position: relative;
+        padding-left: $spacing-5;
+        color: var(--colour-text);
+
+        &::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--colour-accent);
+            font-weight: bold;
+        }
+    }
+}
+
 // Gallery
 .gallery__grid {
     display: grid;
