@@ -45,9 +45,10 @@ if [ ${?} -eq 0 ]; then
     # perms and ownership setup
     echo "Mocha is marking his territory..."
     # chmod -R 775 "/${APP_ROOT}" /var/www/html /var/log/apache2
-    find "/${APP_ROOT}" -type d -exec chmod 755 {} \;
-    find "/${APP_ROOT}" -type f -exec chmod 644 {} \;
-    chown -R apache: "/${APP_ROOT}" /var/www/html /var/log/apache2
+    chmod 755 "/${APP_ROOT}"
+    find "/${APP_ROOT}/dist" -type d -exec chmod 755 {} \;
+    find "/${APP_ROOT}/dist" -type f -exec chmod 644 {} \;
+    chown -R apache: "/${APP_ROOT}/dist" /var/www/html /var/log/apache2
 
     # run apache server
     echo "Mocha is going for a run..."
