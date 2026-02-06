@@ -32,6 +32,10 @@ The site will be available at `http://localhost:8080`.
 ### Production build
 
 ```bash
+# Install dependencies
+npm install
+
+# Build site for production
 npm run build
 ```
 
