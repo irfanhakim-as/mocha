@@ -11,15 +11,15 @@ A modern, configurable static website for your furry friend, built with [Elevent
 - Health records pertaining to vaccinations, conditions, allergies, medications, and more
 - Container-ready for production deployment
 
-## Quick start
+## Development
 
 ### Prerequisites
 
 - [Node.js](https://nodejs.org) 22.2.0 or higher
 
-### Development
+### Getting started
 
-```bash
+```sh
 # Install dependencies
 npm install
 
@@ -27,21 +27,26 @@ npm install
 npm run start
 ```
 
-The site will be available at `http://localhost:8080`.
+By default, the development site will be available at `http://localhost:8080`.
 
 ### Production build
 
-```bash
-# Install dependencies
-npm install
+Pre-build optimised static files for deployment:
 
+```sh
 # Build site for production
 npm run build
 ```
 
-Built files will be in the `dist/` directory.
+Built files will be in the `dist/` directory, ready for:
 
-### Available scripts
+- _Lean_ (Docker) deployment (mount `dist/` to container)
+- Static hosting services (Netlify, Vercel, GitHub Pages, etc.)
+- Manual deployment to any web server (Apache, Nginx, etc.)
+
+### References
+
+Available scripts:
 
 | Script | Description |
 |--------|-------------|
@@ -50,7 +55,7 @@ Built files will be in the `dist/` directory.
 | `npm run build:docker` | Build for Docker (no pre-clean) |
 | `npm run clean` | Remove the `dist/` directory |
 
-### Project structure
+Project structure:
 
 ```
 mocha/
@@ -84,8 +89,8 @@ Two Dockerfiles are provided:
 
 | File | Use case | Build time | Personalisation |
 |------|----------|------------|-----------------|
-| `Dockerfile` | Standard deployment | At runtime | By supplying source data and image files |
-| `Dockerfile.lean` | Pre-built site | At image build | By supplying pre-built `dist` directory |
+| `Dockerfile` | Standard deployment | At runtime | By supplying [source data and image files](#configuration) |
+| `Dockerfile.lean` | Pre-built site | At image build | By supplying [pre-built `dist` directory](#production-build) |
 
 You could build either of these images yourself, locally:
 
@@ -104,26 +109,26 @@ docker build -f Dockerfile.lean -t mocha:lean .
 
 ### Docker
 
-Standard deployment:
+Standard deployment (i.e. site built at runtime):
 
-```bash
-# Run with default source data
+```sh
+# To run with default source data
 docker run -p 8080:80 mocha
 
-# Run with custom data
+# To run with custom data
 docker run -p 8080:80 \
   -v /path/to/data:/config/data:ro \
   -v /path/to/images:/config/images:ro \
   mocha
 ```
 
-Lean deployment:
+Lean deployment (i.e. pre-built site):
 
-```bash
-# Run with default pre-built site
+```sh
+# To run with default pre-built site
 docker run -p 8080:80 mocha:lean
 
-# Run with custom pre-built site
+# To run with custom pre-built site
 docker run -p 8080:80 \
   -v /path/to/dist:/app/dist:ro \
   mocha:lean
