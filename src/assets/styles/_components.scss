@@ -368,6 +368,49 @@
     border-radius: 0 $radius-md $radius-md 0;
 }
 
+.about__favourites-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+}
+
+.about__favourite {
+    border: 1px solid var(--colour-border);
+    border-radius: $radius-md;
+    overflow: hidden;
+}
+
+.about__favourite-summary {
+    display: flex;
+    align-items: center;
+    padding: $spacing-4;
+    background-color: var(--colour-bg-alt);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color $transition-fast;
+
+    &:hover {
+        background-color: var(--colour-bg-hover);
+    }
+}
+
+.about__favourite-title {
+    font-weight: $font-weight-semibold;
+    color: var(--colour-accent);
+}
+
+.about__favourite-details {
+    padding: $spacing-4;
+    background-color: var(--colour-bg-card);
+    font-size: $font-size-sm;
+
+    p {
+        margin: 0;
+        color: var(--colour-text-muted);
+        line-height: $line-height-relaxed;
+    }
+}
+
 // Gallery
 .gallery__grid {
     display: grid;

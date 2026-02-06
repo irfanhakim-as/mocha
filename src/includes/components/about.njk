@@ -41,20 +41,23 @@
             <!-- Favourites Card -->
             <div class="card about__favourites">
                 <h3 class="card__title">Favourites</h3>
-                <dl class="about__details">
-                    <div class="about__detail">
-                        <dt>Food</dt>
-                        <dd>{{ data.cat.about.favFood | orNA }}</dd>
-                    </div>
-                    <div class="about__detail">
-                        <dt>Toy</dt>
-                        <dd>{{ data.cat.about.favToy | orNA }}</dd>
-                    </div>
-                    <div class="about__detail">
-                        <dt>Sleep Spot</dt>
-                        <dd>{{ data.cat.about.sleepSpot | orNA }}</dd>
-                    </div>
-                </dl>
+                <div class="about__favourites-list">
+                    {% set favourites = [
+                        { title: "Food", value: data.cat.about.favFood },
+                        { title: "Toy", value: data.cat.about.favToy },
+                        { title: "Sleep Spot", value: data.cat.about.sleepSpot }
+                    ] %}
+                    {% for fav in favourites %}
+                    <details class="about__favourite">
+                        <summary class="about__favourite-summary">
+                            <span class="about__favourite-title">{{ fav.title }}</span>
+                        </summary>
+                        <div class="about__favourite-details">
+                            <p>{{ fav.value | orNA }}</p>
+                        </div>
+                    </details>
+                    {% endfor %}
+                </div>
             </div>
 
             <!-- Quirks Card -->
