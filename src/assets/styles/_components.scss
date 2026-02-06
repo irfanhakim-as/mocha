@@ -374,11 +374,29 @@
 // Gallery
 .gallery__grid {
     display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc(100% - #{$spacing-4});
     gap: $spacing-4;
-    grid-template-columns: repeat(2, 1fr);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: $spacing-2 0;
+    justify-content: safe center;
 
     @media (min-width: $breakpoint-md) {
-        grid-template-columns: repeat(3, 1fr);
+        grid-auto-columns: calc((100% - #{$spacing-4 * 2}) / 3);
+    }
+
+    // scrollbar styling
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--colour-border);
+        border-radius: $radius-full;
     }
 }
 
@@ -388,6 +406,7 @@
     aspect-ratio: 1;
     box-shadow: var(--shadow-md);
     transition: transform $transition-base, box-shadow $transition-base;
+    scroll-snap-align: start;
 
     &:hover {
         transform: scale(1.02);
