@@ -19,7 +19,7 @@
                         </thead>
                         <tbody>
                             {% for vax in data.health.vaccinations %}
-                            {% set status = vax.nextDue | vaccinationStatus %}
+                            {% set status = vax.nextDue | vaccinationStatus(vax, data.health.vaccinations) %}
                             <tr>
                                 <td>{{ vax.name }}</td>
                                 <td>{{ vax.date | formatDate }}</td>
