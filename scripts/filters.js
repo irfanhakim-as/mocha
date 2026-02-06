@@ -49,13 +49,13 @@ function calculateAge(dateString) {
 }
 
 // Check if a vaccination is the latest dose for the same vaccine
-function isLatestVaccination(vaccination, allVaccinations) {
+function isLatestVaccination(vaccination, allVaccinations, currentDateParsed) {
     if (!vaccination || !Array.isArray(allVaccinations)) return true;
     // find all doses of the same vaccine
     const sameName = allVaccinations.filter(v => v.name === vaccination.name);
     if (sameName.length <= 1) return true;
-    // check if this is the most recent one
-    const currentDate = parseDate(vaccination.date);
+    // use pre-parsed date if provided
+    const currentDate = currentDateParsed || parseDate(vaccination.date);
     if (!currentDate) return true;
     // return whether no other common dose has a newer date
     return !sameName.some(v => {
