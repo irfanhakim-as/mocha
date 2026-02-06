@@ -24,7 +24,7 @@ A modern, configurable static website for your furry friend, built with [Elevent
 npm install
 
 # Start development server
-npm start
+npm run start
 ```
 
 The site will be available at `http://localhost:8080`.
