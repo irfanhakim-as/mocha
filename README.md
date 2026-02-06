@@ -5,7 +5,7 @@ A modern, configurable static website for your furry friend, built with [Elevent
 ## Features
 
 - Clean, modern minimal design with dark/light theme support
-- Responsive layout (mobile-first)
+- Responsive and consistent layout across desktop and mobile
 - Configurable via user-supplied JSON data files and optional photos
 - Auto-calculated age from date of birth
 - Health records pertaining to vaccinations, conditions, allergies, medications, and more
