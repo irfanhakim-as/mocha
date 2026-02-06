@@ -12,22 +12,21 @@ fi
 
 echo "Waking Mocha up..."
 
-# copy user-supplied files
-if [ -n "${CONFIG_DIR}" ] && [ -d "${CONFIG_DIR}" ]; then
-    # copy json data files
-    if [ -d "${CONFIG_DIR}/data" ] && [ -n "$(ls ${CONFIG_DIR}/data/*.json 2>/dev/null)" ]; then
-        echo "Mocha is copying over some data files..."
-        cp -v ${CONFIG_DIR}/data/*.json "/${APP_ROOT}/src/data/"
-    fi
-    # copy images
-    if [ -d "${CONFIG_DIR}/images" ] && [ -n "$(ls -A ${CONFIG_DIR}/images 2>/dev/null)" ]; then
-        echo "Mocha is copying over some images..."
-        cp -rv ${CONFIG_DIR}/images/. "/${APP_ROOT}/src/assets/images/"
-    fi
-fi
-
 # check if site build should be skipped
 if [ "${SKIP_BUILD}" != "true" ]; then
+    # copy user-supplied files
+    if [ -n "${CONFIG_DIR}" ] && [ -d "${CONFIG_DIR}" ]; then
+        # copy json data files
+        if [ -d "${CONFIG_DIR}/data" ] && [ -n "$(ls ${CONFIG_DIR}/data/*.json 2>/dev/null)" ]; then
+            echo "Mocha is copying over some data files..."
+            cp -v ${CONFIG_DIR}/data/*.json "/${APP_ROOT}/src/data/"
+        fi
+        # copy images
+        if [ -d "${CONFIG_DIR}/images" ] && [ -n "$(ls -A ${CONFIG_DIR}/images 2>/dev/null)" ]; then
+            echo "Mocha is copying over some images..."
+            cp -rv ${CONFIG_DIR}/images/. "/${APP_ROOT}/src/assets/images/"
+        fi
+    fi
     # run the build process
     echo "Mocha is packing something for you..."
     npm run build:docker
