@@ -66,25 +66,44 @@ function isLatestVaccination(vaccination, allVaccinations) {
 
 // Get vaccination status
 function vaccinationStatus(nextDueDate, vaccination, allVaccinations) {
+    // parse vaccination date
+    const vaxDate = vaccination ? parseDate(vaccination.date) : null;
+    const hasValidDate = vaxDate && !isNaN(vaxDate.getTime());
     // mark as complete if there has been a newer dose for the same vaccine
-    if (vaccination && allVaccinations && !isLatestVaccination(vaccination, allVaccinations)) {
+    if (vaccination && allVaccinations && !isLatestVaccination(vaccination, allVaccinations, vaxDate)) {
         return { class: 'current', label: 'Complete' };
     }
-
-    // check the nextDue date if the vaccination is not complete
-    if (!nextDueDate) return { class: 'unknown', label: 'N/A' };
+    // determine based on whether vaccine was given if no nextDue
+    if (!nextDueDate) {
+        // no booster needed
+        if (hasValidDate) {
+            return { class: 'current', label: 'Complete' };
+        }
+        return { class: 'unknown', label: 'Unknown' };
+    }
+    // calculate status based on nextDue date
     const now = new Date();
     const dueDate = parseDate(nextDueDate);
-    if (!dueDate || isNaN(dueDate.getTime())) return { class: 'unknown', label: 'N/A' };
+    // nextDue is invalid
+    if (!dueDate || isNaN(dueDate.getTime())) {
+        // mark as complete if vaccine was given
+        if (hasValidDate) {
+            return { class: 'current', label: 'Complete' };
+        }
+        // mark as unknown if vaccine was not given
+        return { class: 'unknown', label: 'Unknown' };
+    }
+    // calculate how many days until due if nextDue is valid
     const daysUntilDue = Math.floor((dueDate - now) / (24 * 60 * 60 * 1000));
-
     if (daysUntilDue < 0) {
+        // nextDue date has passed
         return { class: 'overdue', label: 'Overdue' };
     } else if (daysUntilDue <= 30) {
+        // nextDue within 30 days
         return { class: 'due-soon', label: 'Due Soon' };
-    } else {
-        return { class: 'current', label: 'Current' };
     }
+    // nextDue is more than 30 days away
+    return { class: 'current', label: 'Current' };
 }
 
 // Format routine key (camelCase to Title Case with spaces)
