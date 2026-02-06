@@ -1,6 +1,6 @@
 // Eleventy transforms
 
-const htmlMinifier = require('html-minifier');
+const htmlMinifier = require('html-minifier-terser');
 
 // Minify HTML in production
 function minifyHtml(content, outputPath) {
