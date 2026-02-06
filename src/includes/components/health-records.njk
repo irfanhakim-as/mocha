@@ -22,8 +22,8 @@
                             {% set status = vax.nextDue | vaccinationStatus(vax, data.health.vaccinations) %}
                             <tr>
                                 <td>{{ vax.name }}</td>
-                                <td>{{ vax.date | formatDate }}</td>
-                                <td>{{ vax.nextDue | formatDate }}</td>
+                                <td>{{ vax.date | formatDate | orNA }}</td>
+                                <td>{{ vax.nextDue | formatDate | orNA }}</td>
                                 <td>
                                     <span class="health__badge health__badge--{{ status.class }}">
                                         {{ status.label }}
@@ -45,13 +45,13 @@
                     {% for visit in data.health.vetVisits %}
                     <details class="health__visit">
                         <summary class="health__visit-summary">
-                            <span class="health__visit-date">{{ visit.date | formatDate }}</span>
-                            <span class="health__visit-reason">{{ visit.reason }}</span>
+                            <span class="health__visit-date">{{ visit.date | formatDate | orNA }}</span>
+                            <span class="health__visit-reason">{{ visit.reason | orNA }}</span>
                         </summary>
                         <div class="health__visit-details">
-                            <p><strong>Notes:</strong> {{ visit.notes }}</p>
-                            <p><strong>Veterinarian:</strong> {{ visit.veterinarian }}</p>
-                            <p><strong>Clinic:</strong> {{ visit.clinic }}</p>
+                            <p><strong>Notes:</strong> {{ visit.notes | orNA }}</p>
+                            <p><strong>Veterinarian:</strong> {{ visit.veterinarian | orNA }}</p>
+                            <p><strong>Clinic:</strong> {{ visit.clinic | orNA }}</p>
                         </div>
                     </details>
                     {% endfor %}
@@ -66,8 +66,8 @@
                 <div class="health__weight-list">
                     {% for entry in data.health.weight %}
                     <div class="health__weight-entry">
-                        <span class="health__weight-date">{{ entry.date | formatDate }}</span>
-                        <span class="health__weight-value">{{ entry.kg }} kg</span>
+                        <span class="health__weight-date">{{ entry.date | formatDate | orNA }}</span>
+                        <span class="health__weight-value">{{ entry.kg | orNA }} kg</span>
                     </div>
                     {% endfor %}
                 </div>
@@ -82,10 +82,10 @@
                     {% for allergy in data.health.allergies %}
                     <div class="health__item">
                         <div class="health__item-header">
-                            <strong>{{ allergy.allergen }}</strong>
-                            <span class="health__badge health__badge--{{ allergy.severity }}">{{ allergy.severity }}</span>
+                            <strong>{{ allergy.allergen | orNA }}</strong>
+                            <span class="health__badge health__badge--{{ allergy.severity }}">{{ allergy.severity | orNA }}</span>
                         </div>
-                        <p class="health__item-detail">Reaction: {{ allergy.reaction }}</p>
+                        <p class="health__item-detail">Reaction: {{ allergy.reaction | orNA }}</p>
                         {% if allergy.notes %}
                         <p class="health__item-notes">{{ allergy.notes }}</p>
                         {% endif %}
@@ -103,10 +103,10 @@
                     {% for condition in data.health.conditions %}
                     <div class="health__item">
                         <div class="health__item-header">
-                            <strong>{{ condition.name }}</strong>
-                            <span class="health__badge health__badge--{{ condition.status }}">{{ condition.status }}</span>
+                            <strong>{{ condition.name | orNA }}</strong>
+                            <span class="health__badge health__badge--{{ condition.status }}">{{ condition.status | orNA }}</span>
                         </div>
-                        <p class="health__item-detail">Diagnosed: {{ condition.diagnosedDate | formatDate }}</p>
+                        <p class="health__item-detail">Diagnosed: {{ condition.diagnosedDate | formatDate | orNA }}</p>
                         {% if condition.notes %}
                         <p class="health__item-notes">{{ condition.notes }}</p>
                         {% endif %}
@@ -124,10 +124,10 @@
                     {% for med in data.health.medications %}
                     <div class="health__item">
                         <div class="health__item-header">
-                            <strong>{{ med.name }}</strong>
+                            <strong>{{ med.name | orNA }}</strong>
                         </div>
-                        <p class="health__item-detail">{{ med.dosage }} - {{ med.frequency }}</p>
-                        <p class="health__item-detail">Started: {{ med.startDate | formatDate }}</p>
+                        <p class="health__item-detail">{{ med.dosage | orNA }} - {{ med.frequency | orNA }}</p>
+                        <p class="health__item-detail">Started: {{ med.startDate | formatDate | orNA }}</p>
                         {% if med.reason %}
                         <p class="health__item-notes">{{ med.reason }}</p>
                         {% endif %}

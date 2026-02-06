@@ -9,19 +9,19 @@
                 <dl class="about__details">
                     <div class="about__detail">
                         <dt>Date of Birth</dt>
-                        <dd>{{ data.cat.dob | formatDate }}</dd>
+                        <dd>{{ data.cat.dob | formatDate | orNA }}</dd>
                     </div>
                     <div class="about__detail">
                         <dt>Breed</dt>
-                        <dd>{{ data.cat.breed }}</dd>
+                        <dd>{{ data.cat.breed | orNA }}</dd>
                     </div>
                     <div class="about__detail">
                         <dt>Colour</dt>
-                        <dd>{{ data.cat.colour }}</dd>
+                        <dd>{{ data.cat.colour | orNA }}</dd>
                     </div>
                     <div class="about__detail">
                         <dt>Gender</dt>
-                        <dd>{{ data.cat.gender }}</dd>
+                        <dd>{{ data.cat.gender | orNA }}</dd>
                     </div>
                     {% if data.cat.microchipId %}
                     <div class="about__detail">
@@ -35,7 +35,7 @@
             <!-- Personality Card -->
             <div class="card about__personality">
                 <h3 class="card__title">Personality</h3>
-                <p>{{ data.cat.about.personality }}</p>
+                <p>{{ data.cat.about.personality | orNA }}</p>
             </div>
 
             <!-- Favourites Card -->
@@ -44,15 +44,15 @@
                 <dl class="about__details">
                     <div class="about__detail">
                         <dt>Food</dt>
-                        <dd>{{ data.cat.about.favFood }}</dd>
+                        <dd>{{ data.cat.about.favFood | orNA }}</dd>
                     </div>
                     <div class="about__detail">
                         <dt>Toy</dt>
-                        <dd>{{ data.cat.about.favToy }}</dd>
+                        <dd>{{ data.cat.about.favToy | orNA }}</dd>
                     </div>
                     <div class="about__detail">
                         <dt>Sleep Spot</dt>
-                        <dd>{{ data.cat.about.sleepSpot }}</dd>
+                        <dd>{{ data.cat.about.sleepSpot | orNA }}</dd>
                     </div>
                 </dl>
             </div>
@@ -76,7 +76,7 @@
                     {% for key, value in data.cat.routine %}
                     <li class="about__routine-item">
                         <span class="about__routine-time">{{ key | formatRoutineKey }}</span>
-                        <span class="about__routine-activity">{{ value }}</span>
+                        <span class="about__routine-activity">{{ value | orNA }}</span>
                     </li>
                     {% endfor %}
                 </ul>

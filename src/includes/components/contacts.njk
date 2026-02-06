@@ -9,22 +9,30 @@
                 <dl class="contact__details">
                     <div class="contact__detail">
                         <dt>Name</dt>
-                        <dd>{{ data.owner.name }}</dd>
+                        <dd>{{ data.owner.name | orNA }}</dd>
                     </div>
                     <div class="contact__detail">
                         <dt>Phone</dt>
                         <dd>
+                            {% if data.owner.phone %}
                             <a href="tel:{{ data.owner.phone | telLink }}">
                                 {{ data.owner.phone }}
                             </a>
+                            {% else %}
+                            N/A
+                            {% endif %}
                         </dd>
                     </div>
                     <div class="contact__detail">
                         <dt>Email</dt>
                         <dd>
+                            {% if data.owner.email %}
                             <a href="mailto:{{ data.owner.email }}">
                                 {{ data.owner.email }}
                             </a>
+                            {% else %}
+                            N/A
+                            {% endif %}
                         </dd>
                     </div>
                     {% if data.owner.address %}
@@ -53,19 +61,23 @@
                 <dl class="contact__details">
                     <div class="contact__detail">
                         <dt>Name</dt>
-                        <dd>{{ data.owner.emergencyContact.name }}</dd>
+                        <dd>{{ data.owner.emergencyContact.name | orNA }}</dd>
                     </div>
                     <div class="contact__detail">
                         <dt>Phone</dt>
                         <dd>
+                            {% if data.owner.emergencyContact.phone %}
                             <a href="tel:{{ data.owner.emergencyContact.phone | telLink }}">
                                 {{ data.owner.emergencyContact.phone }}
                             </a>
+                            {% else %}
+                            N/A
+                            {% endif %}
                         </dd>
                     </div>
                     <div class="contact__detail">
                         <dt>Relationship</dt>
-                        <dd>{{ data.owner.emergencyContact.relationship }}</dd>
+                        <dd>{{ data.owner.emergencyContact.relationship | orNA }}</dd>
                     </div>
                 </dl>
             </div>
