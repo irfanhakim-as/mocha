@@ -298,12 +298,6 @@
     }
 }
 
-.about__routine {
-    @media (min-width: $breakpoint-lg) {
-        grid-column: span 2;
-    }
-}
-
 .about__details {
     display: flex;
     flex-direction: column;
