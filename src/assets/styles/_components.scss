@@ -384,6 +384,11 @@
     padding: $spacing-2 0;
     justify-content: safe center;
 
+    // override smooth scrolling for instant positioning (used when syncing with lightbox)
+    &.instant-scroll {
+        scroll-behavior: auto !important;
+    }
+
     @media (min-width: $breakpoint-md) {
         grid-auto-columns: calc((100% - #{$spacing-4 * 2}) / 3);
     }

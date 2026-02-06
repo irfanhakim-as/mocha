@@ -158,6 +158,7 @@ function initLightbox() {
     let currentX = 0;
     let translateX = 0; // current translate position in pixels
     let pendingReset = false; // track if we need to reset position after animation
+    let galleryElements = []; // store gallery DOM elements for scroll sync
 
     // update prev, current, and next images based on current index
     function updateImages() {
@@ -234,16 +235,32 @@ function initLightbox() {
 
     // close lightbox
     function closeLightbox() {
-        lightbox.classList.remove('is-open');
-        lightbox.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
+        // sync gallery scroll to current image instantly
+        if (hasNavigation && galleryElements[currentIndex]) {
+            const galleryGrid = galleryElements[currentIndex].parentElement;
+            if (galleryGrid) {
+                // temporarily override CSS scroll-behavior for instant positioning
+                galleryGrid.classList.add('instant-scroll');
+                // scroll to element while handling gaps and scroll-snap
+                galleryElements[currentIndex].scrollIntoView({ block: 'nearest', inline: 'start' });
+                // restore smooth scroll behavior
+                galleryGrid.classList.remove('instant-scroll');
+            }
+        }
+        // start close animation after scroll completes
+        requestAnimationFrame(() => {
+            lightbox.classList.remove('is-open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        });
     }
 
     // setup gallery images
     const galleryImages = document.querySelectorAll('.gallery__item[data-lightbox]');
     if (galleryImages.length > 0) {
-        images = Array.from(galleryImages).map(el => el.dataset.lightbox);
-        galleryImages.forEach((el, index) => {
+        galleryElements = Array.from(galleryImages);
+        images = galleryElements.map(el => el.dataset.lightbox);
+        galleryElements.forEach((el, index) => {
             el.addEventListener('click', () => {
                 currentIndex = index;
                 hasNavigation = images.length > 1;
