@@ -85,7 +85,7 @@ Two Dockerfiles are provided:
 | File | Use case | Build time | Personalisation |
 |------|----------|------------|-----------------|
 | `Dockerfile` | Standard deployment | At runtime | By supplying source data and image files |
-| `Dockerfile.lean` | Pre-built site | At image build | By supplying built `dist` directory |
+| `Dockerfile.lean` | Pre-built site | At image build | By supplying pre-built `dist` directory |
 
 You could build either of these images yourself, locally:
 
@@ -131,7 +131,7 @@ docker run -p 8080:80 \
 
 ### Docker Compose
 
-Write compose file (i.e. `docker-compose.yml`):
+Create a compose file (i.e. `docker-compose.yml`):
 
 ```yaml
 name: mocha
@@ -272,7 +272,7 @@ Cat profile information:
 
 ### health.json
 
-Health records including vaccinations, vet visits, weight records,conditions, medications, and allergies:
+Health records including vaccinations, vet visits, weight records, conditions, medications, and allergies:
 
 ```json
 {
