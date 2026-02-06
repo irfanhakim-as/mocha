@@ -140,21 +140,97 @@ function calculateAge(dob) {
 // Lightbox for images
 function initLightbox() {
     const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox?.querySelector('.lightbox__image');
+    const container = lightbox?.querySelector('.lightbox__container');
+    const prevImg = lightbox?.querySelector('.lightbox__image--prev');
+    const currentImg = lightbox?.querySelector('.lightbox__image--current');
+    const nextImg = lightbox?.querySelector('.lightbox__image--next');
     const lightboxClose = lightbox?.querySelector('.lightbox__close');
+    const lightboxPrev = lightbox?.querySelector('.lightbox__nav--prev');
+    const lightboxNext = lightbox?.querySelector('.lightbox__nav--next');
 
-    if (!lightbox || !lightboxImg) return;
+    if (!lightbox || !container || !currentImg) return;
 
-    // open lightbox when clicking on elements with data-lightbox
-    document.querySelectorAll('[data-lightbox]').forEach(el => {
-        el.addEventListener('click', () => {
-            const src = el.dataset.lightbox;
-            lightboxImg.src = src;
-            lightbox.classList.add('is-open');
-            lightbox.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-        });
-    });
+    let currentIndex = 0;
+    let images = [];
+    let hasNavigation = false;
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    let translateX = 0; // current translate position in pixels
+    let pendingReset = false; // track if we need to reset position after animation
+
+    // update prev, current, and next images based on current index
+    function updateImages() {
+        const prevIndex = (currentIndex - 1 + images.length) % images.length;
+        const nextIndex = (currentIndex + 1) % images.length;
+
+        if (prevImg) prevImg.src = images[prevIndex] || '';
+        currentImg.src = images[currentIndex] || '';
+        if (nextImg) nextImg.src = images[nextIndex] || '';
+
+        // show or hide navigation buttons
+        if (!hasNavigation || images.length <= 1) {
+            lightboxPrev?.classList.add('is-hidden');
+            lightboxNext?.classList.add('is-hidden');
+        } else {
+            lightboxPrev?.classList.remove('is-hidden');
+            lightboxNext?.classList.remove('is-hidden');
+        }
+    }
+
+    // set transform position
+    function setPosition(x, transition = true) {
+        if (transition) {
+            container.classList.remove('is-dragging');
+        } else {
+            container.classList.add('is-dragging');
+        }
+        container.style.transform = `translateX(${x}px)`;
+    }
+
+    // navigate to specific index
+    function goToIndex(index, direction = 0) {
+        if (index < 0) index = images.length - 1;
+        if (index >= images.length) index = 0;
+        currentIndex = index;
+
+        if (direction !== 0) {
+            // animate in the swipe direction to reveal the target image
+            const targetX = direction < 0
+                ? -window.innerWidth * 2  // slide to next when swiped left
+                : 0;  // slide to previous when swiped right
+
+            setPosition(targetX, true);
+            pendingReset = true;
+
+            // update images and reset to center after animation completes
+            container.addEventListener('transitionend', function resetPosition() {
+                container.removeEventListener('transitionend', resetPosition);
+                if (pendingReset) {
+                    updateImages();
+                    translateX = -window.innerWidth;
+                    setPosition(translateX, false);
+                    pendingReset = false;
+                }
+            }, { once: true });
+        } else {
+            // instantly switch for keyboard or button navigation
+            updateImages();
+            translateX = -window.innerWidth;
+            setPosition(translateX, false);
+        }
+    }
+
+    // open lightbox
+    function openLightbox() {
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        translateX = -window.innerWidth;
+        updateImages();
+        setPosition(translateX, false);
+    }
 
     // close lightbox
     function closeLightbox() {
@@ -163,7 +239,41 @@ function initLightbox() {
         document.body.style.overflow = '';
     }
 
-    // close on button click
+    // setup gallery images
+    const galleryImages = document.querySelectorAll('.gallery__item[data-lightbox]');
+    if (galleryImages.length > 0) {
+        images = Array.from(galleryImages).map(el => el.dataset.lightbox);
+        galleryImages.forEach((el, index) => {
+            el.addEventListener('click', () => {
+                currentIndex = index;
+                hasNavigation = images.length > 1;
+                openLightbox();
+            });
+        });
+    }
+
+    // setup hero image
+    const heroImage = document.querySelector('.hero__image-wrapper[data-lightbox]');
+    if (heroImage) {
+        heroImage.addEventListener('click', () => {
+            const tempImages = images;
+            images = [heroImage.dataset.lightbox];
+            currentIndex = 0;
+            hasNavigation = false;
+            openLightbox();
+            images = tempImages;
+        });
+    }
+
+    // navigation buttons
+    lightboxPrev?.addEventListener('click', () => {
+        if (hasNavigation) goToIndex(currentIndex - 1);
+    });
+
+    lightboxNext?.addEventListener('click', () => {
+        if (hasNavigation) goToIndex(currentIndex + 1);
+    });
+
     lightboxClose?.addEventListener('click', closeLightbox);
 
     // close on backdrop click
@@ -171,10 +281,65 @@ function initLightbox() {
         if (e.target === lightbox) closeLightbox();
     });
 
-    // close on escape key
+    // keyboard navigation
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+        if (!lightbox.classList.contains('is-open')) return;
+
+        if (e.key === 'Escape') {
             closeLightbox();
+        } else if (e.key === 'ArrowLeft' && hasNavigation) {
+            goToIndex(currentIndex - 1);
+        } else if (e.key === 'ArrowRight' && hasNavigation) {
+            goToIndex(currentIndex + 1);
+        }
+    });
+
+    // touch drag support
+    container.addEventListener('touchstart', (e) => {
+        if (!hasNavigation) return;
+
+        // complete any pending reset before starting new drag
+        if (pendingReset) {
+            updateImages();
+            translateX = -window.innerWidth;
+            setPosition(translateX, false);
+            pendingReset = false;
+        }
+
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        currentX = startX;
+    });
+
+    container.addEventListener('touchmove', (e) => {
+        if (!isDragging || !hasNavigation) return;
+        e.preventDefault();
+
+        currentX = e.touches[0].clientX;
+        const diff = currentX - startX;
+
+        setPosition(translateX + diff, false);
+    });
+
+    container.addEventListener('touchend', () => {
+        if (!isDragging || !hasNavigation) return;
+        isDragging = false;
+
+        const diff = currentX - startX;
+        const threshold = window.innerWidth * 0.2; // 20% of screen width
+
+        if (Math.abs(diff) > threshold) {
+            // change image when swipe threshold met
+            if (diff > 0) {
+                // previous when swiped right
+                goToIndex(currentIndex - 1, 1);
+            } else {
+                // next when swiped left
+                goToIndex(currentIndex + 1, -1);
+            }
+        } else {
+            // snap back to current
+            setPosition(translateX, true);
         }
     });
 }

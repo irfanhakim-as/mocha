@@ -705,13 +705,12 @@
     position: fixed;
     inset: 0;
     z-index: $z-modal;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: var(--colour-lightbox-bg);
     opacity: 0;
     visibility: hidden;
     transition: opacity $transition-slow, visibility $transition-slow;
+    overflow: hidden;
+    touch-action: none;
 
     &.is-open {
         opacity: 1;
@@ -719,11 +718,31 @@
     }
 }
 
+.lightbox__container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    touch-action: pan-y;
+    user-select: none;
+
+    &.is-dragging {
+        transition: none;
+    }
+}
+
 .lightbox__image {
-    max-width: 90vw;
-    max-height: 90vh;
+    width: 100vw;
+    height: 100%;
     object-fit: contain;
-    border-radius: $radius-md;
+    padding: 5vh;
+    flex-shrink: 0;
+    pointer-events: none;
 }
 
 .lightbox__close {
@@ -741,6 +760,7 @@
     color: var(--colour-lightbox-close);
     cursor: pointer;
     transition: background-color $transition-fast;
+    z-index: 2;
 
     &:hover {
         background: var(--colour-lightbox-close-hover);
@@ -750,6 +770,56 @@
         width: 24px;
         height: 24px;
     }
+}
+
+.lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--colour-lightbox-close-bg);
+    border: none;
+    border-radius: $radius-full;
+    color: var(--colour-lightbox-close);
+    cursor: pointer;
+    transition: background-color $transition-fast, opacity $transition-fast;
+    z-index: 1;
+
+    &:hover {
+        background: var(--colour-lightbox-close-hover);
+    }
+
+    &.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    @media (max-width: $breakpoint-md) {
+        width: 48px;
+        height: 48px;
+
+        svg {
+            width: 28px;
+            height: 28px;
+        }
+    }
+}
+
+.lightbox__nav--prev {
+    left: $spacing-4;
+}
+
+.lightbox__nav--next {
+    right: $spacing-4;
 }
 
 // Make clickable images look clickable
