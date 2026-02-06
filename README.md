@@ -419,4 +419,4 @@ Owner and emergency contact information:
 
 ## Licence
 
-MIT
+AGPL-3.0-or-later

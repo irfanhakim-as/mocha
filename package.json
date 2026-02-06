@@ -30,7 +30,7 @@
     "website"
   ],
   "author": "Irfan Hakim <irfanhakim.as@yahoo.com> (https://links.irfanhak.im)",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://git.moekai.net/irfan/mocha/issues"
   },
