@@ -345,7 +345,7 @@
 .about__routine-list {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: $spacing-3 0;
+    gap: $spacing-3 $spacing-6;
 }
 
 .about__routine-item {
@@ -633,7 +633,7 @@
 .health__visit-details-list {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: $spacing-3 $spacing-4;
+    gap: $spacing-3 $spacing-6;
 }
 
 .health__visit-detail {
