@@ -71,13 +71,13 @@ function vaccinationStatus(nextDueDate, vaccination, allVaccinations) {
     const hasValidDate = vaxDate && !isNaN(vaxDate.getTime());
     // mark as complete if there has been a newer dose for the same vaccine
     if (vaccination && allVaccinations && !isLatestVaccination(vaccination, allVaccinations, vaxDate)) {
-        return { class: 'current', label: 'Complete' };
+        return { class: 'complete', label: 'Complete' };
     }
     // determine based on whether vaccine was given if no nextDue
     if (!nextDueDate) {
         // no booster needed
         if (hasValidDate) {
-            return { class: 'current', label: 'Complete' };
+            return { class: 'complete', label: 'Complete' };
         }
         return { class: 'unknown', label: 'Unknown' };
     }
@@ -88,7 +88,7 @@ function vaccinationStatus(nextDueDate, vaccination, allVaccinations) {
     if (!dueDate || isNaN(dueDate.getTime())) {
         // mark as complete if vaccine was given
         if (hasValidDate) {
-            return { class: 'current', label: 'Complete' };
+            return { class: 'complete', label: 'Complete' };
         }
         // mark as unknown if vaccine was not given
         return { class: 'unknown', label: 'Unknown' };
