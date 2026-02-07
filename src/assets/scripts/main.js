@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initMobileMenu();
     initLightbox();
+    initLogoScroll();
     updateAge();
 });
 
@@ -135,6 +136,22 @@ function calculateAge(dob) {
     } else {
         return `${years} year${years !== 1 ? 's' : ''}, ${months} month${months !== 1 ? 's' : ''} old`;
     }
+}
+
+// Logo scroll to top
+function initLogoScroll() {
+    const logo = document.querySelector('.header__logo');
+    if (!logo) return;
+    logo.addEventListener('click', (e) => {
+        // prevent default only if we're already on the home page
+        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    });
 }
 
 // Lightbox for images
