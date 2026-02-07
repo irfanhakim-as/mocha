@@ -236,9 +236,11 @@ Cat profile information:
   ],
   "about": {
     "personality": "Gentle and curious...",
-    "favFood": "Salmon wet food",
-    "favToy": "Feather wand",
-    "sleepSpot": "Sunny window spot",
+    "favourites": {
+      "food": ["Salmon wet food", "Occasional treats"],
+      "toy": ["Feather wand", "Crinkle balls"],
+      "sleepSpot": "The sunny spot by the window or on a warm laptop"
+    },
     "quirks": ["Chirps at birds", "Loves to knock things off tables"]
   },
   "routine": {
@@ -268,9 +270,7 @@ Cat profile information:
 | `photos[].featured` | false | Set `true` for hero image (i.e. profile picture) |
 | `about` | false | About section object |
 | `about.personality` | false | Personality description |
-| `about.favFood` | false | Favourite food |
-| `about.favToy` | false | Favourite toy |
-| `about.sleepSpot` | false | Favourite sleeping spot |
+| `about.favourites` | false | Categories of favourites as keys and either string or array of favourite items as values |
 | `about.quirks` | false | Array of quirky behaviours |
 | `routine` | false | Daily routine (key-value pairs) |
 | `socials` | false | Array of social links |

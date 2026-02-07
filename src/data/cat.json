@@ -29,9 +29,20 @@
     ],
     "about": {
         "personality": "Mocha is a gentle and curious soul who loves exploring every corner of the house. He's incredibly affectionate and always greets his humans at the door.",
-        "favFood": "Salmon wet food and occasional treats",
-        "favToy": "Feather wand and crinkle balls",
-        "sleepSpot": "The sunny spot by the window or on a warm laptop",
+        "favourites": {
+            "food": [
+                "Salmon wet food",
+                "Occasional treats"
+            ],
+            "toy": [
+                "Feather wand",
+                "Crinkle balls"
+            ],
+            "sleepSpot": [
+                "The sunny spot by the window",
+                "On a warm laptop"
+            ]
+        },
         "quirks": [
             "Chirps at birds through the window",
             "Loves to knock things off tables",
