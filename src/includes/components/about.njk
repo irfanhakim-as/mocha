@@ -91,7 +91,7 @@
                 <ul class="about__routine-list">
                     {% for key, value in data.cat.routine %}
                     <li class="about__routine-item">
-                        <span class="about__routine-time">{{ key | formatRoutineKey }}</span>
+                        <span class="about__routine-time">{{ key | camelToTitleCase }}</span>
                         <span class="about__routine-activity">{{ value | orNA }}</span>
                     </li>
                     {% endfor %}

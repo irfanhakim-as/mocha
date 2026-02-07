@@ -106,8 +106,8 @@ function vaccinationStatus(nextDueDate, vaccination, allVaccinations) {
     return { class: 'current', label: 'Current' };
 }
 
-// Format routine key (camelCase to Title Case with spaces)
-function formatRoutineKey(key) {
+// Convert camelCase to Title Case with spaces
+function camelToTitleCase(key) {
     if (!key) return '';
     return key
         .replace(/([A-Z])/g, ' $1')
@@ -139,7 +139,7 @@ module.exports = {
     toIso,
     calculateAge,
     vaccinationStatus,
-    formatRoutineKey,
+    camelToTitleCase,
     currentYear,
     telLink,
     orNA
