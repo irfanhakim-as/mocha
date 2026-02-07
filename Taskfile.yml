@@ -4,7 +4,7 @@ vars:
   IMAGE_REGISTRY: git.moekai.net
   IMAGE_REPOSITORY: irfan
   IMAGE_NAME: mocha
-  IMAGE_ARCH: linux/amd64,linux/arm/v7,linux/arm64/v8
+  IMAGE_ARCH: linux/amd64,linux/arm64/v8
   VERSION:
     sh: node -p "try { require('./package.json').version } catch(e) { '' }"
   RELEASE: ""
