@@ -366,6 +366,7 @@ Owner and emergency contact information:
   "phone": "+60 12-345 6789",
   "email": "owner@example.com",
   "address": "123 Cat Street, Meowville",
+  "notes": "Available for contact through iMessage",
   "emergencyContact": {
     "name": "Emergency Contact",
     "phone": "+60 19-876 5432",
@@ -386,6 +387,7 @@ Owner and emergency contact information:
 | `phone` | false | Phone number |
 | `email` | false | Email address |
 | `address` | false | Physical address |
+| `notes` | false | Additional notes or information about the owner |
 | `emergencyContact` | false | Emergency contact object |
 | `emergencyContact.name` | true | Contact name |
 | `emergencyContact.phone` | true | Contact phone |

@@ -43,6 +43,13 @@
                     {% endif %}
                 </dl>
 
+                {% if data.owner.notes %}
+                <div class="contact__notes">
+                    <span class="contact__notes-label">Notes</span>
+                    <p>{{ data.owner.notes }}</p>
+                </div>
+                {% endif %}
+
                 {% if data.owner.socials | length %}
                 <div class="contact__social">
                     {% for link in data.owner.socials %}

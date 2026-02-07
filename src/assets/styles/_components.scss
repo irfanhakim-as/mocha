@@ -743,6 +743,28 @@
     }
 }
 
+.contact__notes {
+    margin-top: $spacing-4;
+    padding-top: $spacing-4;
+    border-top: 1px solid var(--colour-border);
+}
+
+.contact__notes-label {
+    display: block;
+    font-size: $font-size-xs;
+    color: var(--colour-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: $spacing-2;
+}
+
+.contact__notes p {
+    margin: 0;
+    color: var(--colour-text);
+    font-size: $font-size-base;
+    line-height: 1.6;
+}
+
 .contact__social {
     display: flex;
     flex-wrap: wrap;

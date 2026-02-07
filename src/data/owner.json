@@ -3,6 +3,7 @@
     "phone": "+60 12-345 6789",
     "email": "owner@example.com",
     "address": "123 Cat Street, Meowville, CA 90210",
+    "notes": "Available for contact through iMessage",
     "emergencyContact": {
         "name": "Emergency Contact Name",
         "phone": "+60 19-876 5432",
