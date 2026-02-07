@@ -709,9 +709,11 @@
 
 // Contact
 .contact__grid {
+    $grid-max-width: 800px;
+
     display: grid;
     gap: $spacing-6;
-    max-width: 800px;
+    max-width: $grid-max-width;
     margin: 0 auto;
 
     @media (min-width: $breakpoint-md) {
@@ -722,7 +724,7 @@
     > :only-child {
         @media (min-width: $breakpoint-md) {
             grid-column: 1 / -1;
-            width: calc((800px - #{$spacing-6}) / 2);
+            width: calc((#{$grid-max-width} - #{$spacing-6}) / 2);
             justify-self: center;
         }
     }
