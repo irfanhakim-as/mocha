@@ -4,6 +4,7 @@
     "breed": "Classic Siamese",
     "colour": "Seal Points",
     "gender": "Male",
+    "neutered": true,
     "microchipId": "123456789012345",
     "photos": [
         {

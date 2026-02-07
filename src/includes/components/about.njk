@@ -23,6 +23,12 @@
                         <dt>Gender</dt>
                         <dd>{{ data.cat.gender | orNA }}</dd>
                     </div>
+                    {% if data.cat.neutered !== undefined and data.cat.neutered !== null %}
+                    <div class="about__detail">
+                        <dt>Neutered/Spayed</dt>
+                        <dd>{{ 'Yes' if data.cat.neutered else 'No' }}</dd>
+                    </div>
+                    {% endif %}
                     {% if data.cat.microchipId %}
                     <div class="about__detail">
                         <dt>Microchip ID</dt>

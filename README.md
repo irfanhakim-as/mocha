@@ -226,6 +226,7 @@ Cat profile information:
   "breed": "Classic Siamese",
   "colour": "Seal Points",
   "gender": "Male",
+  "neutered": true,
   "microchipId": "123456789012345",
   "photos": [
     {
@@ -263,6 +264,7 @@ Cat profile information:
 | `breed` | true | Breed |
 | `colour` | true | Coat colour/pattern |
 | `gender` | false | Gender |
+| `neutered` | false | Whether the cat has been neutered or spayed (i.e. `true` or `false`) |
 | `microchipId` | false | Microchip ID number |
 | `photos` | false | Array of photo objects |
 | `photos[].src` | true | Filename (relative to `/path/to/images` directory) |
