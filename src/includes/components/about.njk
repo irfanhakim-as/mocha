@@ -45,7 +45,7 @@
                 <div class="about__favourites-list">
                     {% for key, value in data.cat.about.favourites %}
                     {% if (value.join and value.length) or (not value.join and value) %}
-                    <details class="about__favourite">
+                    <details class="about__favourite" open>
                         <summary class="about__favourite-summary">
                             <span class="about__favourite-title">{{ key | camelToTitleCase }}</span>
                         </summary>
