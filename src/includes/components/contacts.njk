@@ -11,30 +11,26 @@
                         <dt>Name</dt>
                         <dd>{{ data.owner.name | orNA }}</dd>
                     </div>
+                    {% if data.owner.phone %}
                     <div class="contact__detail">
                         <dt>Phone</dt>
                         <dd>
-                            {% if data.owner.phone %}
                             <a href="tel:{{ data.owner.phone | telLink }}">
                                 {{ data.owner.phone }}
                             </a>
-                            {% else %}
-                            N/A
-                            {% endif %}
                         </dd>
                     </div>
+                    {% endif %}
+                    {% if data.owner.email %}
                     <div class="contact__detail">
                         <dt>Email</dt>
                         <dd>
-                            {% if data.owner.email %}
                             <a href="mailto:{{ data.owner.email }}">
                                 {{ data.owner.email }}
                             </a>
-                            {% else %}
-                            N/A
-                            {% endif %}
                         </dd>
                     </div>
+                    {% endif %}
                     {% if data.owner.address %}
                     <div class="contact__detail">
                         <dt>Address</dt>
