@@ -164,11 +164,13 @@ function initLightbox() {
     const lightboxClose = lightbox?.querySelector('.lightbox__close');
     const lightboxPrev = lightbox?.querySelector('.lightbox__nav--prev');
     const lightboxNext = lightbox?.querySelector('.lightbox__nav--next');
+    const caption = lightbox?.querySelector('.lightbox__caption');
 
     if (!lightbox || !container || !currentImg) return;
 
     let currentIndex = 0;
     let images = [];
+    let alts = [];
     let hasNavigation = false;
     let isDragging = false;
     let startX = 0;
@@ -185,6 +187,13 @@ function initLightbox() {
         if (prevImg) prevImg.src = images[prevIndex] || '';
         currentImg.src = images[currentIndex] || '';
         if (nextImg) nextImg.src = images[nextIndex] || '';
+
+        // update caption with alt text
+        if (caption) {
+            const alt = alts[currentIndex] || '';
+            caption.textContent = alt;
+            caption.style.display = alt ? '' : 'none';
+        }
 
         // show or hide navigation buttons
         if (!hasNavigation || images.length <= 1) {
@@ -277,6 +286,7 @@ function initLightbox() {
     if (galleryImages.length > 0) {
         galleryElements = Array.from(galleryImages);
         images = galleryElements.map(el => el.dataset.lightbox);
+        alts = galleryElements.map(el => el.dataset.alt || '');
         galleryElements.forEach((el, index) => {
             el.addEventListener('click', () => {
                 currentIndex = index;
@@ -291,11 +301,14 @@ function initLightbox() {
     if (heroImage) {
         heroImage.addEventListener('click', () => {
             const tempImages = images;
+            const tempAlts = alts;
             images = [heroImage.dataset.lightbox];
+            alts = [heroImage.dataset.alt || ''];
             currentIndex = 0;
             hasNavigation = false;
             openLightbox();
             images = tempImages;
+            alts = tempAlts;
         });
     }
 

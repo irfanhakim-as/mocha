@@ -938,6 +938,21 @@
     right: $spacing-4;
 }
 
+.lightbox__caption {
+    position: absolute;
+    bottom: $spacing-6;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--colour-lightbox-caption);
+    font-size: $font-size-sm;
+    text-align: center;
+    max-width: 80%;
+    padding: $spacing-2 $spacing-4;
+    background-color: var(--colour-lightbox-caption-bg);
+    border-radius: $radius-md;
+    margin: 0;
+}
+
 // Make clickable images look clickable
 [data-lightbox] {
     cursor: zoom-in;

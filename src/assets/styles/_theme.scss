@@ -24,6 +24,8 @@
   --colour-lightbox-close: #{$theme-light-lightbox-close};
   --colour-lightbox-close-bg: #{$theme-light-lightbox-close-bg};
   --colour-lightbox-close-hover: #{$theme-light-lightbox-close-hover};
+  --colour-lightbox-caption: #{$theme-light-lightbox-caption};
+  --colour-lightbox-caption-bg: #{$theme-light-lightbox-caption-bg};
 
   // Shadows
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -53,6 +55,8 @@
   --colour-lightbox-close: #{$theme-dark-lightbox-close};
   --colour-lightbox-close-bg: #{$theme-dark-lightbox-close-bg};
   --colour-lightbox-close-hover: #{$theme-dark-lightbox-close-hover};
+  --colour-lightbox-caption: #{$theme-dark-lightbox-caption};
+  --colour-lightbox-caption-bg: #{$theme-dark-lightbox-caption-bg};
 
   // Shadows
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
@@ -83,6 +87,8 @@
     --colour-lightbox-close: #{$theme-dark-lightbox-close};
     --colour-lightbox-close-bg: #{$theme-dark-lightbox-close-bg};
     --colour-lightbox-close-hover: #{$theme-dark-lightbox-close-hover};
+    --colour-lightbox-caption: #{$theme-dark-lightbox-caption};
+    --colour-lightbox-caption-bg: #{$theme-dark-lightbox-caption-bg};
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);

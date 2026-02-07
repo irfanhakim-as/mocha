@@ -3,7 +3,7 @@
         <div class="hero__content">
             {% set featuredPhoto = data.cat.photos | selectattr("featured", "equalto", true) | first %}
             {% if featuredPhoto %}
-            <button class="hero__image-wrapper" type="button" data-lightbox="/images/{{ featuredPhoto.src }}" aria-label="View {{ featuredPhoto.alt }}">
+            <button class="hero__image-wrapper" type="button" data-lightbox="/images/{{ featuredPhoto.src }}" data-alt="{{ featuredPhoto.alt }}" aria-label="View {{ featuredPhoto.alt }}">
                 <img
                     src="/images/{{ featuredPhoto.src }}"
                     alt="{{ featuredPhoto.alt }}"
