@@ -259,7 +259,7 @@ Cat profile information:
 | Field | Required | Description |
 |-------|----------|-------------|
 | `name` | true | Cat's name |
-| `dob` | false | Date of birth (DD-MM-YYYY). If omitted, age is hidden |
+| `dob` | false | Date of birth (i.e. `DD-MM-YYYY`) |
 | `breed` | true | Breed |
 | `colour` | true | Coat colour/pattern |
 | `gender` | false | Gender |
