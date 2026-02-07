@@ -106,6 +106,21 @@ function vaccinationStatus(nextDueDate, vaccination, allVaccinations) {
     return { class: 'current', label: 'Current' };
 }
 
+// Sort array of objects by date field (latest first, invalid/missing dates last)
+function sortByDate(arr, dateField) {
+    if (!Array.isArray(arr)) return arr;
+    return [...arr].sort((a, b) => {
+        const dateA = parseDate(a[dateField]);
+        const dateB = parseDate(b[dateField]);
+        const validA = dateA && !isNaN(dateA.getTime());
+        const validB = dateB && !isNaN(dateB.getTime());
+        if (!validA && !validB) return 0;
+        if (!validA) return 1;
+        if (!validB) return -1;
+        return dateB - dateA;
+    });
+}
+
 // Convert camelCase to Title Case with spaces
 function camelToTitleCase(key) {
     if (!key) return '';
@@ -139,6 +154,7 @@ module.exports = {
     toIso,
     calculateAge,
     vaccinationStatus,
+    sortByDate,
     camelToTitleCase,
     currentYear,
     telLink,

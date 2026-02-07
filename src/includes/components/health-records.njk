@@ -18,7 +18,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for vax in data.health.vaccinations %}
+                            {% for vax in data.health.vaccinations | sortByDate('date') %}
                             {% set status = vax.nextDue | vaccinationStatus(vax, data.health.vaccinations) %}
                             <tr>
                                 <td>{{ vax.name }}</td>
@@ -42,7 +42,7 @@
             <div class="card health__visits">
                 <h3 class="card__title">Vet Visits</h3>
                 <div class="health__visits-list">
-                    {% for visit in data.health.vetVisits %}
+                    {% for visit in data.health.vetVisits | sortByDate('date') %}
                     <details class="health__visit">
                         <summary class="health__visit-summary">
                             <span class="health__visit-date">{{ visit.date | formatDate | orNA }}</span>
@@ -75,7 +75,7 @@
             <div class="card health__weight">
                 <h3 class="card__title">Weight History</h3>
                 <div class="health__weight-list">
-                    {% for entry in data.health.weight %}
+                    {% for entry in data.health.weight | sortByDate('date') %}
                     <div class="health__weight-entry">
                         <span class="health__weight-date">{{ entry.date | formatDate | orNA }}</span>
                         <span class="health__weight-value">{{ entry.kg | orNA }} kg</span>
@@ -111,7 +111,7 @@
             <div class="card health__conditions">
                 <h3 class="card__title">Conditions</h3>
                 <div class="health__list">
-                    {% for condition in data.health.conditions %}
+                    {% for condition in data.health.conditions | sortByDate('diagnosedDate') %}
                     <div class="health__item">
                         <div class="health__item-header">
                             <strong>{{ condition.name | orNA }}</strong>
@@ -132,7 +132,7 @@
             <div class="card health__medications">
                 <h3 class="card__title">Medications</h3>
                 <div class="health__list">
-                    {% for med in data.health.medications %}
+                    {% for med in data.health.medications | sortByDate('startDate') %}
                     <div class="health__item">
                         <div class="health__item-header">
                             <strong>{{ med.name | orNA }}</strong>
