@@ -718,6 +718,11 @@
     }
 }
 
+.contact__owner,
+.contact__emergency {
+    min-width: min(100%, 400px);
+}
+
 .contact__details {
     display: flex;
     flex-direction: column;
