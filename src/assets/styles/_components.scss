@@ -410,7 +410,7 @@
     font-size: $font-size-sm;
 
     p {
-        text-align: justify;
+        // text-align: justify;
         margin: 0;
         color: var(--colour-text-muted);
         line-height: $line-height-relaxed;
@@ -426,7 +426,7 @@
     list-style: none;
 
     li {
-        text-align: justify;
+        // text-align: justify;
         position: relative;
         padding-left: $spacing-5;
         color: var(--colour-text);
