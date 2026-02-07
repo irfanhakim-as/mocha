@@ -369,17 +369,17 @@ Owner and emergency contact information:
   "email": "owner@example.com",
   "address": "123 Cat Street, Meowville",
   "notes": "Available for contact through iMessage",
-  "emergencyContact": {
-    "name": "Emergency Contact",
-    "phone": "+60 19-876 5432",
-    "relationship": "Family Friend"
-  },
   "socials": [
     {
       "name": "Mastodon",
       "url": "https://mastodon.social"
     }
-  ]
+  ],
+  "emergencyContact": {
+    "name": "Emergency Contact",
+    "phone": "+60 19-876 5432",
+    "relationship": "Family Friend"
+  }
 }
 ```
 
@@ -390,11 +390,11 @@ Owner and emergency contact information:
 | `email` | false | Email address |
 | `address` | false | Physical address |
 | `notes` | false | Additional notes or information about the owner |
+| `socials` | false | Array of social links |
 | `emergencyContact` | false | Emergency contact object |
 | `emergencyContact.name` | true | Contact name |
 | `emergencyContact.phone` | false | Contact phone |
 | `emergencyContact.relationship` | false | Relationship to owner |
-| `socials` | false | Array of social links |
 
 ## Adding photos
 
