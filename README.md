@@ -390,7 +390,7 @@ Owner and emergency contact information:
 | `notes` | false | Additional notes or information about the owner |
 | `emergencyContact` | false | Emergency contact object |
 | `emergencyContact.name` | true | Contact name |
-| `emergencyContact.phone` | true | Contact phone |
+| `emergencyContact.phone` | false | Contact phone |
 | `emergencyContact.relationship` | false | Relationship to owner |
 | `socials` | false | Array of social links |
 
