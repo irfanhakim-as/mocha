@@ -709,18 +709,14 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-    // Center single card when no emergency contact
+    // center single card at single col width when no emergency contact
     > :only-child {
-        justify-self: center;
         @media (min-width: $breakpoint-md) {
             grid-column: 1 / -1;
+            width: calc((800px - #{$spacing-6}) / 2);
+            justify-self: center;
         }
     }
-}
-
-.contact__owner,
-.contact__emergency {
-    min-width: min(100%, 400px);
 }
 
 .contact__details {
