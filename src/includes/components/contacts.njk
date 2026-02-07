@@ -66,22 +66,22 @@
                         <dt>Name</dt>
                         <dd>{{ data.owner.emergencyContact.name | orNA }}</dd>
                     </div>
+                    {% if data.owner.emergencyContact.phone %}
                     <div class="contact__detail">
                         <dt>Phone</dt>
                         <dd>
-                            {% if data.owner.emergencyContact.phone %}
                             <a href="tel:{{ data.owner.emergencyContact.phone | telLink }}">
                                 {{ data.owner.emergencyContact.phone }}
                             </a>
-                            {% else %}
-                            N/A
-                            {% endif %}
                         </dd>
                     </div>
+                    {% endif %}
+                    {% if data.owner.emergencyContact.relationship %}
                     <div class="contact__detail">
                         <dt>Relationship</dt>
-                        <dd>{{ data.owner.emergencyContact.relationship | orNA }}</dd>
+                        <dd>{{ data.owner.emergencyContact.relationship }}</dd>
                     </div>
+                    {% endif %}
                 </dl>
             </div>
             {% endif %}
