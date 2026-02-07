@@ -7,9 +7,9 @@
 
         <div class="gallery__grid">
             {% for photo in additionalPhotos %}
-            <button class="gallery__item" type="button" data-lightbox="/images/{{ photo.src }}" data-alt="{{ photo.alt }}" aria-label="View {{ photo.alt }}">
+            <button class="gallery__item" type="button" data-lightbox="/assets/images/{{ photo.src }}" data-alt="{{ photo.alt }}" aria-label="View {{ photo.alt }}">
                 <img
-                    src="/images/{{ photo.src }}"
+                    src="/assets/images/{{ photo.src }}"
                     alt="{{ photo.alt }}"
                     class="gallery__image"
                     loading="lazy"

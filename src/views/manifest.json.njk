@@ -11,9 +11,20 @@ permalink: /manifest.json
     "theme_color": "{{ data.site.theme_colour }}",
     "icons": [
         {
-            "src": "/images/logo.svg",
-            "sizes": "any",
-            "type": "image/svg+xml"
+            "src": "/assets/logos/logo.svg",
+            "type": "image/svg+xml",
+            "sizes": "any"
+        },
+        {
+            "src": "/assets/logos/splash_icon.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "/assets/logos/maskable_icon.png",
+            "type": "image/png",
+            "sizes": "196x196",
+            "purpose": "any maskable"
         }
     ]
 }

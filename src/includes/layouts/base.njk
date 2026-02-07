@@ -14,7 +14,7 @@
     {% if data.cat.photos | length %}
     {% set featuredPhoto = data.cat.photos | selectattr("featured", "equalto", true) | first %}
     {% if featuredPhoto %}
-    <meta property="og:image" content="{{ data.site.url }}/images/{{ featuredPhoto.src }}">
+    <meta property="og:image" content="{{ data.site.url }}/assets/images/{{ featuredPhoto.src }}">
     {% endif %}
     {% endif %}
 
@@ -22,7 +22,10 @@
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+    <link rel="icon" type="image/svg+xml" href="/assets/logos/logo.svg">
+    <link rel="alternate icon" type="image/png" href="/assets/logos/favicon.png">
+    <link rel="mask-icon" href="/assets/logos/logo.svg">
+    <link rel="apple-touch-icon" href="/assets/logos/maskable_icon.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

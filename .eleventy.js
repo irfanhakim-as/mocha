@@ -11,7 +11,8 @@ module.exports = function (eleventyConfig) {
     });
 
     // files to include
-    eleventyConfig.addPassthroughCopy({ "src/assets/images": "images" });
+    eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
+    eleventyConfig.addPassthroughCopy({ "src/assets/logos": "assets/logos" });
     eleventyConfig.addPassthroughCopy({ "src/assets/public": "/" });
 
     // filters
