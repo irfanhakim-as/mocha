@@ -292,6 +292,10 @@
     }
 }
 
+.about__personality p {
+    text-align: justify;
+}
+
 .about__routine {
     @media (min-width: $breakpoint-md) {
         grid-column: 1 / -1;
@@ -328,6 +332,7 @@
     gap: $spacing-2;
 
     li {
+        text-align: justify;
         position: relative;
         padding-left: $spacing-5;
         color: var(--colour-text);
@@ -405,6 +410,7 @@
     font-size: $font-size-sm;
 
     p {
+        text-align: justify;
         margin: 0;
         color: var(--colour-text-muted);
         line-height: $line-height-relaxed;
@@ -420,6 +426,7 @@
     list-style: none;
 
     li {
+        text-align: justify;
         position: relative;
         padding-left: $spacing-5;
         color: var(--colour-text);
@@ -601,6 +608,7 @@
 }
 
 .health__item-notes {
+    text-align: justify;
     font-size: $font-size-sm;
     color: var(--colour-text);
     font-style: italic;
@@ -668,6 +676,7 @@
     }
 
     dd {
+        // text-align: justify;
         color: var(--colour-text);
     }
 }
@@ -755,6 +764,7 @@
 }
 
 .contact__notes p {
+    text-align: justify;
     margin: 0;
     color: var(--colour-text);
     font-size: $font-size-base;
