@@ -39,6 +39,7 @@
             </div>
 
             <!-- Favourites Card -->
+            {% if data.cat.about.favourites %}
             <div class="card about__favourites">
                 <h3 class="card__title">Favourites</h3>
                 <div class="about__favourites-list">
@@ -69,6 +70,7 @@
                     {% endfor %}
                 </div>
             </div>
+            {% endif %}
 
             <!-- Quirks Card -->
             {% if data.cat.about.quirks | length %}
