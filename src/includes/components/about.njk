@@ -43,26 +43,21 @@
             <div class="card about__favourites">
                 <h3 class="card__title">Favourites</h3>
                 <div class="about__favourites-list">
-                    {% set favourites = [
-                        { title: "Food", value: data.cat.about.favFood },
-                        { title: "Toy", value: data.cat.about.favToy },
-                        { title: "Sleep Spot", value: data.cat.about.sleepSpot }
-                    ] %}
-                    {% for fav in favourites %}
-                    {% if (fav.value.join and fav.value.length) or (not fav.value.join and fav.value) %}
+                    {% for key, value in data.cat.about.favourites %}
+                    {% if (value.join and value.length) or (not value.join and value) %}
                     <details class="about__favourite">
                         <summary class="about__favourite-summary">
-                            <span class="about__favourite-title">{{ fav.title }}</span>
+                            <span class="about__favourite-title">{{ key | camelToTitleCase }}</span>
                         </summary>
                         <div class="about__favourite-details">
-                            {% if fav.value.join %}
+                            {% if value.join %}
                             <ul class="about__favourite-list">
-                                {% for item in fav.value %}
+                                {% for item in value %}
                                 <li>{{ item | orNA }}</li>
                                 {% endfor %}
                             </ul>
                             {% else %}
-                            <p>{{ fav.value | orNA }}</p>
+                            <p>{{ value | orNA }}</p>
                             {% endif %}
                         </div>
                     </details>
