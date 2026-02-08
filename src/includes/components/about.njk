@@ -29,6 +29,12 @@
                         <dd>{{ 'Yes' if data.cat.neutered else 'No' }}</dd>
                     </div>
                     {% endif %}
+                    {% if data.cat.insured is defined %}
+                    <div class="about__detail">
+                        <dt>Insured</dt>
+                        <dd>{{ 'Yes' if data.cat.insured else 'No' }}</dd>
+                    </div>
+                    {% endif %}
                     {% if data.cat.microchipId %}
                     <div class="about__detail">
                         <dt>Microchip ID</dt>

@@ -228,6 +228,7 @@ Cat profile information:
   "colour": "Seal Points",
   "gender": "Male",
   "neutered": true,
+  "insured": false,
   "microchipId": "123456789012345",
   "photos": [
     {
@@ -266,6 +267,7 @@ Cat profile information:
 | `colour` | true | Coat colour/pattern |
 | `gender` | false | Gender |
 | `neutered` | false | Whether the cat has been neutered or spayed (i.e. `true` or `false`) |
+| `insured` | false | Whether the cat is insured (i.e. `true` or `false`) |
 | `microchipId` | false | Microchip ID number |
 | `photos` | false | Array of photo objects |
 | `photos[].src` | true | Filename (relative to `/path/to/images` directory) |
