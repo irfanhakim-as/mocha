@@ -12,7 +12,12 @@ module.exports = function (eleventyConfig) {
     });
 
     // files to include
-    eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
+    if (process.env.NODE_ENV === "production") {
+        // only passthrough SVGs (raster images are optimised by eleventy-img)
+        eleventyConfig.addPassthroughCopy({ "src/assets/images/**/*.svg": "assets/images" });
+    } else {
+        eleventyConfig.addPassthroughCopy({ "src/assets/images": "assets/images" });
+    }
     eleventyConfig.addPassthroughCopy({ "src/assets/logos": "assets/logos" });
     eleventyConfig.addPassthroughCopy({ "src/assets/public": "/" });
 

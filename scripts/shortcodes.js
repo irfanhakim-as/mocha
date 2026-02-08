@@ -49,7 +49,8 @@ async function optimisedImage(src, alt, className, loading) {
         metadata = await processImage(src, widths, ["webp", "jpeg"]);
     } catch (err) {
         console.warn(`[image] Could not optimise "${src}": ${err.message}`);
-        return `<img src="${originalUrl(src)}" ${imgAttrs(alt, className, loading)}>`;
+        // return `<img src="${originalUrl(src)}" ${imgAttrs(alt, className, loading)}>`;
+        return "";
     }
 
     const largest = metadata.jpeg.at(-1);
@@ -72,7 +73,8 @@ async function optimisedImageUrl(src, width, format) {
         return metadata[fmt][0].url;
     } catch (err) {
         console.warn(`[image] Could not optimise "${src}": ${err.message}`);
-        return originalUrl(src);
+        // return originalUrl(src);
+        return "";
     }
 }
 
