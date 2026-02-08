@@ -9,7 +9,7 @@ A modern, configurable static website for your furry friend, built with [Elevent
 - Configurable via user-supplied JSON data files and optional photos
 - Auto-calculated age from date of birth
 - Health records pertaining to vaccinations, conditions, allergies, medications, and more
-- Automatic image optimisation in production (`WebP` + `JPEG` at responsive sizes)
+- Automatic image optimisation in production (`WebP` + `JPEG` at responsive sizes) with metadata stripping
 - Container-ready for production deployment
 
 ## Development
