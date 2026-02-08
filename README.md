@@ -105,8 +105,8 @@ docker build -f Dockerfile.lean -t mocha:lean .
 
 **Alternatively**, use the pre-built images from our container registry **(Recommended)**:
 
-- `git.moekai.net/irfan/mocha:latest`
-- `git.moekai.net/irfan/mocha-lean:latest`
+- `ghcr.io/irfanhakim-as/mocha:latest`
+- `ghcr.io/irfanhakim-as/mocha-lean:latest`
 
 ### Docker
 
