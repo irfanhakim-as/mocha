@@ -3,12 +3,12 @@
         <a href="/" class="header__logo">
             <!--<span class="header__logo-icon">🐱</span>-->
             <img class="header__logo-icon" src="/assets/logos/logo.svg" alt="" width="32" height="32">
-            <span class="header__logo-text">{{ data.cat.name }}</span>
+            <span class="header__logo-text">{{ data.pet.name }}</span>
         </a>
         <nav class="header__nav" id="main-nav">
             <ul class="header__nav-list">
                 <li><a href="#about" class="header__nav-link">About</a></li>
-                {% set additionalPhotos = data.cat.photos | rejectattr("featured", "equalto", true) | list %}
+                {% set additionalPhotos = data.pet.photos | rejectattr("featured", "equalto", true) | list %}
                 {% if additionalPhotos | length %}
                 <li><a href="#gallery" class="header__nav-link">Gallery</a></li>
                 {% endif %}

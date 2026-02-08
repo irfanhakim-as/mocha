@@ -5,6 +5,7 @@
     "colour": "Seal Points",
     "gender": "Male",
     "neutered": true,
+    "insured": false,
     "microchipId": "123456789012345",
     "photos": [
         {

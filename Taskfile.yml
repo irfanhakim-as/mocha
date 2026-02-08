@@ -1,8 +1,6 @@
 version: '3'
 
 vars:
-  IMAGE_REGISTRY: git.moekai.net
-  IMAGE_REPOSITORY: irfan
   IMAGE_NAME: mocha
   IMAGE_ARCH: linux/amd64,linux/arm64/v8
   VERSION:
@@ -68,27 +66,45 @@ tasks:
   container:build:std:
     desc: "Build and publish standard container image (usage: task container:build:std [VERSION=x.x.x] [RELEASE=n])"
     cmds:
-      - |
-        cat > .build.env <<EOF
-        IMAGE_NAME={{.IMAGE_NAME}}
-        IMAGE_REGISTRY={{.IMAGE_REGISTRY}}
-        IMAGE_REPOSITORY={{.IMAGE_REPOSITORY}}
-        IMAGE_ARCH={{.IMAGE_ARCH}}
-        IMAGE_DOCKERFILE=Dockerfile
-        EOF
-      - img-builder -c . -e .build.env -t {{.TAG}}
-      - rm -f .build.env
+      - task: _container:push
+        vars:
+          NAME: "{{.IMAGE_NAME}}"
+          REGISTRY: git.moekai.net
+          REPOSITORY: irfan
+          DOCKERFILE: Dockerfile
+      - task: _container:push
+        vars:
+          NAME: "{{.IMAGE_NAME}}"
+          REGISTRY: ghcr.io
+          REPOSITORY: irfanhakim-as
+          DOCKERFILE: Dockerfile
 
   container:build:lean:
     desc: "Build and publish lean container image (usage: task container:build:lean [VERSION=x.x.x] [RELEASE=n])"
     cmds:
+      - task: _container:push
+        vars:
+          NAME: "{{.IMAGE_NAME}}-lean"
+          REGISTRY: git.moekai.net
+          REPOSITORY: irfan
+          DOCKERFILE: Dockerfile.lean
+      - task: _container:push
+        vars:
+          NAME: "{{.IMAGE_NAME}}-lean"
+          REGISTRY: ghcr.io
+          REPOSITORY: irfanhakim-as
+          DOCKERFILE: Dockerfile.lean
+
+  _container:push:
+    internal: true
+    cmds:
       - |
         cat > .build.env <<EOF
-        IMAGE_NAME={{.IMAGE_NAME}}-lean
-        IMAGE_REGISTRY={{.IMAGE_REGISTRY}}
-        IMAGE_REPOSITORY={{.IMAGE_REPOSITORY}}
+        IMAGE_NAME={{.NAME}}
+        IMAGE_REGISTRY={{.REGISTRY}}
+        IMAGE_REPOSITORY={{.REPOSITORY}}
         IMAGE_ARCH={{.IMAGE_ARCH}}
-        IMAGE_DOCKERFILE=Dockerfile.lean
+        IMAGE_DOCKERFILE={{.DOCKERFILE}}
         EOF
       - img-builder -c . -e .build.env -t {{.TAG}}
       - rm -f .build.env

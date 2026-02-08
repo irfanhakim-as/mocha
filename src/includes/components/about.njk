@@ -9,30 +9,36 @@
                 <dl class="about__details">
                     <div class="about__detail">
                         <dt>Date of Birth</dt>
-                        <dd>{{ data.cat.dob | formatDate | orNA }}</dd>
+                        <dd>{{ data.pet.dob | formatDate | orNA }}</dd>
                     </div>
                     <div class="about__detail">
                         <dt>Breed</dt>
-                        <dd>{{ data.cat.breed | orNA }}</dd>
+                        <dd>{{ data.pet.breed | orNA }}</dd>
                     </div>
                     <div class="about__detail">
                         <dt>Colour</dt>
-                        <dd>{{ data.cat.colour | orNA }}</dd>
+                        <dd>{{ data.pet.colour | orNA }}</dd>
                     </div>
                     <div class="about__detail">
                         <dt>Gender</dt>
-                        <dd>{{ data.cat.gender | orNA }}</dd>
+                        <dd>{{ data.pet.gender | orNA }}</dd>
                     </div>
-                    {% if data.cat.neutered is defined %}
+                    {% if data.pet.neutered is defined %}
                     <div class="about__detail">
                         <dt>Neutered/Spayed</dt>
-                        <dd>{{ 'Yes' if data.cat.neutered else 'No' }}</dd>
+                        <dd>{{ 'Yes' if data.pet.neutered else 'No' }}</dd>
                     </div>
                     {% endif %}
-                    {% if data.cat.microchipId %}
+                    {% if data.pet.insured is defined %}
+                    <div class="about__detail">
+                        <dt>Insured</dt>
+                        <dd>{{ 'Yes' if data.pet.insured else 'No' }}</dd>
+                    </div>
+                    {% endif %}
+                    {% if data.pet.microchipId %}
                     <div class="about__detail">
                         <dt>Microchip ID</dt>
-                        <dd><code>{{ data.cat.microchipId }}</code></dd>
+                        <dd><code>{{ data.pet.microchipId }}</code></dd>
                     </div>
                     {% endif %}
                 </dl>
@@ -41,15 +47,15 @@
             <!-- Personality Card -->
             <div class="card about__personality">
                 <h3 class="card__title">Personality</h3>
-                <p>{{ data.cat.about.personality | orNA }}</p>
+                <p>{{ data.pet.about.personality | orNA }}</p>
             </div>
 
             <!-- Favourites Card -->
-            {% if data.cat.about.favourites %}
+            {% if data.pet.about.favourites %}
             <div class="card about__favourites">
                 <h3 class="card__title">Favourites</h3>
                 <div class="about__favourites-list">
-                    {% for key, value in data.cat.about.favourites %}
+                    {% for key, value in data.pet.about.favourites %}
                     {% if (value.join and value.length) or (not value.join and value) %}
                     <details class="about__favourite" open>
                         <summary class="about__favourite-summary">
@@ -74,11 +80,11 @@
             {% endif %}
 
             <!-- Quirks Card -->
-            {% if data.cat.about.quirks | length %}
+            {% if data.pet.about.quirks | length %}
             <div class="card about__quirks">
                 <h3 class="card__title">Quirks & Habits</h3>
                 <ul class="about__quirks-list">
-                    {% for quirk in data.cat.about.quirks %}
+                    {% for quirk in data.pet.about.quirks %}
                     <li>{{ quirk }}</li>
                     {% endfor %}
                 </ul>
@@ -86,11 +92,11 @@
             {% endif %}
 
             <!-- Daily Routine Card -->
-            {% if data.cat.routine %}
+            {% if data.pet.routine %}
             <div class="card about__routine">
                 <h3 class="card__title">Daily Routine</h3>
                 <ul class="about__routine-list">
-                    {% for key, value in data.cat.routine %}
+                    {% for key, value in data.pet.routine %}
                     <li class="about__routine-item">
                         <span class="about__routine-time">{{ key | camelToTitleCase }}</span>
                         <span class="about__routine-activity">{{ value | orNA }}</span>

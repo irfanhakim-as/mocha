@@ -19,5 +19,5 @@
   <!-- Mouth - small smile -->
   <path d="M188 185 Q200 193 212 185" stroke="#737373" stroke-width="2" fill="none"/>
   <!-- Text -->
-  <text x="200" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#737373">Add your cat's photo</text>
+  <text x="200" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#737373">Add your pet's photo</text>
 </svg>

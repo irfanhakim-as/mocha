@@ -11,8 +11,8 @@
     <meta property="og:description" content="{{ data.site.description }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ data.site.url }}">
-    {% if data.cat.photos | length %}
-    {% set featuredPhoto = data.cat.photos | selectattr("featured", "equalto", true) | first %}
+    {% if data.pet.photos | length %}
+    {% set featuredPhoto = data.pet.photos | selectattr("featured", "equalto", true) | first %}
     {% if featuredPhoto %}
     <meta property="og:image" content="{{ data.site.url }}{% optimisedImageUrl featuredPhoto.src, 1200, "jpeg" %}">
     {% endif %}
