@@ -1,5 +1,7 @@
 # Mocha
 
+![version](https://img.shields.io/github/package-json/v/irfanhakim-as/mocha)
+
 A modern, configurable static website for your furry friend, built with [Eleventy](https://www.11ty.dev).
 
 ## Features
