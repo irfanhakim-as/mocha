@@ -398,6 +398,9 @@ Owner and emergency contact information:
 
 ## Adding photos
 
+> [!NOTE]  
+> Apple's `HEIC` image format is currently unsupported outside of Safari and needs to be converted to more common image formats beforehand.
+
 1. Add your photos to `src/assets/images/` (or your own `/path/to/images/` for Docker).
 
 2. Update `cat.json` with photo information:

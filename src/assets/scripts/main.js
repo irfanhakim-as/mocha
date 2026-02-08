@@ -95,6 +95,20 @@ function initMobileMenu() {
         nav.classList.toggle('is-open');
     });
 
+    // close menu when clicking away
+    document.addEventListener('click', (e) => {
+        if (nav.classList.contains('is-open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+
+    // close menu on scroll
+    window.addEventListener('scroll', () => {
+        if (nav.classList.contains('is-open')) {
+            closeMobileMenu();
+        }
+    }, { passive: true });
+
     // close menu on escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {

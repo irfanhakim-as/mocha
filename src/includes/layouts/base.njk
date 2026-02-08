@@ -14,7 +14,7 @@
     {% if data.cat.photos | length %}
     {% set featuredPhoto = data.cat.photos | selectattr("featured", "equalto", true) | first %}
     {% if featuredPhoto %}
-    <meta property="og:image" content="{{ data.site.url }}/assets/images/{{ featuredPhoto.src }}">
+    <meta property="og:image" content="{{ data.site.url }}{% optimisedImageUrl featuredPhoto.src, 1200, "jpeg" %}">
     {% endif %}
     {% endif %}
 

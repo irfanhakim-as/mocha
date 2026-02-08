@@ -1,5 +1,6 @@
 const filters = require("./scripts/filters");
 const transforms = require("./scripts/transforms");
+const shortcodes = require("./scripts/shortcodes");
 
 module.exports = function (eleventyConfig) {
     eleventyConfig.setServerOptions({
@@ -23,6 +24,11 @@ module.exports = function (eleventyConfig) {
     // transforms
     Object.keys(transforms).forEach((transformName) => {
         eleventyConfig.addTransform(transformName, transforms[transformName]);
+    });
+
+    // shortcodes (async)
+    Object.keys(shortcodes).forEach((shortcodeName) => {
+        eleventyConfig.addNunjucksAsyncShortcode(shortcodeName, shortcodes[shortcodeName]);
     });
 
     return {
