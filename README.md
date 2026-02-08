@@ -100,7 +100,7 @@ You could build either of these images yourself, locally:
 docker build -t mocha .
 
 # Lean image
-docker build -f Dockerfile.lean -t mocha:lean .
+docker build -f Dockerfile.lean -t mocha-lean .
 ```
 
 **Alternatively**, use the pre-built images from our container registry **(Recommended)**:
@@ -127,12 +127,12 @@ Lean deployment (i.e. pre-built site):
 
 ```sh
 # To run with default pre-built site
-docker run -p 8080:80 mocha:lean
+docker run -p 8080:80 mocha-lean
 
 # To run with custom pre-built site
 docker run -p 8080:80 \
   -v /path/to/dist:/app/dist:ro \
-  mocha:lean
+  mocha-lean
 ```
 
 ### Docker Compose
@@ -145,7 +145,7 @@ services:
   mocha:
     container_name: mocha
     image: mocha
-    # image: mocha:lean # switch to this for lean deployment
+    # image: mocha-lean # switch to this for lean deployment
     ports:
       - 8080:80
     volumes:
