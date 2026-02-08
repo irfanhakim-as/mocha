@@ -7,13 +7,8 @@
 
         <div class="gallery__grid">
             {% for photo in additionalPhotos %}
-            <button class="gallery__item" type="button" data-lightbox="/assets/images/{{ photo.src }}" data-alt="{{ photo.alt }}" aria-label="View {{ photo.alt }}">
-                <img
-                    src="/assets/images/{{ photo.src }}"
-                    alt="{{ photo.alt }}"
-                    class="gallery__image"
-                    loading="lazy"
-                >
+            <button class="gallery__item" type="button" data-lightbox="{% optimisedImageUrl photo.src, 1920, "jpeg" %}" data-alt="{{ photo.alt }}" aria-label="View {{ photo.alt }}">
+                {% optimisedImage photo.src, photo.alt, "gallery__image", "lazy" %}
             </button>
             {% endfor %}
         </div>
