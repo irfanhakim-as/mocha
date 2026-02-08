@@ -1,26 +1,26 @@
 <section class="hero" id="hero">
     <div class="container">
         <div class="hero__content">
-            {% set featuredPhoto = data.cat.photos | selectattr("featured", "equalto", true) | first %}
+            {% set featuredPhoto = data.pet.photos | selectattr("featured", "equalto", true) | first %}
             {% if featuredPhoto %}
             <button class="hero__image-wrapper" type="button" data-lightbox="{% optimisedImageUrl featuredPhoto.src, 1920, "jpeg" %}" data-alt="{{ featuredPhoto.alt }}" aria-label="View {{ featuredPhoto.alt }}">
                 {% optimisedImage featuredPhoto.src, featuredPhoto.alt, "hero__image", "eager" %}
             </button>
             {% endif %}
             <div class="hero__text">
-                <h1 class="hero__title">{{ data.cat.name }}</h1>
-                <p class="hero__subtitle">{{ data.cat.breed }} &bull; {{ data.cat.colour }}</p>
-                {% if data.cat.dob | calculateAge %}
+                <h1 class="hero__title">{{ data.pet.name }}</h1>
+                <p class="hero__subtitle">{{ data.pet.breed }} &bull; {{ data.pet.colour }}</p>
+                {% if data.pet.dob | calculateAge %}
                 <p class="hero__age">
                     <span class="hero__age-label">Age:</span>
-                    <span class="hero__age-value" data-dob="{{ data.cat.dob | toIso }}">
-                        {{ data.cat.dob | calculateAge }}
+                    <span class="hero__age-value" data-dob="{{ data.pet.dob | toIso }}">
+                        {{ data.pet.dob | calculateAge }}
                     </span>
                 </p>
                 {% endif %}
-                {% if data.cat.socials | length %}
+                {% if data.pet.socials | length %}
                 <div class="hero__social">
-                    {% for link in data.cat.socials %}
+                    {% for link in data.pet.socials %}
                     <a href="{{ link.url }}" class="hero__social-link" target="_blank" rel="noopener noreferrer">
                         {{ link.name }}
                     </a>

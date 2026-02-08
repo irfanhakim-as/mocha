@@ -1,4 +1,4 @@
-{% set additionalPhotos = data.cat.photos | rejectattr("featured", "equalto", true) | list %}
+{% set additionalPhotos = data.pet.photos | rejectattr("featured", "equalto", true) | list %}
 
 {% if additionalPhotos | length %}
 <section class="gallery section" id="gallery">
