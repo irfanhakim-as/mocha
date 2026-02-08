@@ -62,15 +62,15 @@ Project structure:
 mocha/
 ├── src/
 │   ├── data/               # JSON configuration files
-│   │   ├── data.js         # Data aggregator (do not modify)
-│   │   ├── cat.json        # Cat information
+│   │   ├── data.js         # Data aggregator
 │   │   ├── health.json     # Health records
 │   │   ├── owner.json      # Owner contact details
+│   │   ├── pet.json        # Pet information
 │   │   └── site.json       # Site metadata
 │   ├── assets/
 │   │   ├── styles/         # SCSS stylesheets
 │   │   ├── scripts/        # JavaScript
-│   │   ├── images/         # Cat photos and logo
+│   │   ├── images/         # Pet photos and logo
 │   │   └── public/         # Static files (robots.txt)
 │   ├── views/              # Page templates
 │   └── includes/           # Reusable components
@@ -168,9 +168,9 @@ For supplying your own [source data](#source-data) and [images](#adding-photos) 
 ```
 /path/to/
 ├── data/
-│   ├── cat.json
 │   ├── health.json
 │   ├── owner.json
+│   ├── pet.json
 │   └── site.json
 └── images/
     ├── example-profile.jpg
@@ -216,9 +216,9 @@ Site metadata and branding:
 | `font.family` | false | Google Font family name |
 | `font.weights` | false | Font weights to load |
 
-### cat.json
+### pet.json
 
-Cat profile information:
+Pet profile information:
 
 ```json
 {
@@ -261,13 +261,13 @@ Cat profile information:
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `name` | true | Cat's name |
+| `name` | true | Pet name |
 | `dob` | false | Date of birth (i.e. `DD-MM-YYYY`) |
 | `breed` | true | Breed |
 | `colour` | true | Coat colour/pattern |
 | `gender` | false | Gender |
-| `neutered` | false | Whether the cat has been neutered or spayed (i.e. `true` or `false`) |
-| `insured` | false | Whether the cat is insured (i.e. `true` or `false`) |
+| `neutered` | false | Whether the pet has been neutered or spayed (i.e. `true` or `false`) |
+| `insured` | false | Whether the pet is insured (i.e. `true` or `false`) |
 | `microchipId` | false | Microchip ID number |
 | `photos` | false | Array of photo objects |
 | `photos[].src` | true | Filename (relative to `/path/to/images` directory) |
@@ -406,7 +406,7 @@ Owner and emergency contact information:
 
 1. Add your photos to `src/assets/images/` (or your own `/path/to/images/` for Docker).
 
-2. Update `cat.json` with photo information:
+2. Update `pet.json` with photo information:
 
     ```json
     {
