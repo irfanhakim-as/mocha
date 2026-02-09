@@ -339,7 +339,7 @@ function initLightbox() {
 
     // close on backdrop click
     lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
+        if (e.target === lightbox || e.target === container) closeLightbox();
     });
 
     // keyboard navigation
