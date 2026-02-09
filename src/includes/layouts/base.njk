@@ -20,7 +20,7 @@
 
     <title>{{ title | default(data.site.name) }}</title>
 
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main.css?v={{ data.version }}">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/svg+xml" href="/assets/logos/logo.svg">
     <link rel="alternate icon" type="image/png" href="/assets/logos/favicon.png">
@@ -68,6 +68,6 @@
         <p class="lightbox__caption"></p>
     </div>
 
-    <script src="/js/main.js" defer></script>
+    <script src="/js/main.js?v={{ data.version }}" defer></script>
 </body>
 </html>
