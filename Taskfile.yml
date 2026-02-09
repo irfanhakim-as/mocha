@@ -106,5 +106,5 @@ tasks:
         IMAGE_ARCH={{.IMAGE_ARCH}}
         IMAGE_DOCKERFILE={{.DOCKERFILE}}
         EOF
-      - img-builder -c . -e .build.env -t {{.TAG}}
+      - img-builder -c . -e .build.env -t {{.TAG}} --skip-confirmation
       - rm -f .build.env
