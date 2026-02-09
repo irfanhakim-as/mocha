@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const pkg = require("../../package.json");
 const site = require("./site.json");
 const health = require("./health.json");
 const owner = require("./owner.json");
@@ -8,6 +9,7 @@ const petData = fs.existsSync(path.join(__dirname, "cat.json")) ? "cat.json" : "
 const pet = require(`./${petData}`);
 
 module.exports = {
+    version: pkg.version,
     site,
     pet,
     cat: pet,
