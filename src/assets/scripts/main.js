@@ -1,5 +1,9 @@
 // Main JavaScript file
 
+const {
+    vaccinationStatus,
+} = require('../../../scripts/filters');
+
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initSmoothScroll();
@@ -7,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initLightbox();
     initLogoScroll();
     updateAge();
+    updateVaccinationStatuses();
 });
 
 // Theme toggle functionality
@@ -150,6 +155,15 @@ function calculateAge(dob) {
     } else {
         return `${years} year${years !== 1 ? 's' : ''}, ${months} month${months !== 1 ? 's' : ''} old`;
     }
+}
+
+// Update vaccination status badges
+function updateVaccinationStatuses() {
+    document.querySelectorAll('[data-vax-due]').forEach(el => {
+        const status = vaccinationStatus(el.dataset.vaxDue, null, null);
+        el.className = el.className.replace(/health__badge--\S+/, `health__badge--${status.class}`);
+        el.textContent = status.label;
+    });
 }
 
 // Logo scroll to top

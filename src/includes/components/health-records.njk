@@ -25,7 +25,7 @@
                                 <td>{{ vax.date | formatDate | orNA }}</td>
                                 <td>{{ vax.nextDue | formatDate | orNA }}</td>
                                 <td>
-                                    <span class="health__badge health__badge--{{ status.class }}">
+                                    <span class="health__badge health__badge--{{ status.class }}"{% if status.class not in ['complete', 'overdue', 'unknown'] %} data-vax-due="{{ vax.nextDue }}"{% endif %}>
                                         {{ status.label }}
                                     </span>
                                 </td>
