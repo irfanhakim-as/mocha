@@ -324,6 +324,7 @@ Health records including vaccinations, vet visits, weight records, conditions, m
       "dosage": "1 chew daily",
       "frequency": "Daily with food",
       "startDate": "15-01-2024",
+      "endDate": "15-06-2024",
       "reason": "Joint health support"
     }
   ],
