@@ -56,6 +56,12 @@
     ],
     "conditions": [
         {
+            "name": "Upper respiratory infection",
+            "diagnosedDate": "10-03-2023",
+            "status": "complete",
+            "notes": "Treated with antibiotics, fully resolved"
+        },
+        {
             "name": "Mild arthritis",
             "diagnosedDate": "10-01-2024",
             "status": "managed",

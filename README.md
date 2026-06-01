@@ -356,6 +356,7 @@ Condition status:
 | `managed` | Under control | Green |
 | `monitoring` | Being watched | Yellow |
 | `active` | Currently being treated | Red |
+| `complete` | Resolved and no longer active | Grey |
 
 Medication status (automatically calculated based on `startDate` and `endDate`):
 
