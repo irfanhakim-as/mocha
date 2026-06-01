@@ -582,7 +582,7 @@
     }
 
     // zero or low concern
-    &--current, &--managed, &--mild {
+    &--current, &--managed, &--mild, &--ongoing {
         background-color: rgba($colour-success, 0.1);
         color: color.adjust($colour-success, $lightness: -10%);
     }
