@@ -26,7 +26,7 @@
                                 <td>{{ vax.nextDue | formatDate | orNA }}</td>
                                 <td>
                                     <span class="health__badge health__badge--{{ status.class }}"{% if status.class not in ['complete', 'overdue', 'unknown'] %} data-vax-due="{{ vax.nextDue }}"{% endif %}>
-                                        {{ status.label }}
+                                        {{ status.class | statusLabel }}
                                     </span>
                                 </td>
                             </tr>
@@ -94,7 +94,7 @@
                     <div class="health__item">
                         <div class="health__item-header">
                             <strong>{{ allergy.allergen | orNA }}</strong>
-                            <span class="health__badge health__badge--{{ allergy.severity }}">{{ allergy.severity | orNA }}</span>
+                            <span class="health__badge health__badge--{{ allergy.severity }}">{{ allergy.severity | statusLabel }}</span>
                         </div>
                         <p class="health__item-detail">Reaction: {{ allergy.reaction | orNA }}</p>
                         {% if allergy.notes %}
@@ -115,7 +115,7 @@
                     <div class="health__item">
                         <div class="health__item-header">
                             <strong>{{ condition.name | orNA }}</strong>
-                            <span class="health__badge health__badge--{{ condition.status }}">{{ condition.status | orNA }}</span>
+                            <span class="health__badge health__badge--{{ condition.status }}">{{ condition.status | statusLabel }}</span>
                         </div>
                         <p class="health__item-detail">Diagnosed: {{ condition.diagnosedDate | formatDate | orNA }}</p>
                         {% if condition.notes %}

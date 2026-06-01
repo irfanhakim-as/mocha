@@ -168,6 +168,13 @@ function telLink(phone) {
     return String(phone).replace(/[^\d+]/g, '');
 }
 
+// Convert a status class to a display label (hyphens to spaces, N/A if empty)
+function statusLabel(value) {
+    const val = orNA(value);
+    if (val === 'N/A') return val;
+    return val.replace(/-/g, ' ');
+}
+
 // Return N/A if value is null, undefined, or empty
 function orNA(value) {
     if (value === null || value === undefined || value === '') {
@@ -187,5 +194,6 @@ module.exports = {
     camelToTitleCase,
     currentYear,
     telLink,
+    statusLabel,
     orNA
 };
