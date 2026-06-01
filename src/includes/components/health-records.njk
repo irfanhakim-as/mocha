@@ -133,9 +133,11 @@
                 <h3 class="card__title">Medications</h3>
                 <div class="health__list">
                     {% for med in data.health.medications | sortByDate('startDate') %}
+                    {% set medStatus = med.endDate | medicationStatus(med) %}
                     <div class="health__item">
                         <div class="health__item-header">
                             <strong>{{ med.name | orNA }}</strong>
+                            <span class="health__badge health__badge--{{ medStatus.class }}"{% if medStatus.class not in ['complete'] %} data-med-start="{{ med.startDate }}" data-med-end="{{ med.endDate }}"{% endif %}>{{ medStatus.label }}</span>
                         </div>
                         <p class="health__item-detail">{{ med.dosage | orNA }} - {{ med.frequency | orNA }}</p>
                         <p class="health__item-detail">Started: {{ med.startDate | formatDate | orNA }}</p>

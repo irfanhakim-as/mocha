@@ -106,6 +106,22 @@ function vaccinationStatus(nextDueDate, vaccination, allVaccinations) {
     return { class: 'current', label: 'Current' };
 }
 
+// Get medication status from startDate and endDate
+function medicationStatus(endDate, medication) {
+    const now = new Date();
+    // end date has passed
+    const end = parseDate(endDate);
+    if (end && !isNaN(end.getTime()) && end <= now) {
+        return { class: 'complete', label: 'Complete' };
+    }
+    // start date has passed with no end date
+    const startDate = medication ? parseDate(medication.startDate) : null;
+    if (startDate && !isNaN(startDate.getTime()) && startDate <= now) {
+        return { class: 'ongoing', label: 'Ongoing' };
+    }
+    return { class: 'unknown', label: 'Unknown' };
+}
+
 // Sort array of objects by date field (latest first, invalid/missing dates last)
 function sortByDate(arr, dateField) {
     if (!Array.isArray(arr)) return arr;
@@ -154,6 +170,7 @@ module.exports = {
     toIso,
     calculateAge,
     vaccinationStatus,
+    medicationStatus,
     sortByDate,
     camelToTitleCase,
     currentYear,

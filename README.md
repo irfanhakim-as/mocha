@@ -357,6 +357,14 @@ Condition status:
 | `monitoring` | Being watched | Yellow |
 | `active` | Currently being treated | Red |
 
+Medication status (automatically calculated based on `startDate` and `endDate`):
+
+| Status | Condition | Colour |
+|--------|-----------|--------|
+| Ongoing | Started but not yet ended | Green |
+| Complete | End date has passed | Grey |
+| Unknown | Not yet started or missing date | Grey |
+
 Allergy severity:
 
 | Severity | Description | Colour |

@@ -1,6 +1,7 @@
 // Main JavaScript file
 
 const {
+    medicationStatus,
     vaccinationStatus,
 } = require('../../../scripts/filters');
 
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initLightbox();
     initLogoScroll();
     updateAge();
+    updateMedicationStatuses();
     updateVaccinationStatuses();
 });
 
@@ -155,6 +157,15 @@ function calculateAge(dob) {
     } else {
         return `${years} year${years !== 1 ? 's' : ''}, ${months} month${months !== 1 ? 's' : ''} old`;
     }
+}
+
+// Update medication status badges
+function updateMedicationStatuses() {
+    document.querySelectorAll('[data-med-start]').forEach(el => {
+        const status = medicationStatus(el.dataset.medEnd, { startDate: el.dataset.medStart });
+        el.className = el.className.replace(/health__badge--\S+/, `health__badge--${status.class}`);
+        el.textContent = status.label;
+    });
 }
 
 // Update vaccination status badges
