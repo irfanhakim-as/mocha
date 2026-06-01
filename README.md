@@ -345,6 +345,7 @@ Vaccination status (automatically calculated based on `nextDue`):
 | Current | More than 30 days until due | Green |
 | Due Soon | 30 days or less until due | Yellow |
 | Overdue | Past due date | Red |
+| Complete | No booster needed or superseded by a newer dose of the same vaccine | Grey |
 | Unknown | Missing or invalid date | Grey |
 
 Condition status:
