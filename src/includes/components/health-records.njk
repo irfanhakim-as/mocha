@@ -140,7 +140,11 @@
                             <span class="health__badge health__badge--{{ medStatus.class }}"{% if medStatus.class not in ['complete'] %} data-med-start="{{ med.startDate }}" data-med-end="{{ med.endDate }}"{% endif %}>{{ medStatus.label }}</span>
                         </div>
                         <p class="health__item-detail">{{ med.dosage | orNA }} - {{ med.frequency | orNA }}</p>
+                        {% if medStatus.class == 'complete' %}
+                        <p class="health__item-detail">Ended: {{ med.endDate | formatDate | orNA }}</p>
+                        {% else %}
                         <p class="health__item-detail">Started: {{ med.startDate | formatDate | orNA }}</p>
+                        {% endif %}
                         {% if med.reason %}
                         <p class="health__item-notes">{{ med.reason }}</p>
                         {% endif %}
