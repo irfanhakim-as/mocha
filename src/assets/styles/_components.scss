@@ -571,7 +571,7 @@
     font-size: $font-size-xs;
     font-weight: $font-weight-medium;
     text-transform: capitalize;
-    // fallback for unknown values
+    // fallback for unrecognised values
     background-color: var(--colour-border);
     color: var(--colour-text);
 
