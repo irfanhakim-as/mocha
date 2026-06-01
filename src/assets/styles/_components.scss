@@ -575,6 +575,12 @@
     background-color: var(--colour-border);
     color: var(--colour-text);
 
+    // resolved
+    &--complete {
+        background-color: var(--colour-border);
+        color: var(--colour-text);
+    }
+
     // zero or low concern
     &--current, &--managed, &--mild {
         background-color: rgba($colour-success, 0.1);
