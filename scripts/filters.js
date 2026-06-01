@@ -122,6 +122,17 @@ function medicationStatus(endDate, medication) {
     return { class: 'unknown', label: 'Unknown' };
 }
 
+// Sort by date field, pushing items where pinField equals pinValue (or is truthy if omitted) to the end
+function sortByDatePinLast(arr, dateField, pinField, pinValue) {
+    if (!Array.isArray(arr)) return arr;
+    const isPinned = pinValue !== undefined
+        ? item => item[pinField] === pinValue
+        : item => Boolean(item[pinField]);
+    const main = arr.filter(item => !isPinned(item));
+    const pinned = arr.filter(item => isPinned(item));
+    return [...sortByDate(main, dateField), ...sortByDate(pinned, dateField)];
+}
+
 // Sort array of objects by date field (latest first, invalid/missing dates last)
 function sortByDate(arr, dateField) {
     if (!Array.isArray(arr)) return arr;
@@ -172,6 +183,7 @@ module.exports = {
     vaccinationStatus,
     medicationStatus,
     sortByDate,
+    sortByDatePinLast,
     camelToTitleCase,
     currentYear,
     telLink,
