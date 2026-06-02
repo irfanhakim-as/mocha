@@ -2,6 +2,7 @@
 
 const {
     medicationStatus,
+    statusLabel,
     vaccinationStatus,
 } = require('../../../scripts/filters');
 
@@ -164,7 +165,7 @@ function updateMedicationStatuses() {
     document.querySelectorAll('[data-med-start]').forEach(el => {
         const status = medicationStatus(el.dataset.medEnd, { startDate: el.dataset.medStart });
         el.className = el.className.replace(/health__badge--\S+/, `health__badge--${status.class}`);
-        el.textContent = status.label;
+        el.textContent = statusLabel(status.class);
     });
 }
 
@@ -173,7 +174,7 @@ function updateVaccinationStatuses() {
     document.querySelectorAll('[data-vax-due]').forEach(el => {
         const status = vaccinationStatus(el.dataset.vaxDue, null, null);
         el.className = el.className.replace(/health__badge--\S+/, `health__badge--${status.class}`);
-        el.textContent = status.label;
+        el.textContent = statusLabel(status.class);
     });
 }
 
