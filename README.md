@@ -347,7 +347,6 @@ Vaccination status (automatically calculated based on `nextDue`):
 | Due Soon | 30 days or less until due | Yellow |
 | Overdue | Past due date | Red |
 | Complete | No booster needed or superseded by a newer dose of the same vaccine | Grey |
-| Unknown | Missing or invalid date | Grey |
 
 Condition status:
 
@@ -364,7 +363,6 @@ Medication status (automatically calculated based on `startDate` and `endDate`):
 |--------|-----------|--------|
 | Ongoing | Started but not yet ended | Green |
 | Complete | End date has passed | Grey |
-| Unknown | Not yet started or missing date | Grey |
 
 Allergy severity:
 
