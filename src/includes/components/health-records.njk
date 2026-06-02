@@ -19,14 +19,13 @@
                         </thead>
                         <tbody>
                             {% for vax in data.health.vaccinations | sortByDate('date') %}
-                            {% set status = vax.nextDue | vaccinationStatus(vax, data.health.vaccinations) %}
                             <tr>
                                 <td>{{ vax.name }}</td>
                                 <td>{{ vax.date | formatDate | orNA }}</td>
                                 <td>{{ vax.nextDue | formatDate | orNA }}</td>
                                 <td>
-                                    <span class="health__badge health__badge--{{ status.class }}"{% if status.class not in ['complete', 'overdue', 'unknown'] %} data-vax-due="{{ vax.nextDue }}"{% endif %}>
-                                        {{ status.class | statusLabel }}
+                                    <span class="health__badge health__badge--{{ vax.status }}"{% if vax.status not in ['complete', 'overdue', 'unknown'] %} data-vax-due="{{ vax.nextDue }}"{% endif %}>
+                                        {{ vax.status | statusLabel }}
                                     </span>
                                 </td>
                             </tr>
@@ -133,14 +132,13 @@
                 <h3 class="card__title">Medications</h3>
                 <div class="health__list">
                     {% for med in data.health.medications | sortByDate('startDate') %}
-                    {% set medStatus = med.endDate | medicationStatus(med) %}
                     <div class="health__item">
                         <div class="health__item-header">
                             <strong>{{ med.name | orNA }}</strong>
-                            <span class="health__badge health__badge--{{ medStatus.class }}"{% if medStatus.class not in ['complete'] %} data-med-start="{{ med.startDate }}" data-med-end="{{ med.endDate }}"{% endif %}>{{ medStatus.label }}</span>
+                            <span class="health__badge health__badge--{{ med.status }}"{% if med.status not in ['complete'] %} data-med-start="{{ med.startDate }}" data-med-end="{{ med.endDate }}"{% endif %}>{{ med.status | statusLabel }}</span>
                         </div>
                         <p class="health__item-detail">{{ med.dosage | orNA }} - {{ med.frequency | orNA }}</p>
-                        {% if medStatus.class == 'complete' %}
+                        {% if med.status == 'complete' %}
                         <p class="health__item-detail">Ended: {{ med.endDate | formatDate | orNA }}</p>
                         {% else %}
                         <p class="health__item-detail">Started: {{ med.startDate | formatDate | orNA }}</p>
