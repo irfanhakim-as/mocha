@@ -106,6 +106,33 @@ function vaccinationStatus(nextDueDate, vaccination, allVaccinations) {
     return { class: 'current', label: 'Current' };
 }
 
+// Get medication status from startDate and endDate
+function medicationStatus(endDate, medication) {
+    const now = new Date();
+    // end date has passed
+    const end = parseDate(endDate);
+    if (end && !isNaN(end.getTime()) && end <= now) {
+        return { class: 'complete', label: 'Complete' };
+    }
+    // start date has passed with no end date
+    const startDate = medication ? parseDate(medication.startDate) : null;
+    if (startDate && !isNaN(startDate.getTime()) && startDate <= now) {
+        return { class: 'ongoing', label: 'Ongoing' };
+    }
+    return { class: 'unknown', label: 'Unknown' };
+}
+
+// Sort by date field, pushing items where pinField equals pinValue (or is truthy if omitted) to the end
+function sortByDatePinLast(arr, dateField, pinField, pinValue) {
+    if (!Array.isArray(arr)) return arr;
+    const isPinned = pinValue !== undefined
+        ? item => item[pinField] === pinValue
+        : item => Boolean(item[pinField]);
+    const main = arr.filter(item => !isPinned(item));
+    const pinned = arr.filter(item => isPinned(item));
+    return [...sortByDate(main, dateField), ...sortByDate(pinned, dateField)];
+}
+
 // Sort array of objects by date field (latest first, invalid/missing dates last)
 function sortByDate(arr, dateField) {
     if (!Array.isArray(arr)) return arr;
@@ -141,6 +168,13 @@ function telLink(phone) {
     return String(phone).replace(/[^\d+]/g, '');
 }
 
+// Convert a status class to a display label (hyphens to spaces, N/A if empty)
+function statusLabel(value) {
+    const val = orNA(value);
+    if (val === 'N/A') return val;
+    return val.replace(/-/g, ' ');
+}
+
 // Return N/A if value is null, undefined, or empty
 function orNA(value) {
     if (value === null || value === undefined || value === '') {
@@ -154,9 +188,12 @@ module.exports = {
     toIso,
     calculateAge,
     vaccinationStatus,
+    medicationStatus,
     sortByDate,
+    sortByDatePinLast,
     camelToTitleCase,
     currentYear,
     telLink,
+    statusLabel,
     orNA
 };

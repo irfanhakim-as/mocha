@@ -324,6 +324,7 @@ Health records including vaccinations, vet visits, weight records, conditions, m
       "dosage": "1 chew daily",
       "frequency": "Daily with food",
       "startDate": "15-01-2024",
+      "endDate": "15-06-2024",
       "reason": "Joint health support"
     }
   ],
@@ -345,7 +346,7 @@ Vaccination status (automatically calculated based on `nextDue`):
 | Current | More than 30 days until due | Green |
 | Due Soon | 30 days or less until due | Yellow |
 | Overdue | Past due date | Red |
-| Unknown | Missing or invalid date | Grey |
+| Complete | No booster needed or superseded by a newer dose of the same vaccine | Grey |
 
 Condition status:
 
@@ -354,6 +355,14 @@ Condition status:
 | `managed` | Under control | Green |
 | `monitoring` | Being watched | Yellow |
 | `active` | Currently being treated | Red |
+| `complete` | Resolved and no longer active | Grey |
+
+Medication status (automatically calculated based on `startDate` and `endDate`):
+
+| Status | Condition | Colour |
+|--------|-----------|--------|
+| Ongoing | Started but not yet ended | Green |
+| Complete | End date has passed | Grey |
 
 Allergy severity:
 

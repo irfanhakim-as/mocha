@@ -1,0 +1,222 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master                    # monitor changes only in the master branch
+    paths:
+      - package.json              # monitor changes to the package metadata file
+  workflow_dispatch:              # allow manually triggering the workflow
+
+env:
+  REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  GH_REPOSITORY: "irfanhakim-as/mocha"
+  GENERATE_RELEASE_NOTES: "false"
+  PACKAGE_ASSETS: "src scripts .eleventy.js Dockerfile Dockerfile.lean entrypoint.sh httpd.conf packages.txt package.json package-lock.json Taskfile.yml README.md LICENSE"
+
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    outputs:
+      name: ${{ steps.get_metadata.outputs.name }}
+      version: ${{ steps.get_metadata.outputs.version }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Get package metadata
+        id: get_metadata
+        run: |
+          # read name and version from package.json
+          name=$(jq -r '.name' package.json)
+          version=$(jq -r '.version' package.json)
+
+          # export values to output
+          echo "name=${name}" | tee -a ${GITHUB_OUTPUT}
+          echo "version=${version}" | tee -a ${GITHUB_OUTPUT}
+
+  check:
+    runs-on: ubuntu-latest
+    needs: metadata
+    env:
+      VERSION: ${{ needs.metadata.outputs.version }}
+    outputs:
+      forgejo_release_exists: ${{ steps.check_forgejo_release.outputs.exists }}
+      github_release_exists: ${{ steps.check_github_release.outputs.exists }}
+    steps:
+      - name: Check if Forgejo release exists
+        id: check_forgejo_release
+        run: |
+          # check if release of said version exists via Forgejo API
+          status_code=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: token ${REPO_TOKEN}" \
+            "${{ forgejo.server_url }}/api/v1/repos/${{ forgejo.repository }}/releases/tags/v${VERSION}")
+
+          if [ "${status_code}" = "200" ]; then
+            echo "Forgejo release v${VERSION} already exists."
+            exists=true
+          else
+            echo "Forgejo release v${VERSION} has not been created."
+            exists=false
+          fi
+
+          # export result to output
+          echo "exists=${exists}" | tee -a ${GITHUB_OUTPUT}
+
+      - name: Check if GitHub release exists
+        id: check_github_release
+        run: |
+          # check if release of said version exists via GitHub API
+          status_code=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: token ${GH_TOKEN}" \
+            "https://api.github.com/repos/${GH_REPOSITORY}/releases/tags/v${VERSION}")
+
+          if [ "${status_code}" = "200" ]; then
+            echo "GitHub release v${VERSION} already exists."
+            exists=true
+          else
+            echo "GitHub release v${VERSION} has not been created."
+            exists=false
+          fi
+
+          # export result to output
+          echo "exists=${exists}" | tee -a ${GITHUB_OUTPUT}
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [metadata, check]
+    if: needs.check.outputs.forgejo_release_exists == 'false' || needs.check.outputs.github_release_exists == 'false'
+    env:
+      NAME: ${{ needs.metadata.outputs.name }}
+      VERSION: ${{ needs.metadata.outputs.version }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Package assets into archive
+        id: package_asset
+        run: |
+          # package required assets into a tar.gz archive
+          archive="${NAME}_${VERSION}.tar.gz"
+          tar -czvf "${archive}" ${PACKAGE_ASSETS}
+
+          # export result to output
+          echo "asset=${archive}" | tee -a ${GITHUB_OUTPUT}
+
+      - name: Get commits since last release
+        id: get_commits
+        run: |
+          # get previous version tag
+          prev_version=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "HEAD")
+
+          # get commits between versions
+          if [ "${prev_version}" != "HEAD" ]; then
+            prev_version="${prev_version}..HEAD"
+          fi
+          commits="$(git log "${prev_version}" --oneline | base64 -w 0)"
+
+          # export result to output
+          echo "commits=${commits}" | tee -a ${GITHUB_OUTPUT}
+
+      - name: Create Forgejo release
+        id: create_forgejo_release
+        if: needs.check.outputs.forgejo_release_exists == 'false'
+        env:
+          COMMITS: ${{ steps.get_commits.outputs.commits }}
+        run: |
+          # determine main branch
+          main_branch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
+
+          # decode commit messages and prepare release notes
+          decoded_commits=$(echo "${COMMITS}" | base64 --decode)
+          release_notes="Release v${VERSION}.\n\n**Changes**:\n\n${decoded_commits}"
+
+          # create release via Forgejo API
+          response=$(curl -X POST \
+            -H "Authorization: token ${REPO_TOKEN}" \
+            -H "Content-Type: application/json" \
+            "${{ forgejo.server_url }}/api/v1/repos/${{ forgejo.repository }}/releases" \
+            -d "$(jq -n \
+              --arg tag "v${VERSION}" \
+              --arg name "v${VERSION}" \
+              --arg body "$(echo -e "${release_notes}")" \
+              --arg target "${main_branch}" \
+              '{tag_name: $tag, name: $name, body: $body, target_commitish: $target}')")
+
+          # validate response
+          release_id=$(echo "${response}" | jq -r '.id')
+          if [ "${release_id}" = "null" ] || [ -z "${release_id}" ]; then
+            echo "ERROR: Failed to create Forgejo release. Response: ${response}"
+            exit 1
+          fi
+
+          # export release id to output
+          echo "release_id=${release_id}" | tee -a ${GITHUB_OUTPUT}
+
+      - name: Upload asset to Forgejo release
+        id: upload_forgejo_asset
+        if: needs.check.outputs.forgejo_release_exists == 'false'
+        env:
+          ASSET: ${{ steps.package_asset.outputs.asset }}
+          RELEASE_ID: ${{ steps.create_forgejo_release.outputs.release_id }}
+        run: |
+          # upload asset to the Forgejo release
+          curl -s -X POST \
+            -H "Authorization: token ${REPO_TOKEN}" \
+            -F "attachment=@${ASSET}" \
+            "${{ forgejo.server_url }}/api/v1/repos/${{ forgejo.repository }}/releases/${RELEASE_ID}/assets?name=${ASSET}"
+
+      - name: Create GitHub release
+        id: create_github_release
+        if: needs.check.outputs.github_release_exists == 'false'
+        env:
+          COMMITS: ${{ steps.get_commits.outputs.commits }}
+        run: |
+          # determine main branch
+          main_branch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
+
+          # decode commit messages and prepare release notes
+          decoded_commits=$(echo "${COMMITS}" | base64 --decode)
+          release_notes="Release v${VERSION}.\n\n**Changes**:\n\n${decoded_commits}"
+
+          # create release via GitHub API
+          response=$(curl -X POST \
+            -H "Authorization: token ${GH_TOKEN}" \
+            -H "Content-Type: application/json" \
+            "https://api.github.com/repos/${GH_REPOSITORY}/releases" \
+            -d "$(jq -n \
+              --arg tag "v${VERSION}" \
+              --arg name "v${VERSION}" \
+              --arg body "$(echo -e "${release_notes}")" \
+              --arg target "${main_branch}" \
+              --argjson generate_release_notes "${GENERATE_RELEASE_NOTES}" \
+              '{tag_name: $tag, name: $name, body: $body, target_commitish: $target, generate_release_notes: $generate_release_notes}')")
+
+          # validate response
+          upload_url=$(echo "${response}" | jq -r '.upload_url')
+          if [ "${upload_url}" = "null" ] || [ -z "${upload_url}" ]; then
+            echo "ERROR: Failed to create GitHub release. Response: ${response}"
+            exit 1
+          fi
+
+          # export upload url to output (strips trailing {?name,label} template)
+          echo "upload_url=$(echo "${upload_url}" | sed 's/{.*}//')" | tee -a ${GITHUB_OUTPUT}
+
+      - name: Upload asset to GitHub release
+        id: upload_github_asset
+        if: needs.check.outputs.github_release_exists == 'false'
+        env:
+          ASSET: ${{ steps.package_asset.outputs.asset }}
+          UPLOAD_URL: ${{ steps.create_github_release.outputs.upload_url }}
+        run: |
+          # upload asset to the GitHub release
+          curl -s -X POST \
+            -H "Authorization: token ${GH_TOKEN}" \
+            -H "Content-Type: application/octet-stream" \
+            --data-binary "@${ASSET}" \
+            "${UPLOAD_URL}?name=${ASSET}"

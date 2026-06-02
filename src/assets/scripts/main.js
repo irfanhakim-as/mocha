@@ -1,5 +1,12 @@
 // Main JavaScript file
 
+const {
+    medicationStatus,
+    sortByDatePinLast,
+    statusLabel,
+    vaccinationStatus,
+} = require('../../../scripts/filters');
+
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initSmoothScroll();
@@ -7,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initLightbox();
     initLogoScroll();
     updateAge();
+    updateMedicationStatuses();
+    updateVaccinationStatuses();
 });
 
 // Theme toggle functionality
@@ -150,6 +159,37 @@ function calculateAge(dob) {
     } else {
         return `${years} year${years !== 1 ? 's' : ''}, ${months} month${months !== 1 ? 's' : ''} old`;
     }
+}
+
+// Update medication status badges and re-sort the list
+function updateMedicationStatuses() {
+    document.querySelectorAll('[data-med-start]').forEach(el => {
+        const status = medicationStatus(el.dataset.medEnd, { startDate: el.dataset.medStart });
+        el.className = el.className.replace(/health__badge--\S+/, `health__badge--${status.class}`);
+        el.textContent = statusLabel(status.class);
+    });
+    sortMedicationItems();
+}
+
+// Re-sort medication items to reflect current statuses
+function sortMedicationItems() {
+    const list = document.querySelector('.health__medications .health__list');
+    if (!list) return;
+    const items = Array.from(list.children).map(el => ({
+        el,
+        startDate: el.dataset.startDate,
+        isComplete: el.querySelector('.health__badge')?.classList.contains('health__badge--complete') || false,
+    }));
+    sortByDatePinLast(items, 'startDate', 'isComplete', true).forEach(({ el }) => list.appendChild(el));
+}
+
+// Update vaccination status badges
+function updateVaccinationStatuses() {
+    document.querySelectorAll('[data-vax-due]').forEach(el => {
+        const status = vaccinationStatus(el.dataset.vaxDue, null, null);
+        el.className = el.className.replace(/health__badge--\S+/, `health__badge--${status.class}`);
+        el.textContent = statusLabel(status.class);
+    });
 }
 
 // Logo scroll to top

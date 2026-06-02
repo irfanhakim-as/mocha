@@ -571,12 +571,18 @@
     font-size: $font-size-xs;
     font-weight: $font-weight-medium;
     text-transform: capitalize;
-    // fallback for unknown values
+    // fallback for unrecognised values
     background-color: var(--colour-border);
     color: var(--colour-text);
 
+    // resolved
+    &--complete {
+        background-color: var(--colour-border);
+        color: var(--colour-text);
+    }
+
     // zero or low concern
-    &--current, &--managed, &--mild {
+    &--current, &--managed, &--mild, &--ongoing {
         background-color: rgba($colour-success, 0.1);
         color: color.adjust($colour-success, $lightness: -10%);
     }
