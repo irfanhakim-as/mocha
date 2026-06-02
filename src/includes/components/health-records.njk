@@ -18,7 +18,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for vax in data.health.vaccinations | sortByDate('date') %}
+                            {% for vax in data.health.vaccinations | sortByDatePinLast('date', 'status', 'complete') %}
                             <tr>
                                 <td>{{ vax.name }}</td>
                                 <td>{{ vax.date | formatDate | orNA }}</td>
