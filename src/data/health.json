@@ -56,12 +56,6 @@
     ],
     "conditions": [
         {
-            "name": "Upper respiratory infection",
-            "diagnosedDate": "10-03-2023",
-            "status": "complete",
-            "notes": "Treated with antibiotics, fully resolved"
-        },
-        {
             "name": "Mild arthritis",
             "diagnosedDate": "10-01-2024",
             "status": "managed",
@@ -78,6 +72,12 @@
             "diagnosedDate": "20-01-2026",
             "status": "active",
             "notes": "Currently being treated with ear drops"
+        },
+        {
+            "name": "Upper respiratory infection",
+            "diagnosedDate": "10-02-2026",
+            "status": "complete",
+            "notes": "Treated with antibiotics, fully resolved"
         }
     ],
     "medications": [
@@ -93,7 +93,7 @@
             "dosage": "1/2 teaspoon",
             "frequency": "Every other day",
             "startDate": "01-02-2024",
-            "endDate": "01-02-2025",
+            "endDate": "01-03-2024",
             "reason": "Coat and skin health"
         }
     ],
