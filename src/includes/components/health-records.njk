@@ -110,7 +110,7 @@
             <div class="card health__conditions">
                 <h3 class="card__title">Conditions</h3>
                 <div class="health__list">
-                    {% for condition in data.health.conditions | sortByDate('diagnosedDate') %}
+                    {% for condition in data.health.conditions | sortByDatePinLast('diagnosedDate', 'status', 'complete') %}
                     <div class="health__item">
                         <div class="health__item-header">
                             <strong>{{ condition.name | orNA }}</strong>
@@ -131,7 +131,7 @@
             <div class="card health__medications">
                 <h3 class="card__title">Medications</h3>
                 <div class="health__list">
-                    {% for med in data.health.medications | sortByDate('startDate') %}
+                    {% for med in data.health.medications | sortByDatePinLast('startDate', 'status', 'complete') %}
                     <div class="health__item">
                         <div class="health__item-header">
                             <strong>{{ med.name | orNA }}</strong>
