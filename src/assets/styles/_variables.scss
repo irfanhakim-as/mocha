@@ -48,6 +48,17 @@ $theme-light-lightbox-close-bg: rgba(255, 255, 255, 0.1);
 $theme-light-lightbox-close-hover: rgba(255, 255, 255, 0.2);
 $theme-light-lightbox-caption: #ffffff;
 $theme-light-lightbox-caption-bg: rgba(0, 0, 0, 0.6);
+// Announcement banner colours
+$theme-light-announcement-neutral-text: $theme-light-text;
+$theme-light-announcement-neutral-border: $theme-light-border;
+$theme-light-announcement-accent-text: $colour-accent-dark;
+$theme-light-announcement-accent-border: rgba($colour-accent, 0.25);
+$theme-light-announcement-success-text: #16a34a;
+$theme-light-announcement-success-border: rgba($colour-success, 0.25);
+$theme-light-announcement-warning-text: #b45309;
+$theme-light-announcement-warning-border: rgba($colour-warning, 0.25);
+$theme-light-announcement-danger-text: #dc2626;
+$theme-light-announcement-danger-border: rgba($colour-danger, 0.25);
 
 // Dark mode colours
 $theme-dark-bg: #0a0a0a;
@@ -71,6 +82,17 @@ $theme-dark-lightbox-close-bg: rgba(255, 255, 255, 0.1);
 $theme-dark-lightbox-close-hover: rgba(255, 255, 255, 0.2);
 $theme-dark-lightbox-caption: #ffffff;
 $theme-dark-lightbox-caption-bg: rgba(0, 0, 0, 0.6);
+// Announcement banner colours
+$theme-dark-announcement-neutral-text: $theme-dark-text;
+$theme-dark-announcement-neutral-border: $theme-dark-border;
+$theme-dark-announcement-accent-text: $colour-accent-light;
+$theme-dark-announcement-accent-border: rgba($colour-accent-light, 0.3);
+$theme-dark-announcement-success-text: #4ade80;
+$theme-dark-announcement-success-border: rgba($colour-success, 0.3);
+$theme-dark-announcement-warning-text: #fbbf24;
+$theme-dark-announcement-warning-border: rgba($colour-warning, 0.3);
+$theme-dark-announcement-danger-text: #f87171;
+$theme-dark-announcement-danger-border: rgba($colour-danger, 0.3);
 
 // ===============================================
 
