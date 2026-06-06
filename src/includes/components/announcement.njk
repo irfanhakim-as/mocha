@@ -1,0 +1,14 @@
+{% if data.site.announcement and data.site.announcement.enabled and data.site.announcement.message %}
+{% set colour = data.site.announcement.colour | default("neutral") %}
+<div class="announcement announcement--{{ colour }}" id="announcement" data-announcement-id="{{ data.site.announcement.message | sha1 }}" aria-live="polite">
+    <div class="announcement__inner container">
+        <p class="announcement__message">{{ data.site.announcement.message | markdownInline | safe }}</p>
+        <button class="announcement__close" aria-label="Dismiss announcement">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+</div>
+{% endif %}
