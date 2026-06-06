@@ -5,7 +5,7 @@ const {
     sortByDatePinLast,
     statusLabel,
     vaccinationStatus,
-} = require('../../../scripts/filters');
+} = require('../../../scripts/filters.core');
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
