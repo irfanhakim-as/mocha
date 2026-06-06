@@ -34,7 +34,9 @@
     <style>:root { --font-family: '{{ data.site.font.family }}', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }</style>
 </head>
 <body>
-    {% include "components/header.njk" %}
+    <div class="site-header">
+        {% include "components/header.njk" %}
+    </div>
 
     <main>
         {{ content | safe }}

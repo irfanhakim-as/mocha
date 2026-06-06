@@ -1,11 +1,15 @@
 @use 'variables' as *;
 @use 'sass:color';
 
-// Header
-.header {
+// Site header wrapper
+.site-header {
     position: sticky;
     top: 0;
     z-index: $z-header;
+}
+
+// Header
+.header {
     background-color: var(--colour-header-bg);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--colour-border);
