@@ -203,6 +203,11 @@ Site metadata and branding:
   "font": {
     "family": "Inter",
     "weights": "400;500;600;700"
+  },
+  "announcement": {
+    "enabled": true,
+    "message": "Mocha's next vet visit is on June 15. [Learn more](#health).",
+    "colour": "warning"
   }
 }
 ```
@@ -217,6 +222,9 @@ Site metadata and branding:
 | `url` | false | Canonical URL |
 | `font.family` | false | Google Font family name |
 | `font.weights` | false | Font weights to load |
+| `announcement.enabled` | false | Show the announcement banner (i.e. `true` or `false`) |
+| `announcement.message` | false | Banner message, supports Markdown |
+| `announcement.colour` | false | Banner colour: `neutral`, `accent`, `success`, `warning`, `danger` (default: `neutral`) |
 
 ### pet.json
 
