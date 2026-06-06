@@ -78,8 +78,8 @@ function initSmoothScroll() {
             const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
-                const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                const siteHeaderHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - siteHeaderHeight;
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
