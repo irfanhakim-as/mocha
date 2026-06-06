@@ -1,5 +1,3 @@
-// Eleventy filters
-
 // Parse DD-MM-YYYY date string to Date object
 function parseDate(dateString) {
     if (!dateString) return null;
@@ -184,6 +182,7 @@ function orNA(value) {
 }
 
 module.exports = {
+    parseDate,
     formatDate,
     toIso,
     calculateAge,
