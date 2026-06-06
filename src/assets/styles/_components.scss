@@ -1,11 +1,15 @@
 @use 'variables' as *;
 @use 'sass:color';
 
-// Header
-.header {
+// Site header wrapper
+.site-header {
     position: sticky;
     top: 0;
     z-index: $z-header;
+}
+
+// Header
+.header {
     background-color: var(--colour-header-bg);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--colour-border);
@@ -904,14 +908,24 @@
         width: 24px;
         height: 24px;
     }
+
+    @media (min-width: $breakpoint-md) {
+        width: 56px;
+        height: 56px;
+
+        svg {
+            width: 28px;
+            height: 28px;
+        }
+    }
 }
 
 .lightbox__nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -933,13 +947,13 @@
     }
 
     svg {
-        width: 32px;
-        height: 32px;
+        width: 24px;
+        height: 24px;
     }
 
-    @media (max-width: $breakpoint-md) {
-        width: 48px;
-        height: 48px;
+    @media (min-width: $breakpoint-md) {
+        width: 56px;
+        height: 56px;
 
         svg {
             width: 28px;
@@ -988,4 +1002,122 @@ button.hero__image-wrapper {
     background: none;
     border: none;
     padding: 0;
+}
+
+// Announcement banner
+.announcement {
+    --announcement-close-size: 28px;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--colour-announcement-neutral-border);
+    background-color: var(--colour-announcement-neutral-bg);
+    color: var(--colour-announcement-neutral-text);
+
+    &--accent {
+        border-bottom-color: var(--colour-announcement-accent-border);
+        background-color: var(--colour-announcement-accent-bg);
+        color: var(--colour-announcement-accent-text);
+
+        .announcement__close {
+            color: var(--colour-announcement-accent-text);
+
+            &:hover {
+                background-color: var(--colour-announcement-accent-border);
+            }
+        }
+    }
+
+    &--success {
+        border-bottom-color: var(--colour-announcement-success-border);
+        background-color: var(--colour-announcement-success-bg);
+        color: var(--colour-announcement-success-text);
+
+        .announcement__close {
+            color: var(--colour-announcement-success-text);
+
+            &:hover {
+                background-color: var(--colour-announcement-success-border);
+            }
+        }
+    }
+
+    &--warning {
+        border-bottom-color: var(--colour-announcement-warning-border);
+        background-color: var(--colour-announcement-warning-bg);
+        color: var(--colour-announcement-warning-text);
+
+        .announcement__close {
+            color: var(--colour-announcement-warning-text);
+
+            &:hover {
+                background-color: var(--colour-announcement-warning-border);
+            }
+        }
+    }
+
+    &--danger {
+        border-bottom-color: var(--colour-announcement-danger-border);
+        background-color: var(--colour-announcement-danger-bg);
+        color: var(--colour-announcement-danger-text);
+
+        .announcement__close {
+            color: var(--colour-announcement-danger-text);
+
+            &:hover {
+                background-color: var(--colour-announcement-danger-border);
+            }
+        }
+    }
+
+    &.is-hidden {
+        display: none;
+    }
+}
+
+.announcement__inner {
+    display: grid;
+    grid-template-columns: calc(var(--announcement-close-size) + #{$spacing-3}) 1fr calc(var(--announcement-close-size) + #{$spacing-3});
+    align-items: center;
+    min-height: 40px;
+    padding: $spacing-2 0;
+}
+
+.announcement__message {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    text-align: center;
+    margin: 0;
+    grid-column: 2;
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+.announcement__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--announcement-close-size);
+    height: var(--announcement-close-size);
+    justify-self: end;
+    border-radius: $radius-full;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--colour-announcement-neutral-text);
+    transition: background-color $transition-fast;
+
+    &:hover {
+        background-color: var(--colour-announcement-neutral-border);
+    }
+
+    svg {
+        display: block;
+    }
 }
