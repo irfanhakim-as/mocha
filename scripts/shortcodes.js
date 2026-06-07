@@ -4,7 +4,8 @@ const Image = require("@11ty/eleventy-img");
 const path = require("path");
 
 const isProduction = process.env.NODE_ENV === "production";
-const originalUrl = (src) => `/assets/images/${src}`;
+const isExternalUrl = (src) => /^https?:\/\//.test(src);
+const originalUrl = (src) => isExternalUrl(src) ? src : `/assets/images/${src}`;
 
 // Optimise images in production and skip SVGs
 function shouldOptimise(src) {
@@ -18,7 +19,7 @@ function imgAttrs(alt, className, loading) {
 
 // Generate optimised versions at given widths and formats using eleventy-img
 async function processImage(src, widths, formats) {
-    return Image(path.join("src/assets/images", src), {
+    return Image(isExternalUrl(src) ? src : path.join("src/assets/images", src), {
         widths,
         formats,
         outputDir: "dist/assets/images/optimised",

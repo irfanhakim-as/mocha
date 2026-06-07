@@ -5,10 +5,11 @@ const {
     sortByDatePinLast,
     statusLabel,
     vaccinationStatus,
-} = require('../../../scripts/filters');
+} = require('../../../scripts/filters.core');
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    initAnnouncement();
     initSmoothScroll();
     initMobileMenu();
     initLightbox();
@@ -68,6 +69,25 @@ function initTheme() {
     });
 }
 
+// Persist announcement banner dismissal
+function initAnnouncement() {
+    const banner = document.getElementById('announcement');
+    if (!banner) return;
+
+    const id = banner.dataset.announcementId;
+    // hide if this announcement was the last one dismissed
+    if (id && localStorage.getItem('announcement-dismissed-id') === id) {
+        banner.classList.add('is-hidden');
+        return;
+    }
+
+    banner.querySelector('.announcement__close')?.addEventListener('click', () => {
+        banner.classList.add('is-hidden');
+        // store last dismissed announcement id so it stays hidden
+        if (id) localStorage.setItem('announcement-dismissed-id', id);
+    });
+}
+
 // Smooth scroll for anchor links
 function initSmoothScroll() {
     const links = document.querySelectorAll('a[href^="#"]');
@@ -78,8 +98,8 @@ function initSmoothScroll() {
             const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
-                const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                const siteHeaderHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - siteHeaderHeight;
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'

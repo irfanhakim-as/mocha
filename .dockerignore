@@ -4,6 +4,9 @@ node_modules
 # Build output
 dist
 
+# Cache
+.cache
+
 # OS
 .DS_Store
 

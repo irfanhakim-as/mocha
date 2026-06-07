@@ -8,5 +8,10 @@
     "font": {
         "family": "Inter",
         "weights": "400;500;600;700"
+    },
+    "announcement": {
+        "enabled": false,
+        "message": "",
+        "colour": "neutral"
     }
 }

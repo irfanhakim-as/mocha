@@ -26,6 +26,22 @@
   --colour-lightbox-close-hover: #{$theme-light-lightbox-close-hover};
   --colour-lightbox-caption: #{$theme-light-lightbox-caption};
   --colour-lightbox-caption-bg: #{$theme-light-lightbox-caption-bg};
+  // Announcement banner colours
+  --colour-announcement-neutral-bg: color-mix(in srgb, var(--colour-bg-alt) 80%, transparent);
+  --colour-announcement-neutral-text: #{$theme-light-announcement-neutral-text};
+  --colour-announcement-neutral-border: #{$theme-light-announcement-neutral-border};
+  --colour-announcement-accent-bg: color-mix(in srgb, #{$colour-accent} 15%, transparent);
+  --colour-announcement-accent-text: #{$theme-light-announcement-accent-text};
+  --colour-announcement-accent-border: #{$theme-light-announcement-accent-border};
+  --colour-announcement-success-bg: color-mix(in srgb, #{$colour-success} 15%, transparent);
+  --colour-announcement-success-text: #{$theme-light-announcement-success-text};
+  --colour-announcement-success-border: #{$theme-light-announcement-success-border};
+  --colour-announcement-warning-bg: color-mix(in srgb, #{$colour-warning} 15%, transparent);
+  --colour-announcement-warning-text: #{$theme-light-announcement-warning-text};
+  --colour-announcement-warning-border: #{$theme-light-announcement-warning-border};
+  --colour-announcement-danger-bg: color-mix(in srgb, #{$colour-danger} 15%, transparent);
+  --colour-announcement-danger-text: #{$theme-light-announcement-danger-text};
+  --colour-announcement-danger-border: #{$theme-light-announcement-danger-border};
 
   // Shadows
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -57,6 +73,22 @@
   --colour-lightbox-close-hover: #{$theme-dark-lightbox-close-hover};
   --colour-lightbox-caption: #{$theme-dark-lightbox-caption};
   --colour-lightbox-caption-bg: #{$theme-dark-lightbox-caption-bg};
+  // Announcement banner colours
+  --colour-announcement-neutral-bg: color-mix(in srgb, var(--colour-bg-alt) 80%, transparent);
+  --colour-announcement-neutral-text: #{$theme-dark-announcement-neutral-text};
+  --colour-announcement-neutral-border: #{$theme-dark-announcement-neutral-border};
+  --colour-announcement-accent-bg: color-mix(in srgb, #{$colour-accent-light} 15%, transparent);
+  --colour-announcement-accent-text: #{$theme-dark-announcement-accent-text};
+  --colour-announcement-accent-border: #{$theme-dark-announcement-accent-border};
+  --colour-announcement-success-bg: color-mix(in srgb, #{$colour-success} 15%, transparent);
+  --colour-announcement-success-text: #{$theme-dark-announcement-success-text};
+  --colour-announcement-success-border: #{$theme-dark-announcement-success-border};
+  --colour-announcement-warning-bg: color-mix(in srgb, #{$colour-warning} 15%, transparent);
+  --colour-announcement-warning-text: #{$theme-dark-announcement-warning-text};
+  --colour-announcement-warning-border: #{$theme-dark-announcement-warning-border};
+  --colour-announcement-danger-bg: color-mix(in srgb, #{$colour-danger} 15%, transparent);
+  --colour-announcement-danger-text: #{$theme-dark-announcement-danger-text};
+  --colour-announcement-danger-border: #{$theme-dark-announcement-danger-border};
 
   // Shadows
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
@@ -89,6 +121,24 @@
     --colour-lightbox-close-hover: #{$theme-dark-lightbox-close-hover};
     --colour-lightbox-caption: #{$theme-dark-lightbox-caption};
     --colour-lightbox-caption-bg: #{$theme-dark-lightbox-caption-bg};
+    // Announcement banner colours
+    --colour-announcement-neutral-bg: color-mix(in srgb, var(--colour-bg-alt) 80%, transparent);
+    --colour-announcement-neutral-text: #{$theme-dark-announcement-neutral-text};
+    --colour-announcement-neutral-border: #{$theme-dark-announcement-neutral-border};
+    --colour-announcement-accent-bg: color-mix(in srgb, #{$colour-accent-light} 15%, transparent);
+    --colour-announcement-accent-text: #{$theme-dark-announcement-accent-text};
+    --colour-announcement-accent-border: #{$theme-dark-announcement-accent-border};
+    --colour-announcement-success-bg: color-mix(in srgb, #{$colour-success} 15%, transparent);
+    --colour-announcement-success-text: #{$theme-dark-announcement-success-text};
+    --colour-announcement-success-border: #{$theme-dark-announcement-success-border};
+    --colour-announcement-warning-bg: color-mix(in srgb, #{$colour-warning} 15%, transparent);
+    --colour-announcement-warning-text: #{$theme-dark-announcement-warning-text};
+    --colour-announcement-warning-border: #{$theme-dark-announcement-warning-border};
+    --colour-announcement-danger-bg: color-mix(in srgb, #{$colour-danger} 15%, transparent);
+    --colour-announcement-danger-text: #{$theme-dark-announcement-danger-text};
+    --colour-announcement-danger-border: #{$theme-dark-announcement-danger-border};
+
+    // Shadows
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);

@@ -203,6 +203,11 @@ Site metadata and branding:
   "font": {
     "family": "Inter",
     "weights": "400;500;600;700"
+  },
+  "announcement": {
+    "enabled": true,
+    "message": "Mocha's next vet visit is on June 15. [Learn more](#health).",
+    "colour": "warning"
   }
 }
 ```
@@ -217,6 +222,9 @@ Site metadata and branding:
 | `url` | false | Canonical URL |
 | `font.family` | false | Google Font family name |
 | `font.weights` | false | Font weights to load |
+| `announcement.enabled` | false | Show the announcement banner (i.e. `true` or `false`) |
+| `announcement.message` | false | Banner message, supports Markdown |
+| `announcement.colour` | false | Banner colour: `neutral`, `accent`, `success`, `warning`, `danger` (default: `neutral`) |
 
 ### pet.json
 
@@ -272,7 +280,7 @@ Pet profile information:
 | `insured` | false | Whether the pet is insured (i.e. `true` or `false`) |
 | `microchipId` | false | Microchip ID number |
 | `photos` | false | Array of photo objects |
-| `photos[].src` | true | Filename (relative to `/path/to/images` directory) |
+| `photos[].src` | true | Filename (relative to `/path/to/images` directory) or an external image URL |
 | `photos[].alt` | true | Alt text for accessibility |
 | `photos[].featured` | false | Set `true` for hero image (i.e. profile picture) |
 | `about` | false | About section object |
@@ -415,9 +423,11 @@ Owner and emergency contact information:
 > [!NOTE]  
 > Apple's `HEIC` image format is currently unsupported outside of Safari and needs to be converted to more common image formats beforehand.
 
-1. Add your photos to `src/assets/images/` (or your own `/path/to/images/` for Docker).
+Photos can be sourced locally or from an external URL:
 
-2. Update `pet.json` with photo information:
+1. For local photos, add your photos to `src/assets/images/` (or your own `/path/to/images/` for Docker).
+
+2. Update `pet.json` with photo information, referencing each file by name:
 
     ```json
     {
@@ -431,6 +441,20 @@ Owner and emergency contact information:
           "src": "my-cat-sleeping.jpg",
           "alt": "My cat napping",
           "featured": false
+        }
+      ]
+    }
+    ```
+
+    **Alternatively**, for external photos, set `src` to a full `http://` or `https://` URL instead of a filename. The image will be fetched and optimised at build time, so no local file is needed:
+
+    ```json
+    {
+      "photos": [
+        {
+          "src": "https://example.com/my-cat-hero.jpg",
+          "alt": "My cat looking majestic",
+          "featured": true
         }
       ]
     }
