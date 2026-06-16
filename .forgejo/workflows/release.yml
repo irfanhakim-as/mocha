@@ -12,6 +12,8 @@ env:
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
   GH_REPOSITORY: "irfanhakim-as/mocha"
+  METADATA_FILE: "package.json"
+  METADATA_VARS: "name version"
   GENERATE_RELEASE_NOTES: "false"
   PACKAGE_ASSETS: "src scripts .eleventy.js Dockerfile Dockerfile.lean entrypoint.sh httpd.conf packages.txt package.json package-lock.json Taskfile.yml README.md LICENSE"
 
@@ -23,20 +25,26 @@ jobs:
       version: ${{ steps.get_metadata.outputs.version }}
     steps:
       - name: Check out the repository
+        id: checkout
         uses: actions/checkout@v4
         with:
+          token: ${{ env.REPO_TOKEN }}
           fetch-depth: 1
 
       - name: Get package metadata
         id: get_metadata
         run: |
-          # read name and version from package.json
-          name=$(jq -r '.name' package.json)
-          version=$(jq -r '.version' package.json)
-
-          # export values to output
-          echo "name=${name}" | tee -a ${GITHUB_OUTPUT}
-          echo "version=${version}" | tee -a ${GITHUB_OUTPUT}
+          # source required variables from metadata file
+          for var in ${METADATA_VARS}; do
+            # ensure variable is set
+            value=$(jq -r ".${var}" "${METADATA_FILE}")
+            if [ -z "${value}" ] || [ "${value}" = "null" ]; then
+              echo "ERROR: Required variable \"${var}\" was not set successfully."
+              exit 1
+            fi
+            # export variable to output
+            echo "${var}=${value}" | tee -a ${GITHUB_OUTPUT}
+          done
 
   check:
     runs-on: ubuntu-latest
@@ -94,8 +102,10 @@ jobs:
       VERSION: ${{ needs.metadata.outputs.version }}
     steps:
       - name: Check out the repository
+        id: checkout
         uses: actions/checkout@v4
         with:
+          token: ${{ env.REPO_TOKEN }}
           fetch-depth: 0
 
       - name: Package assets into archive
