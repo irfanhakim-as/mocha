@@ -1,0 +1,188 @@
+name: Build and publish container images
+
+on:
+  push:
+    branches:
+      - master                    # monitor changes only in the master branch
+    paths:
+      - package.json              # monitor changes to the package metadata file
+      - Dockerfile                # monitor changes to the standard container definition
+      - Dockerfile.lean           # monitor changes to the lean container definition
+  workflow_dispatch:              # allow manually triggering the workflow
+    inputs:
+      image_arch:
+        description: 'Architectures to build (comma-separated)'
+        type: string
+        required: false
+        default: ''
+      image_tag:
+        description: 'Override the primary image tag (skips auto tag generation)'
+        type: string
+        required: false
+        default: ''
+      tag_branch:
+        description: 'Include branch name in auto generated tag'
+        type: boolean
+        required: false
+        default: true
+      tag_release:
+        description: 'Append release number to auto generated tag (-rN)'
+        type: boolean
+        required: false
+        default: true
+      tag_latest:
+        description: 'Tag as latest when run on the default branch'
+        type: boolean
+        required: false
+        default: true
+      extra_tags:
+        description: 'Extra tags to apply (comma-separated)'
+        type: string
+        required: false
+        default: ''
+
+env:
+  REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  IMG_BUILDER_REPO: "irfan/img-builder"
+  FORGEJO_SERVER_URL: ${{ forgejo.server_url }}
+  METADATA_FILE: "package.json"
+  METADATA_VARS: "version"
+  IMAGE_ARCH: ${{ inputs.image_arch || 'linux/amd64,linux/arm64/v8' }}
+  IMAGE_TAG_BRANCH: ${{ inputs.tag_branch || 'true' }}
+  IMAGE_TAG_RELEASE: ${{ inputs.tag_release || 'true' }}
+  IMAGE_TAG_LATEST: ${{ inputs.tag_latest || 'true' }}
+  CONTAINER_RUNTIME: docker
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - image_name: mocha
+            dockerfile: Dockerfile
+            registry: git.moekai.net
+            repository: irfan
+            registry_user: irfan
+            registry_token_var: REPO_TOKEN
+            link_repo: true
+          - image_name: mocha
+            dockerfile: Dockerfile
+            registry: ghcr.io
+            repository: irfanhakim-as
+            registry_user: irfanhakim-as
+            registry_token_var: GH_TOKEN
+            link_repo: false
+          - image_name: mocha-lean
+            dockerfile: Dockerfile.lean
+            registry: git.moekai.net
+            repository: irfan
+            registry_user: irfan
+            registry_token_var: REPO_TOKEN
+            link_repo: true
+          - image_name: mocha-lean
+            dockerfile: Dockerfile.lean
+            registry: ghcr.io
+            repository: irfanhakim-as
+            registry_user: irfanhakim-as
+            registry_token_var: GH_TOKEN
+            link_repo: false
+    steps:
+      - name: Check out the repository
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ env.REPO_TOKEN }}
+          fetch-depth: 1
+
+      - name: Get package metadata
+        id: get_metadata
+        run: |
+          # source required variables from metadata file
+          for var in ${METADATA_VARS}; do
+            # ensure variable is set
+            value=$(jq -r ".${var}" "${METADATA_FILE}")
+            if [ -z "${value}" ] || [ "${value}" = "null" ]; then
+              echo "ERROR: Required variable \"${var}\" was not set successfully."
+              exit 1
+            fi
+            # export variable to output
+            echo "${var}=${value}" | tee -a ${GITHUB_OUTPUT}
+          done
+
+      - name: Set up QEMU for multiarch
+        id: setup_qemu
+        run: docker run --rm --privileged tonistiigi/binfmt --install all
+
+      - name: Install img-builder
+        id: install_img_builder
+        run: |
+          asset_url=$(curl -s \
+            -H "Authorization: token ${REPO_TOKEN}" \
+            "${FORGEJO_SERVER_URL}/api/v1/repos/${IMG_BUILDER_REPO}/releases/latest" \
+            | jq -r '.assets[] | select(.name | test("_any\\.tar\\.gz$")) | .browser_download_url')
+          mkdir -p /tmp/img-builder
+          curl -sL \
+            -H "Authorization: token ${REPO_TOKEN}" \
+            "${asset_url}" | tar -xz -C /tmp/img-builder
+          sudo bash /tmp/img-builder/installer.sh --install-prefix /usr/local
+
+      - name: Log in to registry
+        id: login
+        env:
+          REGISTRY: ${{ matrix.registry }}
+          REGISTRY_USER: ${{ matrix.registry_user }}
+          REGISTRY_TOKEN_VAR: ${{ matrix.registry_token_var }}
+        run: |
+          echo "${!REGISTRY_TOKEN_VAR}" | docker login "${REGISTRY}" \
+            -u "${REGISTRY_USER}" --password-stdin
+
+      - name: Determine image tag
+        id: determine_tag
+        if: inputs.image_tag == ''
+        env:
+          IMAGE_NAME: ${{ matrix.image_name }}
+          TAG_VERSION: ${{ steps.get_metadata.outputs.version }}
+          TAG_BRANCH: ${{ env.IMAGE_TAG_BRANCH }}
+          TAG_RELEASE: ${{ env.IMAGE_TAG_RELEASE }}
+          BRANCH_NAME: ${{ forgejo.ref_name }}
+          REGISTRY: ${{ matrix.registry }}
+          REPOSITORY: ${{ matrix.repository }}
+        run: |
+          tag="${TAG_VERSION}"
+          if [ "${TAG_BRANCH}" = "true" ]; then
+            tag="${tag}-${BRANCH_NAME}"
+          fi
+          if [ "${TAG_RELEASE}" = "true" ]; then
+            n=1
+            while docker manifest inspect "${REGISTRY}/${REPOSITORY}/${IMAGE_NAME}:${tag}-r${n}" > /dev/null 2>&1; do
+              n=$((n + 1))
+            done
+            tag="${tag}-r${n}"
+          fi
+          echo "tag=${tag}" | tee -a ${GITHUB_OUTPUT}
+
+      - name: Build and publish image
+        id: build
+        env:
+          IMAGE_NAME: ${{ matrix.image_name }}
+          IMAGE_TAG: ${{ inputs.image_tag || steps.determine_tag.outputs.tag }}
+          IMAGE_REGISTRY: ${{ matrix.registry }}
+          IMAGE_REPOSITORY: ${{ matrix.repository }}
+          IMAGE_DOCKERFILE: ${{ matrix.dockerfile }}
+          IMAGE_EXTRA_TAGS: ${{ inputs.extra_tags || (env.IMAGE_TAG_LATEST == 'true' && forgejo.ref_name == forgejo.event.repository.default_branch && 'latest' || '') }}
+        run: img-builder --skip-confirmation
+
+      - name: Link image to repository
+        id: link_repo
+        if: matrix.link_repo
+        env:
+          IMAGE_NAME: ${{ matrix.image_name }}
+          REPOSITORY: ${{ matrix.repository }}
+        run: |
+          repo_name="${GITHUB_REPOSITORY#*/}"
+          curl -s -X POST \
+            -H "Authorization: token ${REPO_TOKEN}" \
+            "${FORGEJO_SERVER_URL}/api/v1/packages/${REPOSITORY}/container/${IMAGE_NAME}/-/link/${repo_name}"
