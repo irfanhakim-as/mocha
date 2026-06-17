@@ -42,7 +42,7 @@
                 {% if data.owner.notes %}
                 <div class="contact__notes">
                     <span class="contact__notes-label">Notes</span>
-                    <p>{{ data.owner.notes }}</p>
+                    <p>{{ data.owner.notes | markdownInline | safe }}</p>
                 </div>
                 {% endif %}
 

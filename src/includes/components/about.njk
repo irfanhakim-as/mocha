@@ -47,7 +47,7 @@
             <!-- Personality Card -->
             <div class="card about__personality">
                 <h3 class="card__title">Personality</h3>
-                <p>{{ data.pet.about.personality | orNA }}</p>
+                <p>{{ data.pet.about.personality | orNA | markdownInline | safe }}</p>
             </div>
 
             <!-- Favourites Card -->
@@ -65,7 +65,7 @@
                             {% if value.join %}
                             <ul class="about__favourite-list">
                                 {% for item in value %}
-                                <li>{{ item | orNA }}</li>
+                                <li>{{ item | orNA | markdownInline | safe }}</li>
                                 {% endfor %}
                             </ul>
                             {% else %}
@@ -85,7 +85,7 @@
                 <h3 class="card__title">Quirks & Habits</h3>
                 <ul class="about__quirks-list">
                     {% for quirk in data.pet.about.quirks %}
-                    <li>{{ quirk }}</li>
+                    <li>{{ quirk | markdownInline | safe }}</li>
                     {% endfor %}
                 </ul>
             </div>
@@ -99,7 +99,7 @@
                     {% for key, value in data.pet.routine %}
                     <li class="about__routine-item">
                         <span class="about__routine-time">{{ key | camelToTitleCase }}</span>
-                        <span class="about__routine-activity">{{ value | orNA }}</span>
+                        <span class="about__routine-activity">{{ value | orNA | markdownInline | safe }}</span>
                     </li>
                     {% endfor %}
                 </ul>

@@ -51,7 +51,7 @@
                             <dl class="health__visit-details-list">
                                 <div class="health__visit-detail">
                                     <dt>Notes</dt>
-                                    <dd>{{ visit.notes | orNA }}</dd>
+                                    <dd>{{ visit.notes | orNA | markdownInline | safe }}</dd>
                                 </div>
                                 <div class="health__visit-detail">
                                     <dt>Veterinarian</dt>
@@ -97,7 +97,7 @@
                         </div>
                         <p class="health__item-detail">Reaction: {{ allergy.reaction | orNA }}</p>
                         {% if allergy.notes %}
-                        <p class="health__item-notes">{{ allergy.notes }}</p>
+                        <p class="health__item-notes">{{ allergy.notes | markdownInline | safe }}</p>
                         {% endif %}
                     </div>
                     {% endfor %}
@@ -118,7 +118,7 @@
                         </div>
                         <p class="health__item-detail">Diagnosed: {{ condition.diagnosedDate | formatDate | orNA }}</p>
                         {% if condition.notes %}
-                        <p class="health__item-notes">{{ condition.notes }}</p>
+                        <p class="health__item-notes">{{ condition.notes | markdownInline | safe }}</p>
                         {% endif %}
                     </div>
                     {% endfor %}
@@ -144,7 +144,7 @@
                         <p class="health__item-detail">Started: {{ med.startDate | formatDate | orNA }}</p>
                         {% endif %}
                         {% if med.reason %}
-                        <p class="health__item-notes">{{ med.reason }}</p>
+                        <p class="health__item-notes">{{ med.reason | markdownInline | safe }}</p>
                         {% endif %}
                     </div>
                     {% endfor %}
