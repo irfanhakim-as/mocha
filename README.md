@@ -301,6 +301,12 @@ Health records including vaccinations, vet visits, weight records, conditions, m
 > - `allergies[].notes`
 > - `medications[].reason`
 
+> [!WARNING]
+> The following fields are currently unused:
+> - `vaccinations[].veterinarian`
+> - `vaccinations[].clinic`
+> - `vaccinations[].notes`
+
 ```json
 {
   "vaccinations": [
