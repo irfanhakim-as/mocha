@@ -3,7 +3,7 @@
     "phone": "+60 12-345 6789",
     "email": "owner@example.com",
     "address": "123 Cat Street, Meowville, CA 90210",
-    "notes": "Available for contact through iMessage",
+    "notes": "Available for contact through **[iMessage](sms:+60123456789)**",
     "socials": [
         {
             "name": "Mastodon",

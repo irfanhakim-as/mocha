@@ -29,21 +29,21 @@
         {
             "date": "10-01-2024",
             "reason": "Annual wellness exam",
-            "notes": "Healthy weight at 4.5kg. Teeth in good condition. All vitals normal.",
+            "notes": "Healthy weight at 4.5kg. Teeth in good condition. All vitals normal. [View full report](https://ncpacca.wpenginepowered.com/wp-content/uploads/2020/03/Medical_Evaluation_Report_-_March_2016.pdf).",
             "veterinarian": "Dr. Sarah Smith",
             "clinic": "Happy Paws Veterinary Clinic"
         },
         {
             "date": "15-06-2023",
             "reason": "Vaccination appointment",
-            "notes": "Received FVRCP and Rabies boosters. No adverse reactions.",
+            "notes": "Received _FVRCP_ and _Rabies_ boosters. No adverse reactions.",
             "veterinarian": "Dr. Sarah Smith",
             "clinic": "Happy Paws Veterinary Clinic"
         },
         {
             "date": "20-02-2023",
             "reason": "Minor eye irritation",
-            "notes": "Prescribed eye drops for 7 days. Cleared up completely.",
+            "notes": "Prescribed [Tobramycin](https://en.wikipedia.org/wiki/Tobramycin) eye drops for 7 days. Cleared up completely.",
             "veterinarian": "Dr. Michael Chen",
             "clinic": "Happy Paws Veterinary Clinic"
         }
@@ -65,7 +65,7 @@
             "name": "Dental tartar buildup",
             "diagnosedDate": "10-01-2024",
             "status": "monitoring",
-            "notes": "Recommend dental cleaning within 6 months"
+            "notes": "Recommend dental cleaning within **6 months**"
         },
         {
             "name": "Ear infection",
@@ -86,7 +86,7 @@
             "dosage": "1 chew daily",
             "frequency": "Daily with food",
             "startDate": "15-01-2024",
-            "reason": "Joint health support"
+            "reason": "Joint health support for **mild arthritis**"
         },
         {
             "name": "Omega-3 fish oil",
@@ -102,19 +102,19 @@
             "allergen": "Chicken",
             "severity": "mild",
             "reaction": "Skin irritation",
-            "notes": "Avoid chicken-based foods and treats"
+            "notes": "Avoid chicken-based foods and treats. List of [safe foods to eat](https://www.reddit.com/r/CatAdvice/comments/1h8621a/comment/mrkecvw)"
         },
         {
             "allergen": "Certain flea treatments",
             "severity": "moderate",
             "reaction": "Excessive scratching and hair loss",
-            "notes": "Use vet-approved alternatives only"
+            "notes": "Use **vet-approved** alternatives only"
         },
         {
             "allergen": "Bee stings",
             "severity": "severe",
             "reaction": "Swelling, difficulty breathing",
-            "notes": "Requires immediate vet attention if stung"
+            "notes": "Requires **immediate** vet attention if stung"
         }
     ]
 }

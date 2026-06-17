@@ -30,36 +30,36 @@
         }
     ],
     "about": {
-        "personality": "Mocha is a gentle and curious soul who loves exploring every corner of the house. He's incredibly affectionate and always greets his humans at the door.",
+        "personality": "Mocha is a gentle and curious [Classic Siamese](https://en.wikipedia.org/wiki/Thai_cat) cat who loves ~~terrorising~~ exploring every corner of the house. He's **incredibly** affectionate and **always** greets his humans at the door.",
         "favourites": {
             "food": [
-                "Salmon wet food",
-                "Occasional treats"
+                "[Cindy's Recipe](https://cindysrecipe.com/wet-food-canned/signature-series) Salmon wet food",
+                "_Occasional_ treats"
             ],
             "toy": [
                 "Feather wand",
                 "Crinkle balls"
             ],
             "sleepSpot": [
-                "The sunny spot by the window",
+                "The _sunny spot_ by the window",
                 "On a warm laptop"
             ]
         },
         "quirks": [
             "Chirps at birds through the window",
             "Loves to knock things off tables",
-            "Has a specific meow for dinner time",
-            "Sits like a loaf when content"
+            "Has a **very specific** meow for dinner time",
+            "Sits like a _perfect loaf_ when content"
         ]
     },
     "routine": {
-        "wakeUp": "6:00 AM - Morning stretches and window watching",
-        "breakfast": "7:00 AM - Wet food and fresh water",
-        "playtime": "9:00 AM - Active play session",
-        "napTime": "11:00 AM - 3:00 PM - Extended nap in favourite spots",
-        "dinner": "6:00 PM - Second meal of the day",
-        "eveningPlay": "8:00 PM - Evening zoomies and play",
-        "bedtime": "10:00 PM - Settles down for the night"
+        "wakeUp": "**6:00 AM** - Morning stretches and window watching",
+        "breakfast": "**7:00 AM** - Wet food and fresh water",
+        "playtime": "**9:00 AM** - Active play session",
+        "napTime": "**11:00 AM - 3:00 PM** - Extended nap in _favourite spots_",
+        "dinner": "**6:00 PM** - Second meal of the day",
+        "eveningPlay": "**8:00 PM** - Evening _zoomies_ and play",
+        "bedtime": "**10:00 PM** - Settles down for the night"
     },
     "socials": [
         {
