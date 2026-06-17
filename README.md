@@ -284,15 +284,22 @@ Pet profile information:
 | `photos[].alt` | true | Alt text for accessibility |
 | `photos[].featured` | false | Set `true` for hero image (i.e. profile picture) |
 | `about` | false | About section object |
-| `about.personality` | false | Personality description |
-| `about.favourites` | false | Categories of favourites as keys and either string or array of favourite items as values |
-| `about.quirks` | false | Array of quirky behaviours |
-| `routine` | false | Daily routine (key-value pairs) |
+| `about.personality` | false | Personality description, supports Markdown |
+| `about.favourites` | false | Categories of favourites as keys and either string or array of favourite items as values, values support Markdown |
+| `about.quirks` | false | Array of quirky behaviours, supports Markdown |
+| `routine` | false | Daily routine (key-value pairs), values support Markdown |
 | `socials` | false | Array of social links |
 
 ### health.json
 
 Health records including vaccinations, vet visits, weight records, conditions, medications, and allergies:
+
+> [!NOTE]
+> The following fields support Markdown:
+> - `vetVisits[].notes`
+> - `conditions[].notes`
+> - `allergies[].notes`
+> - `medications[].reason`
 
 ```json
 {
@@ -411,7 +418,7 @@ Owner and emergency contact information:
 | `phone` | false | Phone number |
 | `email` | false | Email address |
 | `address` | false | Physical address |
-| `notes` | false | Additional notes or information about the owner |
+| `notes` | false | Additional notes or information about the owner, supports Markdown |
 | `socials` | false | Array of social links |
 | `emergencyContact` | false | Emergency contact object |
 | `emergencyContact.name` | true | Contact name |
