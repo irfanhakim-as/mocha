@@ -40,6 +40,16 @@ on:
         type: string
         required: false
         default: ''
+      image_variants:
+        description: 'Variants to build (comma-separated)'
+        type: string
+        required: false
+        default: ''
+      image_registries:
+        description: 'Registries to push to (comma-separated)'
+        type: string
+        required: false
+        default: ''
 
 env:
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
@@ -57,6 +67,9 @@ env:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    if: |
+      (inputs.image_variants == '' || contains(inputs.image_variants, matrix.variant)) &&
+      (inputs.image_registries == '' || contains(inputs.image_registries, matrix.registry_id))
     strategy:
       fail-fast: false
       matrix:
@@ -68,6 +81,8 @@ jobs:
             registry_user: irfan
             registry_token_var: REPO_TOKEN
             link_repo: true
+            variant: standard
+            registry_id: forgejo
           - image_name: mocha
             dockerfile: Dockerfile
             registry: ghcr.io
@@ -75,6 +90,8 @@ jobs:
             registry_user: irfanhakim-as
             registry_token_var: GH_TOKEN
             link_repo: false
+            variant: standard
+            registry_id: github
           - image_name: mocha-lean
             dockerfile: Dockerfile.lean
             registry: git.moekai.net
@@ -82,6 +99,8 @@ jobs:
             registry_user: irfan
             registry_token_var: REPO_TOKEN
             link_repo: true
+            variant: lean
+            registry_id: forgejo
           - image_name: mocha-lean
             dockerfile: Dockerfile.lean
             registry: ghcr.io
@@ -89,6 +108,8 @@ jobs:
             registry_user: irfanhakim-as
             registry_token_var: GH_TOKEN
             link_repo: false
+            variant: lean
+            registry_id: github
     steps:
       - name: Check out the repository
         id: checkout
