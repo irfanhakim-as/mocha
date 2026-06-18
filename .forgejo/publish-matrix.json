@@ -1,0 +1,46 @@
+[
+  {
+    "image_name": "mocha",
+    "dockerfile": "Dockerfile",
+    "registry": "git.moekai.net",
+    "repository": "irfan",
+    "registry_user": "irfan",
+    "registry_token_var": "REPO_TOKEN",
+    "link_repo": true,
+    "variant": "standard",
+    "registry_id": "forgejo"
+  },
+  {
+    "image_name": "mocha",
+    "dockerfile": "Dockerfile",
+    "registry": "ghcr.io",
+    "repository": "irfanhakim-as",
+    "registry_user": "irfanhakim-as",
+    "registry_token_var": "GH_TOKEN",
+    "link_repo": false,
+    "variant": "standard",
+    "registry_id": "github"
+  },
+  {
+    "image_name": "mocha-lean",
+    "dockerfile": "Dockerfile.lean",
+    "registry": "git.moekai.net",
+    "repository": "irfan",
+    "registry_user": "irfan",
+    "registry_token_var": "REPO_TOKEN",
+    "link_repo": true,
+    "variant": "lean",
+    "registry_id": "forgejo"
+  },
+  {
+    "image_name": "mocha-lean",
+    "dockerfile": "Dockerfile.lean",
+    "registry": "ghcr.io",
+    "repository": "irfanhakim-as",
+    "registry_user": "irfanhakim-as",
+    "registry_token_var": "GH_TOKEN",
+    "link_repo": false,
+    "variant": "lean",
+    "registry_id": "github"
+  }
+]
