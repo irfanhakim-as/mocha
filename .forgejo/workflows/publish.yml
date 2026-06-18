@@ -92,7 +92,7 @@ jobs:
             matrix=$(echo "${matrix}" | jq --arg r "${IMAGE_REGISTRIES}" \
               '[.[] | select(.registry_id as $x | ($r | gsub(" "; "") | split(",") | index($x)) != null)]')
           fi
-          echo "matrix={\"include\":${matrix}}" >> "${GITHUB_OUTPUT}"
+          echo "matrix={\"include\":$(echo "${matrix}" | jq -c .)}" >> "${GITHUB_OUTPUT}"
 
   publish:
     needs: setup
