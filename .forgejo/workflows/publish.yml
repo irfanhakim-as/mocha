@@ -56,6 +56,7 @@ env:
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
   IMG_BUILDER_REPO: "irfan/img-builder"
   FORGEJO_SERVER_URL: ${{ forgejo.server_url }}
+  MATRIX_FILE: ".forgejo/publish-matrix.json"
   METADATA_FILE: "package.json"
   METADATA_VARS: "version"
   IMAGE_ARCH: ${{ inputs.image_arch || 'linux/amd64,linux/arm64/v8' }}
@@ -65,51 +66,40 @@ env:
   CONTAINER_RUNTIME: docker
 
 jobs:
-  publish:
+  setup:
     runs-on: ubuntu-latest
-    if: |
-      (inputs.image_variants == '' || contains(inputs.image_variants, matrix.variant)) &&
-      (inputs.image_registries == '' || contains(inputs.image_registries, matrix.registry_id))
+    outputs:
+      matrix: ${{ steps.filter.outputs.matrix }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ env.REPO_TOKEN }}
+          fetch-depth: 1
+
+      - name: Generate build matrix
+        id: filter
+        env:
+          IMAGE_VARIANTS: ${{ inputs.image_variants }}
+          IMAGE_REGISTRIES: ${{ inputs.image_registries }}
+        run: |
+          matrix=$(cat "${MATRIX_FILE}")
+          if [ -n "${IMAGE_VARIANTS}" ]; then
+            matrix=$(echo "${matrix}" | jq --arg v "${IMAGE_VARIANTS}" \
+              '[.[] | select(.variant as $x | ($v | gsub(" "; "") | split(",") | index($x)) != null)]')
+          fi
+          if [ -n "${IMAGE_REGISTRIES}" ]; then
+            matrix=$(echo "${matrix}" | jq --arg r "${IMAGE_REGISTRIES}" \
+              '[.[] | select(.registry_id as $x | ($r | gsub(" "; "") | split(",") | index($x)) != null)]')
+          fi
+          echo "matrix={\"include\":${matrix}}" >> "${GITHUB_OUTPUT}"
+
+  publish:
+    needs: setup
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - image_name: mocha
-            dockerfile: Dockerfile
-            registry: git.moekai.net
-            repository: irfan
-            registry_user: irfan
-            registry_token_var: REPO_TOKEN
-            link_repo: true
-            variant: standard
-            registry_id: forgejo
-          - image_name: mocha
-            dockerfile: Dockerfile
-            registry: ghcr.io
-            repository: irfanhakim-as
-            registry_user: irfanhakim-as
-            registry_token_var: GH_TOKEN
-            link_repo: false
-            variant: standard
-            registry_id: github
-          - image_name: mocha-lean
-            dockerfile: Dockerfile.lean
-            registry: git.moekai.net
-            repository: irfan
-            registry_user: irfan
-            registry_token_var: REPO_TOKEN
-            link_repo: true
-            variant: lean
-            registry_id: forgejo
-          - image_name: mocha-lean
-            dockerfile: Dockerfile.lean
-            registry: ghcr.io
-            repository: irfanhakim-as
-            registry_user: irfanhakim-as
-            registry_token_var: GH_TOKEN
-            link_repo: false
-            variant: lean
-            registry_id: github
+      matrix: ${{ fromJSON(needs.setup.outputs.matrix) }}
     steps:
       - name: Check out the repository
         id: checkout
