@@ -46,6 +46,11 @@ const healthData = {
 
 const ownerData = {
     ...owner,
+    hasOwner: !!(
+        owner.name || owner.phone || owner.email ||
+        owner.address || owner.notes ||
+        (owner.socials || []).length
+    ),
     hasData: !!(
         owner.name || owner.phone || owner.email ||
         owner.address || owner.notes ||
