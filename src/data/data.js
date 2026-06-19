@@ -13,7 +13,8 @@ const petDataFile = fs.existsSync(path.join(__dirname, "cat.json")) ? "cat.json"
 const pet = require(`./${petDataFile}`);
 
 // pre-process arrays used in templates
-const galleryPhotos = (pet.photos || []).filter(p => !p.featured);
+const heroPhoto = (pet.photos || []).find(p => p.featured);
+const galleryPhotos = (pet.photos || []).filter(p => p !== heroPhoto);
 const vaccinations = (health.vaccinations || []).map(vax => ({
     ...vax,
     status: vaccinationStatus(vax.nextDue, vax, health.vaccinations).class,
