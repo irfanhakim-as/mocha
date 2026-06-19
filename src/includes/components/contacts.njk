@@ -1,9 +1,11 @@
+{% if data.owner.hasData %}
 <section class="contact section" id="contact">
     <div class="container">
         <h2 class="section__title">Contacts</h2>
 
         <div class="contact__grid">
             <!-- Owner Info -->
+            {% if data.owner.hasOwner %}
             <div class="card contact__owner">
                 <h3 class="card__title">Owner Information</h3>
                 <dl class="contact__details">
@@ -56,6 +58,7 @@
                 </div>
                 {% endif %}
             </div>
+            {% endif %}
 
             <!-- Emergency Contact -->
             {% if data.owner.emergencyContact %}
@@ -88,3 +91,4 @@
         </div>
     </div>
 </section>
+{% endif %}

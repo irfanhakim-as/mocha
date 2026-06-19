@@ -1,12 +1,10 @@
-{% set additionalPhotos = data.pet.photos | rejectattr("featured", "equalto", true) | list %}
-
-{% if additionalPhotos | length %}
+{% if data.pet.hasData %}
 <section class="gallery section" id="gallery">
     <div class="container">
         <h2 class="section__title">Gallery</h2>
 
         <div class="gallery__grid">
-            {% for photo in additionalPhotos %}
+            {% for photo in data.pet.galleryPhotos %}
             <button class="gallery__item" type="button" data-lightbox="{% optimisedImageUrl photo.src, 1920, "jpeg" %}" data-alt="{{ photo.alt }}" aria-label="View {{ photo.alt }}">
                 {% optimisedImage photo.src, photo.alt, "gallery__image", "lazy" %}
             </button>
