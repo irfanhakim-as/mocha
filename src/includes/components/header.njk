@@ -9,14 +9,13 @@
         <nav class="header__nav" id="main-nav">
             <ul class="header__nav-list">
                 <li><a href="#about" class="header__nav-link">About</a></li>
-                {% set additionalPhotos = data.pet.photos | rejectattr("featured", "equalto", true) | list %}
-                {% if additionalPhotos | length %}
+                {% if data.pet.hasData %}
                 <li><a href="#gallery" class="header__nav-link">Gallery</a></li>
                 {% endif %}
-                {% if data.health.vaccinations | length or data.health.vetVisits | length or data.health.weight | length %}
+                {% if data.health.hasData %}
                 <li><a href="#health" class="header__nav-link">Health</a></li>
                 {% endif %}
-                {% if data.owner.name or data.owner.phone or data.owner.email %}
+                {% if data.owner.hasData %}
                 <li><a href="#contact" class="header__nav-link">Contact</a></li>
                 {% endif %}
             </ul>
