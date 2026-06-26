@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAge();
     updateMedicationStatuses();
     updateVaccinationStatuses();
-    initPagination();
+    document.fonts.ready.then(initPagination);
 });
 
 // Theme toggle functionality
