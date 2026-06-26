@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAge();
     updateMedicationStatuses();
     updateVaccinationStatuses();
+    initPagination();
 });
 
 // Theme toggle functionality
@@ -225,6 +226,145 @@ function initLogoScroll() {
                 behavior: 'smooth'
             });
         }
+    });
+}
+
+// Card pagination
+function initPagination() {
+    const SVG_PREV = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>';
+    const SVG_NEXT = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+
+    document.querySelectorAll('[data-paginate]').forEach(container => {
+        const pageSize = parseInt(container.dataset.paginate, 10);
+        if (!pageSize || pageSize < 1) return;
+
+        const items = Array.from(container.children);
+        if (items.length <= pageSize) return;
+
+        const totalPages = Math.ceil(items.length / pageSize);
+        let currentPage = 1;
+
+        const card = container.closest('.card');
+        if (!card) return;
+
+        // fix column widths before hiding rows so they stay consistent across pages
+        if (container.tagName === 'TBODY') {
+            container.closest('table')?.querySelectorAll('thead th').forEach(th => {
+                th.style.width = th.offsetWidth + 'px';
+            });
+        }
+
+        // prev button
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'card__pagination-btn';
+        prevBtn.type = 'button';
+        prevBtn.setAttribute('aria-label', 'Previous page');
+        prevBtn.innerHTML = SVG_PREV;
+
+        // next button
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'card__pagination-btn';
+        nextBtn.type = 'button';
+        nextBtn.setAttribute('aria-label', 'Next page');
+        nextBtn.innerHTML = SVG_NEXT;
+
+        // page indicator dots
+        const dotsEl = document.createElement('div');
+        dotsEl.className = 'card__pagination-dots';
+        for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'card__pagination-dot' + (i === 0 ? ' is-active' : '');
+            dotsEl.appendChild(dot);
+        }
+
+        const pagination = document.createElement('div');
+        pagination.className = 'card__pagination';
+        pagination.appendChild(prevBtn);
+        pagination.appendChild(dotsEl);
+        pagination.appendChild(nextBtn);
+        card.appendChild(pagination);
+
+        function showPage(page) {
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+            items.forEach((item, i) => {
+                item.style.display = (i >= start && i < end) ? '' : 'none';
+            });
+            dotsEl.children[currentPage - 1]?.classList.remove('is-active');
+            dotsEl.children[page - 1]?.classList.add('is-active');
+            currentPage = page;
+            prevBtn.disabled = page === 1;
+            nextBtn.disabled = page === totalPages;
+        }
+
+        prevBtn.addEventListener('click', () => showPage(currentPage - 1));
+        nextBtn.addEventListener('click', () => showPage(currentPage + 1));
+
+        // touch swipe: horizontal swipe navigates pages, vertical swipe scrolls normally
+        let startX = 0, startY = 0, swipeDir = null;
+
+        card.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            swipeDir = null;
+        }, { passive: true });
+
+        card.addEventListener('touchmove', e => {
+            const dx = e.touches[0].clientX - startX;
+            const dy = e.touches[0].clientY - startY;
+            if (swipeDir === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+                swipeDir = Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y';
+            }
+            if (swipeDir === 'x') e.preventDefault();
+        }, { passive: false });
+
+        card.addEventListener('touchend', e => {
+            if (swipeDir !== 'x') return;
+            const dx = e.changedTouches[0].clientX - startX;
+            if (Math.abs(dx) < 40) return;
+            if (dx < 0 && currentPage < totalPages) showPage(currentPage + 1);
+            else if (dx > 0 && currentPage > 1) showPage(currentPage - 1);
+        }, { passive: true });
+
+        // accordion: if children are details elements, only allow one open at a time
+        if (items.some(item => item.tagName === 'DETAILS')) {
+            container.addEventListener('toggle', e => {
+                if (!e.target.open) return;
+                items.forEach(item => {
+                    if (item !== e.target && item.tagName === 'DETAILS' && item.open) {
+                        item.removeAttribute('open');
+                    }
+                });
+            }, true);
+        }
+
+        // lock the content area to the tallest page so the dots never move
+        const heightTarget = container.tagName === 'TBODY'
+            ? (container.closest('.health__table-wrapper') || container.closest('table') || container)
+            : container;
+        let maxHeight = 0;
+        for (let p = 1; p <= totalPages; p++) {
+            const start = (p - 1) * pageSize;
+            const end = start + pageSize;
+            items.forEach((item, i) => {
+                item.style.display = (i >= start && i < end) ? '' : 'none';
+            });
+            if (heightTarget.offsetHeight > maxHeight) maxHeight = heightTarget.offsetHeight;
+        }
+        heightTarget.style.minHeight = maxHeight + 'px';
+
+        // ratchet: if a details element expands and grows the container, lock in the new height
+        heightTarget.addEventListener('toggle', () => {
+            requestAnimationFrame(() => {
+                const h = heightTarget.offsetHeight;
+                if (h > maxHeight) {
+                    maxHeight = h;
+                    heightTarget.style.minHeight = maxHeight + 'px';
+                }
+            });
+        }, true);
+
+        showPage(1);
     });
 }
 
