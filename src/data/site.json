@@ -13,5 +13,13 @@
         "enabled": false,
         "message": "",
         "colour": "neutral"
+    },
+    "pagination": {
+        "vaccinations": 5,
+        "vetVisits": 5,
+        "weight": 10,
+        "allergies": 5,
+        "conditions": 5,
+        "medications": 5
     }
 }
