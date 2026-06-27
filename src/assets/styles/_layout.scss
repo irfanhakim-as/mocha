@@ -139,6 +139,25 @@
     }
 }
 
+// Card pages slide layout
+.card__pages-viewport {
+    overflow: hidden;
+    position: relative;
+}
+
+.card__pages-track {
+    display: flex;
+    gap: var(--pages-gap, 32px);
+    will-change: transform;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.card__page {
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
 // Main content area
 main {
     min-height: calc(100vh - 200px);
