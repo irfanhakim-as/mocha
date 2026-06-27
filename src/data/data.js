@@ -12,6 +12,15 @@ const {
 const petDataFile = fs.existsSync(path.join(__dirname, "cat.json")) ? "cat.json" : "pet.json";
 const pet = require(`./${petDataFile}`);
 
+const PAGINATION_DEFAULTS = {
+    vaccinations: 5,
+    vetVisits: 5,
+    weight: 10,
+    allergies: 5,
+    conditions: 5,
+    medications: 5,
+};
+
 // pre-process arrays used in templates
 const heroPhoto = (pet.photos || []).find(p => p.featured);
 const galleryPhotos = (pet.photos || []).filter(p => p !== heroPhoto);
@@ -25,6 +34,11 @@ const medications = (health.medications || []).map(med => ({
 }));
 
 // hasData controls section + nav link visibility in templates
+const siteData = {
+    ...site,
+    pagination: { ...PAGINATION_DEFAULTS, ...(site.pagination || {}) },
+};
+
 const petData = {
     ...pet,
     galleryPhotos,
@@ -62,7 +76,7 @@ const ownerData = {
 
 module.exports = {
     version: pkg.version,
-    site,
+    site: siteData,
     pet: petData,
     cat: petData,
     health: healthData,

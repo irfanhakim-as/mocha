@@ -63,6 +63,101 @@
     border-bottom: 1px solid var(--colour-border);
 }
 
+// Card pagination
+.card__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-3;
+    padding-top: $spacing-4;
+    margin-top: $spacing-4;
+}
+
+.card__pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background: none;
+    border: 1px solid var(--colour-border);
+    border-radius: $radius-full;
+    color: var(--colour-text-muted);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: color $transition-fast, border-color $transition-fast, opacity $transition-fast;
+
+    &:focus-visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    @media (hover: hover) {
+        .card:hover & {
+            opacity: 1;
+            pointer-events: auto;
+
+            &:disabled {
+                opacity: 0.3;
+                pointer-events: none;
+                cursor: default;
+            }
+        }
+
+        &:hover:not(:disabled) {
+            color: var(--colour-accent);
+            border-color: var(--colour-accent);
+        }
+    }
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.card__pagination-dots {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+}
+
+.card__pagination-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: $radius-full;
+    background-color: var(--colour-border);
+    border: none;
+    padding: 0;
+    transition: background-color $transition-fast, transform $transition-fast;
+
+    &.is-active {
+        background-color: var(--colour-accent);
+        transform: scale(1.25);
+    }
+}
+
+// Card pages slide layout
+.card__pages-viewport {
+    overflow: hidden;
+    position: relative;
+}
+
+.card__pages-track {
+    display: flex;
+    gap: var(--pages-gap, 32px);
+    will-change: transform;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.card__page {
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
 // Main content area
 main {
     min-height: calc(100vh - 200px);
