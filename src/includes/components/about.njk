@@ -11,6 +11,18 @@
                         <dt>Date of Birth</dt>
                         <dd>{{ data.pet.dob | formatDate | orNA }}</dd>
                     </div>
+                    {% if data.pet.adoptionDate %}
+                    <div class="about__detail">
+                        <dt>Date of Adoption</dt>
+                        <dd>{{ data.pet.adoptionDate | formatDate }}</dd>
+                    </div>
+                    {% endif %}
+                    {% if data.pet.deceasedDate %}
+                    <div class="about__detail">
+                        <dt>Date of Passing</dt>
+                        <dd>{{ data.pet.deceasedDate | formatDate }}</dd>
+                    </div>
+                    {% endif %}
                     <div class="about__detail">
                         <dt>Breed</dt>
                         <dd>{{ data.pet.breed | orNA }}</dd>
@@ -23,6 +35,12 @@
                         <dt>Gender</dt>
                         <dd>{{ data.pet.gender | orNA }}</dd>
                     </div>
+                    {% if data.pet.bloodType %}
+                    <div class="about__detail">
+                        <dt>Blood Type</dt>
+                        <dd>{{ data.pet.bloodType }}</dd>
+                    </div>
+                    {% endif %}
                     {% if data.pet.neutered is defined %}
                     <div class="about__detail">
                         <dt>Neutered/Spayed</dt>

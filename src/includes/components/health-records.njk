@@ -18,7 +18,7 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody data-paginate="{{ data.site.pagination.vaccinations }}">
                             {% for vax in data.health.vaccinations | sortByDatePinLast('date', 'status', 'complete') %}
                             <tr>
                                 <td>{{ vax.name }}</td>
@@ -41,7 +41,7 @@
             {% if data.health.vetVisits | length %}
             <div class="card health__visits">
                 <h3 class="card__title">Vet Visits</h3>
-                <div class="health__visits-list">
+                <div class="health__visits-list" data-paginate="{{ data.site.pagination.vetVisits }}">
                     {% for visit in data.health.vetVisits | sortByDate('date') %}
                     <details class="health__visit">
                         <summary class="health__visit-summary">
@@ -74,7 +74,7 @@
             {% if data.health.weight | length %}
             <div class="card health__weight">
                 <h3 class="card__title">Weight History</h3>
-                <div class="health__weight-list">
+                <div class="health__weight-list" data-paginate="{{ data.site.pagination.weight }}">
                     {% for entry in data.health.weight | sortByDate('date') %}
                     <div class="health__weight-entry">
                         <span class="health__weight-date">{{ entry.date | formatDate | orNA }}</span>
@@ -89,7 +89,7 @@
             {% if data.health.allergies | length %}
             <div class="card health__allergies">
                 <h3 class="card__title">Allergies</h3>
-                <div class="health__list">
+                <div class="health__list" data-paginate="{{ data.site.pagination.allergies }}">
                     {% for allergy in data.health.allergies %}
                     <div class="health__item">
                         <div class="health__item-header">
@@ -110,7 +110,7 @@
             {% if data.health.conditions | length %}
             <div class="card health__conditions">
                 <h3 class="card__title">Conditions</h3>
-                <div class="health__list">
+                <div class="health__list" data-paginate="{{ data.site.pagination.conditions }}">
                     {% for condition in data.health.conditions | sortByDatePinLast('diagnosedDate', 'status', 'complete') %}
                     <div class="health__item">
                         <div class="health__item-header">
@@ -131,7 +131,7 @@
             {% if data.health.medications | length %}
             <div class="card health__medications">
                 <h3 class="card__title">Medications</h3>
-                <div class="health__list">
+                <div class="health__list" data-paginate="{{ data.site.pagination.medications }}">
                     {% for med in data.health.medications | sortByDatePinLast('startDate', 'status', 'complete') %}
                     <div class="health__item" data-start-date="{{ med.startDate }}">
                         <div class="health__item-header">

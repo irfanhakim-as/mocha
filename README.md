@@ -208,6 +208,14 @@ Site metadata and branding:
     "enabled": true,
     "message": "Mocha's next vet visit is on June 15. [Learn more](#health).",
     "colour": "warning"
+  },
+  "pagination": {
+    "vaccinations": 5,
+    "vetVisits": 5,
+    "weight": 10,
+    "allergies": 5,
+    "conditions": 5,
+    "medications": 5
   }
 }
 ```
@@ -225,6 +233,12 @@ Site metadata and branding:
 | `announcement.enabled` | false | Show the announcement banner (i.e. `true` or `false`) |
 | `announcement.message` | false | Banner message, supports Markdown |
 | `announcement.colour` | false | Banner colour: `neutral`, `accent`, `success`, `warning`, `danger` (default: `neutral`) |
+| `pagination.vaccinations` | false | Entries per page in the Vaccinations card (default: `5`, set to `0` to disable) |
+| `pagination.vetVisits` | false | Entries per page in the Vet Visits card (default: `5`, set to `0` to disable) |
+| `pagination.weight` | false | Entries per page in the Weight History card (default: `10`, set to `0` to disable) |
+| `pagination.allergies` | false | Entries per page in the Allergies card (default: `5`, set to `0` to disable) |
+| `pagination.conditions` | false | Entries per page in the Conditions card (default: `5`, set to `0` to disable) |
+| `pagination.medications` | false | Entries per page in the Medications card (default: `5`, set to `0` to disable) |
 
 ### pet.json
 
@@ -234,9 +248,12 @@ Pet profile information:
 {
   "name": "Mocha",
   "dob": "15-01-2020",
+  "adoptionDate": "20-03-2020",
+  "deceasedDate": "10-06-2999",
   "breed": "Classic Siamese",
   "colour": "Seal Points",
   "gender": "Male",
+  "bloodType": "A",
   "neutered": true,
   "insured": false,
   "microchipId": "123456789012345",
@@ -273,9 +290,12 @@ Pet profile information:
 |-------|----------|-------------|
 | `name` | true | Pet name |
 | `dob` | false | Date of birth (i.e. `DD-MM-YYYY`) |
+| `adoptionDate` | false | Date of adoption (i.e. `DD-MM-YYYY`) |
+| `deceasedDate` | false | Date of passing (i.e. `DD-MM-YYYY`) |
 | `breed` | true | Breed |
 | `colour` | true | Coat colour/pattern |
 | `gender` | false | Gender |
+| `bloodType` | false | Blood type |
 | `neutered` | false | Whether the pet has been neutered or spayed (i.e. `true` or `false`) |
 | `insured` | false | Whether the pet is insured (i.e. `true` or `false`) |
 | `microchipId` | false | Microchip ID number |
