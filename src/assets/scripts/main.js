@@ -338,31 +338,33 @@ function initPagination() {
             }, true);
         }
 
-        // lock the content area to the tallest page so the dots never move
-        const heightTarget = container.tagName === 'TBODY'
-            ? (container.closest('.health__table-wrapper') || container.closest('table') || container)
-            : container;
-        let maxHeight = 0;
-        for (let p = 1; p <= totalPages; p++) {
-            const start = (p - 1) * pageSize;
-            const end = start + pageSize;
-            items.forEach((item, i) => {
-                item.style.display = (i >= start && i < end) ? '' : 'none';
-            });
-            if (heightTarget.offsetHeight > maxHeight) maxHeight = heightTarget.offsetHeight;
-        }
-        heightTarget.style.minHeight = maxHeight + 'px';
+        // desktop: lock the content area to the tallest page so the dots never move
+        if (window.matchMedia('(hover: hover)').matches) {
+            const heightTarget = container.tagName === 'TBODY'
+                ? (container.closest('.health__table-wrapper') || container.closest('table') || container)
+                : container;
+            let maxHeight = 0;
+            for (let p = 1; p <= totalPages; p++) {
+                const start = (p - 1) * pageSize;
+                const end = start + pageSize;
+                items.forEach((item, i) => {
+                    item.style.display = (i >= start && i < end) ? '' : 'none';
+                });
+                if (heightTarget.offsetHeight > maxHeight) maxHeight = heightTarget.offsetHeight;
+            }
+            heightTarget.style.minHeight = maxHeight + 'px';
 
-        // ratchet: if a details element expands and grows the container, lock in the new height
-        heightTarget.addEventListener('toggle', () => {
-            requestAnimationFrame(() => {
-                const h = heightTarget.offsetHeight;
-                if (h > maxHeight) {
-                    maxHeight = h;
-                    heightTarget.style.minHeight = maxHeight + 'px';
-                }
-            });
-        }, true);
+            // ratchet: if a details element expands and grows the container, lock in the new height
+            heightTarget.addEventListener('toggle', () => {
+                requestAnimationFrame(() => {
+                    const h = heightTarget.offsetHeight;
+                    if (h > maxHeight) {
+                        maxHeight = h;
+                        heightTarget.style.minHeight = maxHeight + 'px';
+                    }
+                });
+            }, true);
+        }
 
         showPage(1);
     });
