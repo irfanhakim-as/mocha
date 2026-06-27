@@ -248,9 +248,12 @@ Pet profile information:
 {
   "name": "Mocha",
   "dob": "15-01-2020",
+  "adoptionDate": "20-03-2020",
+  "deceasedDate": "10-06-2999",
   "breed": "Classic Siamese",
   "colour": "Seal Points",
   "gender": "Male",
+  "bloodType": "A",
   "neutered": true,
   "insured": false,
   "microchipId": "123456789012345",
@@ -287,9 +290,12 @@ Pet profile information:
 |-------|----------|-------------|
 | `name` | true | Pet name |
 | `dob` | false | Date of birth (i.e. `DD-MM-YYYY`) |
+| `adoptionDate` | false | Date of adoption (i.e. `DD-MM-YYYY`) |
+| `deceasedDate` | false | Date of passing (i.e. `DD-MM-YYYY`) |
 | `breed` | true | Breed |
 | `colour` | true | Coat colour/pattern |
 | `gender` | false | Gender |
+| `bloodType` | false | Blood type |
 | `neutered` | false | Whether the pet has been neutered or spayed (i.e. `true` or `false`) |
 | `insured` | false | Whether the pet is insured (i.e. `true` or `false`) |
 | `microchipId` | false | Microchip ID number |

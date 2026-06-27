@@ -1,9 +1,12 @@
 {
     "name": "Mocha",
     "dob": "15-01-2020",
+    "adoptionDate": "20-03-2020",
+    "deceasedDate": "",
     "breed": "Classic Siamese",
     "colour": "Seal Points",
     "gender": "Male",
+    "bloodType": "A",
     "neutered": true,
     "insured": false,
     "microchipId": "123456789012345",
