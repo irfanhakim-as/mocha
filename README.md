@@ -253,6 +253,7 @@ Pet profile information:
   "breed": "Classic Siamese",
   "colour": "Seal Points",
   "gender": "Male",
+  "bloodType": "A",
   "neutered": true,
   "insured": false,
   "microchipId": "123456789012345",
@@ -294,6 +295,7 @@ Pet profile information:
 | `breed` | true | Breed |
 | `colour` | true | Coat colour/pattern |
 | `gender` | false | Gender |
+| `bloodType` | false | Blood type |
 | `neutered` | false | Whether the pet has been neutered or spayed (i.e. `true` or `false`) |
 | `insured` | false | Whether the pet is insured (i.e. `true` or `false`) |
 | `microchipId` | false | Microchip ID number |

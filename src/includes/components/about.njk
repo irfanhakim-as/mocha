@@ -35,6 +35,12 @@
                         <dt>Gender</dt>
                         <dd>{{ data.pet.gender | orNA }}</dd>
                     </div>
+                    {% if data.pet.bloodType %}
+                    <div class="about__detail">
+                        <dt>Blood Type</dt>
+                        <dd>{{ data.pet.bloodType }}</dd>
+                    </div>
+                    {% endif %}
                     {% if data.pet.neutered is defined %}
                     <div class="about__detail">
                         <dt>Neutered/Spayed</dt>
