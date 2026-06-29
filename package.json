@@ -1,6 +1,6 @@
 {
   "name": "mocha",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "A dynamic site that generates a personalised profile for your beloved furry friend.",
   "main": "index.js",
   "scripts": {
