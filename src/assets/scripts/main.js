@@ -355,9 +355,8 @@ function initPagination() {
         viewport.className = 'card__pages-viewport';
         const track = document.createElement('div');
         track.className = 'card__pages-track';
-        // mobile: pages have natural heights
-        // desktop: flex-stretch makes all pages equal height
-        if (!isPointer) track.style.alignItems = 'flex-start';
+        // pages always use natural height, viewport min-height keeps the dots stable on desktop
+        track.style.alignItems = 'flex-start';
         pageEls.forEach(p => track.appendChild(p));
         viewport.appendChild(track);
 
