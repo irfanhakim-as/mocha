@@ -151,8 +151,6 @@
     display: flex;
     gap: var(--pages-gap, 32px);
     will-change: transform;
-    user-select: none;
-    -webkit-user-select: none;
 }
 
 .card__page {

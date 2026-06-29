@@ -245,7 +245,9 @@ function createSwiper(el, { onDragStart, onDrag, onSettle, ignoreSelector } = {}
         velocityWindow.length = 0;
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
-        gestureIgnored = !!(ignoreSelector && e.target.closest(ignoreSelector));
+        // ignore if touch is inside an excluded element or text is selected (selection handle drag)
+        gestureIgnored = !!(ignoreSelector && e.target.closest(ignoreSelector))
+                      || window.getSelection()?.toString().length > 0;
         if (gestureIgnored) return;
         onDragStart?.();
     }, { passive: true });
