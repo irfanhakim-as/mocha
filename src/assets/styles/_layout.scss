@@ -143,6 +143,8 @@
 .card__pages-viewport {
     overflow: hidden;
     position: relative;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 .card__pages-track {

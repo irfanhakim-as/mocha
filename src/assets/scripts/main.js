@@ -236,20 +236,22 @@ function initLogoScroll() {
 // onSettle(intentDir, dx): finger lifted; intentDir is +1 (next), -1 (prev), or 0 (cancel)
 // ignoreSelector: touches starting inside matching children are passed through untouched.
 function createSwiper(el, { onDragStart, onDrag, onSettle, ignoreSelector } = {}) {
-    let startX = 0, startY = 0, swipeDir = null, isDragging = false;
+    let startX = 0, startY = 0, swipeDir = null, isDragging = false, gestureIgnored = false;
     const velocityWindow = [];
 
     el.addEventListener('touchstart', e => {
-        if (ignoreSelector && e.target.closest(ignoreSelector)) return;
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
         swipeDir = null;
         isDragging = false;
         velocityWindow.length = 0;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        gestureIgnored = !!(ignoreSelector && e.target.closest(ignoreSelector));
+        if (gestureIgnored) return;
         onDragStart?.();
     }, { passive: true });
 
     el.addEventListener('touchmove', e => {
+        if (gestureIgnored) return;
         const cx = e.touches[0].clientX;
         const dx = cx - startX;
         const dy = e.touches[0].clientY - startY;
@@ -270,7 +272,7 @@ function createSwiper(el, { onDragStart, onDrag, onSettle, ignoreSelector } = {}
     }, { passive: false });
 
     el.addEventListener('touchend', e => {
-        if (!isDragging) return;
+        if (!isDragging || gestureIgnored) return;
         const dx = e.changedTouches[0].clientX - startX;
         let velocity = 0;
         if (velocityWindow.length >= 2) {
@@ -286,8 +288,9 @@ function createSwiper(el, { onDragStart, onDrag, onSettle, ignoreSelector } = {}
 
     // cancel resets state without navigating e.g. when an OS interruption ends the touch
     el.addEventListener('touchcancel', () => {
-        if (isDragging) onSettle?.(0, 0);
+        if (isDragging && !gestureIgnored) onSettle?.(0, 0);
         isDragging = false;
+        gestureIgnored = false;
     }, { passive: true });
 }
 
@@ -355,9 +358,8 @@ function initPagination() {
         viewport.className = 'card__pages-viewport';
         const track = document.createElement('div');
         track.className = 'card__pages-track';
-        // mobile: pages have natural heights
-        // desktop: flex-stretch makes all pages equal height
-        if (!isPointer) track.style.alignItems = 'flex-start';
+        // pages always use natural height, viewport min-height keeps the dots stable on desktop
+        track.style.alignItems = 'flex-start';
         pageEls.forEach(p => track.appendChild(p));
         viewport.appendChild(track);
 
